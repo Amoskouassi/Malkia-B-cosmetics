@@ -101,7 +101,10 @@ const TR = {
       free:"Gratuite", promo:"Code promo", apply:"Appliquer", secure:"Paiement sécurisé" },
     checkout: { title:"Paiement", place:"Confirmer et payer", card:"Carte bancaire", or:"ou",
       summary:"Récapitulatif", info_title:"Informations de livraison", name:"Nom complet",
-      address:"Adresse", city:"Ville", country:"Pays", zip:"Code postal", confirm:"Commande confirmée — merci !" },
+      address:"Adresse", city:"Ville", country:"Pays", zip:"Code postal", confirm:"Commande confirmée — merci !",
+      mpresa:"M-PESA", airtel:"Airtel Money", orange:"Orange Money", cod:"Paiement à la livraison",
+      mpresa_num:"+243 99 594 5889", airtel_num:"+243 81 715 0000", orange_num:"+243 89 850 0000",
+      pay_info:"Envoyez le montant exact au numéro ci-dessus, puis confirmez la commande." },
     account: { title:"Mon Compte", orders:"Historique des commandes", info:"Informations personnelles", logout:"Déconnexion",
       order:"Commande", delivered:"Livrée", pending:"En cours", items:"articles", share:"Partager",
       also:"Découvrez aussi", members:"Les autres membres", not_found:"Membre introuvable", back:"Retour à l'équipe",
@@ -170,7 +173,10 @@ const TR = {
       free:"Free", promo:"Promo Code", apply:"Apply", secure:"Secure Payment" },
     checkout: { title:"Checkout", place:"Confirm & Pay", card:"Credit Card", or:"or",
       summary:"Order Summary", info_title:"Shipping Information", name:"Full Name",
-      address:"Address", city:"City", country:"Country", zip:"ZIP Code", confirm:"Order confirmed — thank you!" },
+      address:"Address", city:"City", country:"Country", zip:"ZIP Code", confirm:"Order confirmed — thank you!",
+      mpresa:"M-PESA", airtel:"Airtel Money", orange:"Orange Money", cod:"Cash on Delivery",
+      mpresa_num:"+243 99 594 5889", airtel_num:"+243 81 715 0000", orange_num:"+243 89 850 0000",
+      pay_info:"Send the exact amount to the number above, then confirm your order." },
     account: { title:"My Account", orders:"Order History", info:"Personal Information", logout:"Log Out",
       order:"Order", delivered:"Delivered", pending:"Pending", items:"items", share:"Share",
       also:"Also discover", members:"Other members", not_found:"Member not found", back:"Back to team",
@@ -955,7 +961,7 @@ function renderCheckout(){
             <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Last Name':'Nom'}</label><input class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'Last Name':'Nom'}"></div>
             <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.address}</label><input class="underline-input w-full py-2 text-sm" placeholder="${co.address}"></div>
             <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.city}</label><input class="underline-input w-full py-2 text-sm" placeholder="${co.city}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Phone':'Téléphone'}</label><input class="underline-input w-full py-2 text-sm" placeholder="+225 ..."></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Phone':'Téléphone'}</label><input class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
           </div>
         </section>
         <section>
@@ -967,21 +973,52 @@ function renderCheckout(){
             </label>
             <label class="flex items-center justify-between p-5 border border-outline-variant/30 cursor-pointer">
               <div class="flex items-center gap-4"><input type="radio" name="delivery" class="accent-primary"><div><p class="text-sm font-medium">Express</p><p class="text-xs text-on-surface-variant">24-48h</p></div></div>
-              <span class="text-sm">5 000 CFA</span>
+              <span class="text-sm">5 $</span>
             </label>
           </div>
         </section>
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">03</span><h2 class="font-display text-xl">${co.title}</h2></div>
-          <div class="grid grid-cols-3 gap-4 mb-8">
-            <label class="flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center"><input type="radio" name="pay" checked class="hidden"><span class="material-symbols-outlined">credit_card</span><span class="text-[11px] uppercase">${co.card}</span></label>
-            <label class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center"><input type="radio" name="pay" class="hidden"><span class="material-symbols-outlined">smartphone</span><span class="text-[11px] uppercase">Mobile Money</span></label>
-            <label class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center"><input type="radio" name="pay" class="hidden"><span class="material-symbols-outlined">payments</span><span class="text-[11px] uppercase">PayPal</span></label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center">
+              <input type="radio" name="pay" checked class="hidden">
+              <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+              <span class="text-[11px] uppercase font-medium">M-PESA</span>
+              <span class="text-[10px] text-on-surface-variant">Vodacom</span>
+            </label>
+            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+              <input type="radio" name="pay" class="hidden">
+              <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+              <span class="text-[11px] uppercase font-medium">Airtel Money</span>
+              <span class="text-[10px] text-on-surface-variant">Airtel</span>
+            </label>
+            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+              <input type="radio" name="pay" class="hidden">
+              <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+              <span class="text-[11px] uppercase font-medium">Orange Money</span>
+              <span class="text-[10px] text-on-surface-variant">Orange</span>
+            </label>
+            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+              <input type="radio" name="pay" class="hidden">
+              <span class="material-symbols-outlined text-2xl text-on-surface-variant">payments</span>
+              <span class="text-[11px] uppercase font-medium">${co.cod}</span>
+              <span class="text-[10px] text-on-surface-variant">Cash</span>
+            </label>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Card Number':'Numéro de carte'}</label><input class="underline-input w-full py-2 text-sm" placeholder="0000 0000 0000 0000"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Expiry':'Expiration'}</label><input class="underline-input w-full py-2 text-sm" placeholder="MM/AA"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">CVC</label><input class="underline-input w-full py-2 text-sm" placeholder="123"></div>
+          <div id="paymentInfo" class="p-5 bg-surface-container-low border border-outline-variant/10 rounded-lg text-sm space-y-2">
+            <p class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">info</span> <span>${co.pay_info}</span></p>
+            <div class="flex items-center gap-3 py-2">
+              <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">MP</span>
+              <div><p class="font-medium text-sm">M-PESA</p><p class="text-xs text-on-surface-variant">${co.mpresa_num}</p></div>
+            </div>
+            <div class="flex items-center gap-3 py-2">
+              <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">AM</span>
+              <div><p class="font-medium text-sm">Airtel Money</p><p class="text-xs text-on-surface-variant">${co.airtel_num}</p></div>
+            </div>
+            <div class="flex items-center gap-3 py-2">
+              <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">OM</span>
+              <div><p class="font-medium text-sm">Orange Money</p><p class="text-xs text-on-surface-variant">${co.orange_num}</p></div>
+            </div>
           </div>
         </section>
       </div>
@@ -995,13 +1032,35 @@ function renderCheckout(){
             <div class="flex justify-between"><span>${ca.delivery}</span><span>${shipping===0?ca.free:fmt(shipping)+' $'}</span></div>
             <div class="flex justify-between font-display text-lg text-primary pt-2"><span>${ca.total}</span><span>${fmt(total)} $</span></div>
           </div>
-          <button onclick="cart=[]; saveCart(); updateCartCount(); showToast('${co.confirm}'); location.hash='#/account';" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${co.place}</button>
+          <button onclick="confirmOrder()" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${co.place}</button>
           <p class="text-center mt-5 text-xs text-on-surface-variant flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">lock</span> ${ca.secure}</p>
         </div>
       </div>
     </div>
   </div>
   `;
+}
+
+function switchPay(el){
+  document.querySelectorAll('label:has(input[name="pay"])').forEach(l=>{
+    l.className = l.className.replace(/border-primary bg-surface-container-low/g, 'border-outline-variant/30');
+  });
+  el.className = el.className.replace(/border-outline-variant\/30/g, 'border-primary bg-surface-container-low');
+}
+
+function confirmOrder(){
+  const co = t('checkout');
+  const selected = document.querySelector('input[name="pay"]:checked');
+  const label = selected?.closest('label')?.querySelector('span:not(.material-symbols-outlined):not(.text-[10px])')?.textContent?.trim() || '';
+  const isCod = label === (LANG.current==='en'?'Cash on Delivery':'Paiement à la livraison');
+  if(isCod){
+    cart = []; saveCart(); updateCartCount();
+    showToast(co.confirm);
+    location.hash = '#/account';
+  } else {
+    showToast(`${co.confirm} ${LANG.current==='en'?'Pay via':'Payez via'} ${label} ${LANG.current==='en'?'at':'au'} ${co.mpresa_num}`);
+    setTimeout(()=>{ cart = []; saveCart(); updateCartCount(); location.hash = '#/account'; }, 2500);
+  }
 }
 
 /* ===== ACCOUNT ===== */
