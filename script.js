@@ -424,11 +424,11 @@ function toggleMobileMenu(){
 
 /* ===== TEAM ===== */
 const TEAM = [
-  { id:'hamin', name:'Hamin Banga', role:'CEO / Fondateur', roleKey:'boss', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'team-hamin' },
+  { id:'hamin', name:'Hamin Banga', role:'CEO / Fondateur', roleKey:'boss', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.jpeg' },
   { id:'samuel', name:'Samuel Buhendwa', role:'Sales & Marketing', bio:"Samuel est le moteur commercial de Malkia B. Stratège dans l'âme, il développe les marchés et fidélise une clientèle exigeante grâce à un accompagnement personnalisé.", img:'team-samuel' },
   { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", img:'team-wema' },
-  { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionné par la cosmétique, il met son sens du service au service de l'expérience Malkia B.", img:'team-fadhili' },
-  { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", img:'team-julia' },
+  { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionné par la cosmétique, il met son sens du service au service de l'expérience Malkia B.", img:'images/Fadhili.jpeg' },
+  { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", img:'images/Wani Julia.jpeg' },
   { id:'narcisse', name:'Narcisse Baderhe', role:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", img:'images/Narcisse Baderhe.jpeg' },
   { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'team-esther' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
