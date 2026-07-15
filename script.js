@@ -1115,7 +1115,7 @@ function confirmOrder(){
     const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
     if(dc==='bukavu'){ shipping = 1; deliveryLabel = 'Bukavu'; }
     else if(dc==='goma'){ shipping = 5; deliveryLabel = 'Goma'; }
-    else { shipping = 5; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; }
+    else { shipping = 10; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; }
   }
   const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
   const fullName = firstName + ' ' + lastName;
