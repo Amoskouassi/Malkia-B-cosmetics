@@ -1021,26 +1021,30 @@ function renderCheckout(){
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">03</span><h2 class="font-display text-xl">${co.title}</h2></div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            <label onclick="switchPay(this, 'mp')" class="flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center">
+            <label onclick="switchPay(this, 'mp')" class="relative flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center shadow-sm">
               <input type="radio" name="pay" checked class="hidden">
+              <span class="pay-check absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-xs" style="font-size:14px">check</span></span>
               <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">M-PESA</span>
               <span class="text-[10px] text-on-surface-variant">Vodacom</span>
             </label>
-            <label onclick="switchPay(this, 'am')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'am')" class="relative flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
+              <span class="pay-check absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center hidden"><span class="material-symbols-outlined text-xs" style="font-size:14px">check</span></span>
               <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">Airtel Money</span>
               <span class="text-[10px] text-on-surface-variant">Airtel</span>
             </label>
-            <label onclick="switchPay(this, 'om')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'om')" class="relative flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
+              <span class="pay-check absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center hidden"><span class="material-symbols-outlined text-xs" style="font-size:14px">check</span></span>
               <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">Orange Money</span>
               <span class="text-[10px] text-on-surface-variant">Orange</span>
             </label>
-            <label onclick="switchPay(this, 'cod')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'cod')" class="relative flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
+              <span class="pay-check absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center hidden"><span class="material-symbols-outlined text-xs" style="font-size:14px">check</span></span>
               <span class="material-symbols-outlined text-2xl text-on-surface-variant">payments</span>
               <span class="text-[11px] uppercase font-medium">${co.cod}</span>
               <span class="text-[10px] text-on-surface-variant">Cash</span>
@@ -1088,9 +1092,13 @@ function renderCheckout(){
 
 function switchPay(el, key){
   document.querySelectorAll('label:has(input[name="pay"])').forEach(l=>{
-    l.className = l.className.replace('border-primary bg-surface-container-low', 'border-outline-variant/30');
+    l.className = l.className.replace('border-primary bg-surface-container-low shadow-sm', 'border-outline-variant/30');
+    const ck = l.querySelector('.pay-check');
+    if(ck) ck.classList.add('hidden');
   });
-  el.className = el.className.replace('border-outline-variant/30', 'border-primary bg-surface-container-low');
+  el.className = el.className.replace('border-outline-variant/30', 'border-primary bg-surface-container-low shadow-sm');
+  const ck = el.querySelector('.pay-check');
+  if(ck) ck.classList.remove('hidden');
   document.querySelectorAll('#paymentInfo > div[id^="pay-"]').forEach(d=> d.classList.add('hidden'));
   const info = document.getElementById('pay-'+key);
   if(info) info.classList.remove('hidden');
