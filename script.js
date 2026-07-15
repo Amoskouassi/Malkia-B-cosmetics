@@ -31,16 +31,16 @@ const TR = {
     story: { title:"Notre Histoire", subtitle:"L'héritage d'une beauté souveraine",
       p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Tout est parti d'une conviction simple : chaque femme a le droit de se sentir souveraine. J'ai voulu créer des soins qui ne transforment pas seulement la peau, mais aussi la confiance.",
       p2:"Mon parcours m'a amené à sélectionner les meilleurs ingrédients — du karité du Burkina à l'huile d'argan du Maroc — pour offrir des formules d'une efficacité rare. Chaque produit est le fruit d'une quête d'excellence.",
-      p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Goma, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
+      p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
       sig:"— Hamin Banga, Fondateur" },
 
     shops: { title:"Nos Boutiques", subtitle:"Des espaces dédiés à votre beauté",
       bukavu:{ name:"Boutique Bukavu", tag:"Beauty Specialists", addr:"Mosquée Nyawera — Bukavu, DRCongo",
         phone:"+243 995 945 889", hours:"Lun – Sam : 8h00 – 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      goma:{ name:"Boutique Goma", tag:"Beauty Specialists", addr:"Himbi — Goma, DRCongo",
-        phone:"+243 995 945 889", hours:"Lun – Sam : 8h00 – 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
-        lat:"-1.6745", lng:"29.2335", q:"Goma,DRC" } },
+      kigali:{ name:"Boutique Kigali", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
+        phone:"+250 788 000 000", hours:"Lun – Sam : 9h00 – 19h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
+        lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
     contact: { title:"Contactez-nous", heading:"Une question sur nos rituels de beauté ?",
       desc:"Que vous recherchiez un conseil personnalisé ou des informations sur nos ingrédients, notre équipe est à votre écoute.",
       form:{ name:"Nom complet", email:"Email", subject:"Sujet", msg:"Message", send:"Envoyer le message",
@@ -102,15 +102,15 @@ const TR = {
     story: { title:"Our Story", subtitle:"The legacy of sovereign beauty",
       p1:"I am Hamin Banga, founder of Malkia B Cosmetics. It all started with a simple belief: every woman deserves to feel sovereign. I wanted to create products that don't just transform the skin, but also transform confidence.",
       p2:"My journey led me to select the finest ingredients — from Burkina’s shea butter to Morocco’s argan oil — to deliver formulas of exceptional efficacy. Every product is the result of a pursuit of excellence.",
-      p3:"Today, Malkia B shines from Bukavu and Goma, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
+      p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
       sig:"— Hamin Banga, Founder" },
     shops: { title:"Our Boutiques", subtitle:"Dedicated spaces for your beauty",
       bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque — Bukavu, DRCongo",
         phone:"+243 995 945 889", hours:"Mon – Sat: 8:00 AM – 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      goma:{ name:"Goma Boutique", tag:"Beauty Specialists", addr:"Himbi — Goma, DRCongo",
-        phone:"+243 995 945 889", hours:"Mon – Sat: 8:00 AM – 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
-        lat:"-1.6745", lng:"29.2335", q:"Goma,DRC" } },
+      kigali:{ name:"Kigali Boutique", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
+        phone:"+250 788 000 000", hours:"Mon – Sat: 9:00 AM – 7:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
+        lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
     contact: { title:"Contact Us", heading:"A question about your beauty rituals?",
       desc:"Whether you need personalized advice or information about our ingredients, our team is here to help.",
       form:{ name:"Full Name", email:"Email", subject:"Subject", msg:"Message", send:"Send Message",
@@ -389,7 +389,7 @@ function toggleMobileMenu(){
 
 /* ===== TEAM ===== */
 const TEAM = [
-  { id:'hamin', name:'CEO & Fondateur', role:'', roleKey:'', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.jpeg' },
+  { id:'hamin', name:'CEO & Fondateur — Hamin Banga', role:'', roleKey:'', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.jpeg' },
   { id:'samuel', name:'Samuel Buhendwa', role:'Sales & Marketing', bio:"Samuel est le moteur commercial de Malkia B. Stratège dans l'âme, il développe les marchés et fidélise une clientèle exigeante grâce à un accompagnement personnalisé.", img:'images/samuel.jpeg' },
   { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", img:'images/Wema.jpeg' },
   { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionnée par la cosmétique, elle met son sens du service au service de l'expérience Malkia B.", img:'images/Fadhili.jpeg' },
@@ -1293,7 +1293,7 @@ function renderShops(){
       <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
     </div>
     ${shopCard('bukavu')}
-    ${shopCard('goma')}
+    ${shopCard('kigali')}
     <section class="pt-8">
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
@@ -1349,7 +1349,7 @@ function renderContact(){
           <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${c.offices}</h3>
           <div class="space-y-4">
             <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Bukavu, DRCongo</p><p class="text-xs text-on-surface-variant">${t('shops.bukavu.addr')}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Goma, DRCongo</p><p class="text-xs text-on-surface-variant">${t('shops.goma.addr')}</p></div></div>
+            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Kigali, Rwanda</p><p class="text-xs text-on-surface-variant">${t('shops.kigali.addr')}</p></div></div>
           </div>
         </div>
         <div>
