@@ -214,8 +214,13 @@ const PRODUCTS = [
   {id:'r22', cat:'fragrance', name:"Moussuf Bleu", subtitle:"Parfums", price:30, seed:'parfum-moussuf-bleu', desc:"Moussuf version bleue. Fraîcheur aquatique et florale.", ingredients:"Notes marines, lavande, musc.", rating:4.4, reviews:12},
   {id:'r23', cat:'fragrance', name:"Moussuf Rouge", subtitle:"Parfums", price:30, seed:'parfum-moussuf-rouge', desc:"Moussuf version rouge. Passion et intensité.", ingredients:"Fraise, rose rouge, ambre.", rating:4.5, reviews:10},
   {id:'r24', cat:'fragrance', name:"Moussuf Rose", subtitle:"Parfums", price:30, seed:'parfum-moussuf-rose', desc:"Moussuf version rose. Douceur florale et romantique.", ingredients:"Rose, pivoine, musc blanc.", rating:4.4, reviews:9},
-  {id:'r25', cat:'fragrance', name:"Moussuf Chocolat", subtitle:"Parfums", price:30, seed:'parfum-moussuf-choco', desc:"Moussuf version chocolatée. Gourmandise addictive.", ingredients:"Cacao, vanille, caramel.", rating:4.5, reviews:11},
+  {id:'r25', cat:'fragrance', name:"Moussuf Chocolat", subtitle:"Parfums", price:30, img:'images/Mousuf Chocolat.jpeg', seed:'parfum-moussuf-choco', desc:"Moussuf version chocolatée. Gourmandise addictive.", ingredients:"Cacao, vanille, caramel.", rating:4.5, reviews:11},
   {id:'r26', cat:'fragrance', name:"Moussuf Blanc", subtitle:"Parfums", price:30, seed:'parfum-moussuf-blanc', desc:"Moussuf version blanche. Pureté et élégance minimaliste.", ingredients:"Fleur d'oranger, musc, vanille.", rating:4.3, reviews:8},
+  {id:'r28', cat:'fragrance', name:"Moussuf Musk", subtitle:"Parfums", price:30, img:'images/Mousf Musk.jpeg', seed:'parfum-moussuf-musk', desc:"Moussuf version musc. Douceur enveloppante et sensuelle.", ingredients:"Musc blanc, ambre, vanille.", rating:4.5, reviews:8},
+  {id:'r29', cat:'fragrance', name:"Moussuf Aswad", subtitle:"Parfums", price:30, img:'images/Mousuf Aswad.jpeg', seed:'parfum-moussuf-aswad', desc:"Moussuf version noire. Mystère et élégance profonde.", ingredients:"Oud, cuir, poivre noir, ambre.", rating:4.4, reviews:7},
+  {id:'r30', cat:'fragrance', name:"Moussuf Ramadi", subtitle:"Parfums", price:30, img:'images/Mousuf Ramadi.jpeg', seed:'parfum-moussuf-ramadi', desc:"Moussuf version grisée. Élégance sobre et moderne.", ingredients:"Cèdre, poivre rose, musc gris.", rating:4.3, reviews:6},
+  {id:'r31', cat:'fragrance', name:"Moussuf Sexy", subtitle:"Parfums", price:30, img:'images/Mousuf Sexy.jpeg', seed:'parfum-moussuf-sexy', desc:"Moussuf version sexy. Notes envoûtantes et magnétiques.", ingredients:"Fraise, caramel, patchouli, musc.", rating:4.6, reviews:10},
+  {id:'r32', cat:'fragrance', name:"Moussuf Wardi", subtitle:"Parfums", price:30, img:'images/Mousuf Wardi.jpeg', seed:'parfum-moussuf-wardi', desc:"Moussuf version wardi. Fraîcheur florale et poudrée.", ingredients:"Rose, pivoine, musc doux.", rating:4.4, reviews:7},
   {id:'w1', cat:'wellness', name:"Flat Tummy Tea", subtitle:"Wellness", price:22, img:'images/flat-tummy-tea-beta-1.webp', seed:'wellness-tea', desc:"Infusion minceur naturelle aux actifs puissants. Formule douce et efficace. Saveur agréable et relaxante.", ingredients:"Thé vert bio, gingembre, menthe, cannelle, aneth.", rating:4.6, reviews:27},
   /* ===== BIEN-ÊTRE ===== */
   {id:'w2', cat:'wellness', name:"Masques de Visage", subtitle:"Wellness", price:15, seed:'wellness-masques', desc:"Masques visage hydratants et purifiants. Selon votre type de peau pour un teint frais et lumineux.", ingredients:"Argile verte, aloe vera, extrait de concombre.", rating:4.5, reviews:18},
@@ -766,7 +771,7 @@ function renderHome(){
 function renderCategory(catKey){
   const label = t('cat.'+catKey) || (CATS[catKey] || 'Boutique');
   const items = PRODUCTS.filter(p=>p.cat===catKey);
-  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil (2).jpg', wellness:'images/bien etre accueil (2).jpg' }[catKey];
+  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil.jpg', wellness:'images/bien etre accueil (2).jpg' }[catKey];
   return `
   ${catHero ? `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative mb-10">
