@@ -62,7 +62,7 @@ const TR = {
       subscribe:"S'inscrire", thanks:"Merci, vous êtes inscrit(e) !",
       find:"Retrouvez-nous", contacts:"Nos Contacts & Représentations", contacts_p:"Notre équipe est à votre écoute dans le monde entier.",
       email:"Email", write:"Écrivez-nous", phone:"Téléphone", service:"Service client",
-      wa_sub:"Réponse sous 24h", hours:"Horaires", hours_week:"Lundi �$� Samedi", hours_time:"9h00 �$� 18h00",
+      wa_sub:"Réponse sous 24h", hours:"Horaires", hours_week:"Lundi — Samedi", hours_time:"9h00 — 18h00",
       hours_sun:"Dimanche : Sur rendez-vous", siège:"Siège", intl:"International",
       map:"Ouvrir dans Google Maps", map_hint:"Cliquez pour voir notre boutique sur Google Maps",
       see_more:"Voir plus" },
@@ -70,22 +70,22 @@ const TR = {
       p1:"Malkia B Cosmetics est née d'une conviction : chaque femme mérite de révéler la reine qui sommeille en elle. Inspirée par les rituels de beauté ancestraux africains et les ingrédients les plus précieux du continent, notre maison allie tradition et innovation.",
       p2:"Du beurre de karité du Burkina Faso à l'huile d'argan du Maroc, en passant par le miel d'Éthiopie et le baobab du Sénégal, chaque ingrédient est sélectionné avec la plus grande exigence pour offrir des soins d'une pureté et d'une efficacité exceptionnelles.",
       p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage la même vision : célébrer la beauté authentique et souveraine de chaque femme.",
-      sig:"�$� Malkia B, Fondatrice" },
+      sig:"— Malkia B, Fondatrice" },
     shops: { title:"Nos Boutiques", subtitle:"Des espaces dédiés à votre beauté",
-      bukavu:{ name:"Boutique Bukavu", tag:"Beauty Specialists", addr:"Mosquée Nyawera �$� Bukavu, DRCongo",
-        phone:"+243 995 945 889", hours:"Lun �$� Sam : 8h00 �$� 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
+      bukavu:{ name:"Boutique Bukavu", tag:"Beauty Specialists", addr:"Mosquée Nyawera — Bukavu, DRCongo",
+        phone:"+243 995 945 889", hours:"Lun – Sam : 8h00 – 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      kigali:{ name:"Boutique Kigali", tag:"Flagship Store", addr:"KG 123 St �$� Kigali, Rwanda",
-        phone:"+250 788 000 000", hours:"Lun �$� Sam : 9h00 �$� 19h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
+      kigali:{ name:"Boutique Kigali", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
+        phone:"+250 788 000 000", hours:"Lun – Sam : 9h00 – 19h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
         lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
     contact: { title:"Contactez-nous", heading:"Une question sur nos rituels de beauté ?",
       desc:"Que vous recherchiez un conseil personnalisé ou des informations sur nos ingrédients, notre équipe est à votre écoute.",
       form:{ name:"Nom complet", email:"Email", subject:"Sujet", msg:"Message", send:"Envoyer le message",
         sent:"Message envoyé, merci !" },
       direct:"Contact direct", offices:"Nos Représentations",
-      abidjan:"Siège �$� Cocody, Rue des Jardins", paris:"Showroom �$� Le Marais, 75003",
-      dakar:"Point relais �$� Almadies", dubai:"Distributeur agréé �$� Dubai Mall",
-      hours:"Lun �$� Sam : 9h00 �$� 18h00<br>Dim : Sur rendez-vous", map:"Voir sur Google Maps",
+      abidjan:"Siège — Cocody, Rue des Jardins", paris:"Showroom — Le Marais, 75003",
+      dakar:"Point relais — Almadies", dubai:"Distributeur agréé — Dubai Mall",
+      hours:"Lun – Sam : 9h00 – 18h00<br>Dim : Sur rendez-vous", map:"Voir sur Google Maps",
       wa:"Contactez-nous via WhatsApp", wa_sub:"Réponse sous 24h" },
     footer: { tagline:"L'excellence de la cosmétique artisanale, inspirée par la souveraineté de la femme moderne.",
       shop:"Boutique", support:"Assistance", follow:"Suivez-nous", delivery:"Livraison & retours",
@@ -101,7 +101,7 @@ const TR = {
       free:"Gratuite", promo:"Code promo", apply:"Appliquer", secure:"Paiement sécurisé" },
     checkout: { title:"Paiement", place:"Confirmer et payer", card:"Carte bancaire", or:"ou",
       summary:"Récapitulatif", info_title:"Informations de livraison", name:"Nom complet",
-      address:"Adresse", city:"Ville", country:"Pays", zip:"Code postal", confirm:"Commande confirmée �$� merci !" },
+      address:"Adresse", city:"Ville", country:"Pays", zip:"Code postal", confirm:"Commande confirmée — merci !" },
     account: { title:"Mon Compte", orders:"Historique des commandes", info:"Informations personnelles", logout:"Déconnexion",
       order:"Commande", delivered:"Livrée", pending:"En cours", items:"articles", share:"Partager",
       also:"Découvrez aussi", members:"Les autres membres", not_found:"Membre introuvable", back:"Retour à l'équipe",
@@ -131,7 +131,7 @@ const TR = {
       subscribe:"Subscribe", thanks:"Thank you for subscribing!",
       find:"Find Us", contacts:"Our Contacts & Locations", contacts_p:"Our team is here for you worldwide.",
       email:"Email", write:"Write us", phone:"Phone", service:"Customer service",
-      wa_sub:"Reply within 24h", hours:"Hours", hours_week:"Monday �$� Saturday", hours_time:"9:00 AM �$� 6:00 PM",
+      wa_sub:"Reply within 24h", hours:"Hours", hours_week:"Monday — Saturday", hours_time:"9:00 AM — 6:00 PM",
       hours_sun:"Sunday: By appointment", siège:"Head Office", intl:"International",
       map:"Open in Google Maps", map_hint:"Click to view our store on Google Maps",
       see_more:"View More" },
@@ -139,22 +139,22 @@ const TR = {
       p1:"Malkia B Cosmetics was born from a belief: every woman deserves to reveal the queen within. Inspired by ancient African beauty rituals and the continent's most precious ingredients, our house blends tradition with innovation.",
       p2:"From shea butter from Burkina Faso to argan oil from Morocco, Ethiopian honey to Senegalese baobab, each ingredient is carefully selected to deliver products of exceptional purity and efficacy.",
       p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team united by the same vision: celebrating the authentic and sovereign beauty of every woman.",
-      sig:"�$� Malkia B, Founder" },
+      sig:"— Malkia B, Founder" },
     shops: { title:"Our Boutiques", subtitle:"Dedicated spaces for your beauty",
-      bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque �$� Bukavu, DRCongo",
-        phone:"+243 995 945 889", hours:"Mon �$� Sat: 8:00 AM �$� 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
+      bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque — Bukavu, DRCongo",
+        phone:"+243 995 945 889", hours:"Mon – Sat: 8:00 AM – 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      kigali:{ name:"Kigali Boutique", tag:"Flagship Store", addr:"KG 123 St �$� Kigali, Rwanda",
-        phone:"+250 788 000 000", hours:"Mon �$� Sat: 9:00 AM �$� 7:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
+      kigali:{ name:"Kigali Boutique", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
+        phone:"+250 788 000 000", hours:"Mon – Sat: 9:00 AM – 7:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
         lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
     contact: { title:"Contact Us", heading:"A question about your beauty rituals?",
       desc:"Whether you need personalized advice or information about our ingredients, our team is here to help.",
       form:{ name:"Full Name", email:"Email", subject:"Subject", msg:"Message", send:"Send Message",
         sent:"Message sent, thank you!" },
       direct:"Direct Contact", offices:"Our Locations",
-      abidjan:"Head Office �$� Cocody, Rue des Jardins", paris:"Showroom �$� Le Marais, 75003",
-      dakar:"Pickup Point �$� Almadies", dubai:"Authorized Distributor �$� Dubai Mall",
-      hours:"Mon �$� Sat: 9:00 AM �$� 6:00 PM<br>Sun: By appointment", map:"View on Google Maps",
+      abidjan:"Head Office — Cocody, Rue des Jardins", paris:"Showroom — Le Marais, 75003",
+      dakar:"Pickup Point — Almadies", dubai:"Authorized Distributor — Dubai Mall",
+      hours:"Mon – Sat: 9:00 AM – 6:00 PM<br>Sun: By appointment", map:"View on Google Maps",
       wa:"Contact us via WhatsApp", wa_sub:"Reply within 24h" },
     footer: { tagline:"The excellence of artisanal cosmetics, inspired by the sovereignty of the modern woman.",
       shop:"Shop", support:"Support", follow:"Follow Us", delivery:"Shipping & Returns",
@@ -170,7 +170,7 @@ const TR = {
       free:"Free", promo:"Promo Code", apply:"Apply", secure:"Secure Payment" },
     checkout: { title:"Checkout", place:"Confirm & Pay", card:"Credit Card", or:"or",
       summary:"Order Summary", info_title:"Shipping Information", name:"Full Name",
-      address:"Address", city:"City", country:"Country", zip:"ZIP Code", confirm:"Order confirmed �$� thank you!" },
+      address:"Address", city:"City", country:"Country", zip:"ZIP Code", confirm:"Order confirmed — thank you!" },
     account: { title:"My Account", orders:"Order History", info:"Personal Information", logout:"Log Out",
       order:"Order", delivered:"Delivered", pending:"Pending", items:"items", share:"Share",
       also:"Also discover", members:"Other members", not_found:"Member not found", back:"Back to team",
@@ -187,14 +187,14 @@ const CATS = { body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Welln
 const PRODUCTS = [
   {id:'b1', cat:'body', name:"Lotion Corps AHA 3 Jours (Lovska)", subtitle:"Lait", price:15, img:'images/S1944c55855ca4c9b97e3a6d9c185f47aO.webp', seed:'body-aha', desc:"Exfoliation chimique douce et efficace. Résultats visibles en 3 jours. Texture onctueuse et absorbante. Parfaite pour une peau lisse et éclatante.", ingredients:"Acide glycolique 5%, aloe vera, extrait de camomille.", rating:4.8, reviews:24, badge:'Vedette'},
   {id:'b2', cat:'body', name:"Extra Strong Whitening Molato Scrub", subtitle:"Corps", price:20, img:'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&h=750&fit=crop&q=80', seed:'body-scrub', desc:"Gommage exfoliant intensif aux grains fins naturels. Éclaircissant progressif. Révèle une peau uniforme, douce et radieuse.", ingredients:"Extrait de molato, beurre de karité bio, vitamine E.", rating:4.7, reviews:19},
-  {id:'f1', cat:'face', name:"Kojic Glow Skin �$� Set Complet", subtitle:"Visage", price:35, img:'images/15d056d007a32fae0eb37fbd8826e419.jpg', seed:'face-biovene', desc:"Soin visage éclat premium. Texture divine et nourrissante. Résultats visibles rapidement. Pour une peau lumineuse, hydratée et protégée.", ingredients:"Vitamine C stabilisée, niacinamide, beurre de karité bio.", rating:4.9, reviews:31, badge:'Vedette'},
+  {id:'f1', cat:'face', name:"Kojic Glow Skin — Set Complet", subtitle:"Visage", price:35, img:'images/15d056d007a32fae0eb37fbd8826e419.jpg', seed:'face-biovene', desc:"Soin visage éclat premium. Texture divine et nourrissante. Résultats visibles rapidement. Pour une peau lumineuse, hydratée et protégée.", ingredients:"Vitamine C stabilisée, niacinamide, beurre de karité bio.", rating:4.9, reviews:31, badge:'Vedette'},
   {id:'f2', cat:'face', name:"Anti acné _ set complet", subtitle:"Visage", price:40, img:'images/img_0001.jpeg', seed:'face-serum', desc:"Sérum concentré pour sublimer l'éclat naturel du teint. Améliore la texture et raffermit. Anti-âge haute performance.", ingredients:"Acide hyaluronique haut & bas poids moléculaire, extrait de rose, panthénol.", rating:4.7, reviews:22},
   {id:'b3', cat:'body', name:"Almond Glow Korea Glow", subtitle:"Lait", price:28, img:'images/Home-Health-Almond-Glow-Skin-Lotion-Jasmine-8-Oz_7f817bcb-e801-4572-a216-c4ac195291bc.8c76c4c5d6b9a1ddb44667509aa1cf03.avif', seed:'body-glow', desc:"Illuminant corps effet glowy. Texture légère et sublimante. Donne un effet de peau lumineuse et nacré à effet glassé coréen.", ingredients:"Extrait d'amande, huile de jojoba, pigments minéraux.", rating:4.6, reviews:15},
   /* ===== PARFUMS ===== */
   {id:'r3', cat:'fragrance', name:"Sauvage Dior", subtitle:"Parfums", price:100, img:'images/Sauvage Dior.jpeg', seed:'parfum-sauvage-dior', desc:"Eau de toilette iconique Dior. Fraîcheur épicée et virile. Notes de bergamote, poivre et ambre.", ingredients:"Bergamote, poivre de Sichuan, ambre gris.", rating:4.9, reviews:45, badge:'Premium'},
-  {id:'r4', cat:'fragrance', name:"Baccarat Rouge 540 �$� Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/baccarat rouge.jpeg', seed:'parfum-baccarat-rouge', desc:"Fragrance légendaire signée Francis Kurkdjian. Note safranée et boisée inoubliable.", ingredients:"Safran, cèdre, ambre gras, ciste.", rating:5.0, reviews:62, badge:'Premium'},
-  {id:'r5', cat:'fragrance', name:"Baccarat Blanc �$� Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/Baccarat blanc.jpeg', seed:'parfum-baccarat-blanc', desc:"Version lumineuse du Baccarat. Notes fraîches et florales. Élégance pure.", ingredients:"Fleur d'oranger, musc blanc, vanille.", rating:4.8, reviews:28, badge:'Premium'},
-  {id:'r6', cat:'fragrance', name:"Baccarat Noire �$� Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/Baccarat noir.jpeg', seed:'parfum-baccarat-noire', desc:"Variation intense et mystérieuse du Baccarat. Profondeur envoûtante.", ingredients:"Oud, cuir, bois de santal, safran.", rating:4.9, reviews:34, badge:'Premium'},
+  {id:'r4', cat:'fragrance', name:"Baccarat Rouge 540 — Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/baccarat rouge.jpeg', seed:'parfum-baccarat-rouge', desc:"Fragrance légendaire signée Francis Kurkdjian. Note safranée et boisée inoubliable.", ingredients:"Safran, cèdre, ambre gras, ciste.", rating:5.0, reviews:62, badge:'Premium'},
+  {id:'r5', cat:'fragrance', name:"Baccarat Blanc — Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/Baccarat blanc.jpeg', seed:'parfum-baccarat-blanc', desc:"Version lumineuse du Baccarat. Notes fraîches et florales. Élégance pure.", ingredients:"Fleur d'oranger, musc blanc, vanille.", rating:4.8, reviews:28, badge:'Premium'},
+  {id:'r6', cat:'fragrance', name:"Baccarat Noire — Francis Kurkdjian", subtitle:"Parfums", price:100, img:'images/Baccarat noir.jpeg', seed:'parfum-baccarat-noire', desc:"Variation intense et mystérieuse du Baccarat. Profondeur envoûtante.", ingredients:"Oud, cuir, bois de santal, safran.", rating:4.9, reviews:34, badge:'Premium'},
   {id:'r7', cat:'fragrance', name:"Terre d'Hermès", subtitle:"Parfums", price:100, img:'images/Terre d\'Hermès.jpeg', seed:'parfum-terre-hermes', desc:"Parfum emblématique Hermès aux notes minérales et boisées. Élégance intemporelle.", ingredients:"Pamplemousse, silex, cèdre, vétiver.", rating:4.8, reviews:41},
   {id:'r8', cat:'fragrance', name:"Badel Al Oud", subtitle:"Parfums", price:100, img:'images/Badee al oud.jpeg', seed:'parfum-badel-al-oud', desc:"Parfum oriental riche au oud noble. Sillage envoûtant et tenue exceptionnelle.", ingredients:"Oud naturel, musc, ambre, bois de santal.", rating:4.7, reviews:23},
   {id:'r9', cat:'fragrance', name:"Scandal", subtitle:"Parfums", price:100, img:'images/Scandal.jpeg', seed:'parfum-scandal', desc:"Parfum audacieux aux notes de miel et de fleur d'oranger. Gourmand et sensuel.", ingredients:"Miel, fleur d'oranger, patchouli, vanille.", rating:4.6, reviews:19},
@@ -309,7 +309,7 @@ const HERO_SLIDES = [
     img: 'images/pexels-jayrinho-16559618.jpg',
     tag: 'Since 2015 · Livraison mondiale',
     title: 'Votre Beauté, Notre Priorité',
-    text: 'True Beauty Comes From Within �$� Des soins de beauté premium conçus pour révéler votre éclat avec élégance, douceur et efficacité.',
+    text: 'True Beauty Comes From Within — Des soins de beauté premium conçus pour révéler votre éclat avec élégance, douceur et efficacité.',
     cta1: { text: 'Découvrir nos produits', link: '#/category/fragrance' },
     cta2: { text: 'Commander via WhatsApp', link: '#/contact' }
   },
@@ -433,7 +433,7 @@ const TEAM = [
   { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'images/Janitor.jpeg' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
   { id:'elie', name:'Elie Binwa', role:'Sécurité', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", img:'team-elie' },
-  { id:'photo', name:'Photographe', role: LANG.current==='en'?'Coming soon':'�$ venir', bio:LANG.current==='en'?"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!":"Nous recrutons actuellement un photographe talentueux pour capturer l'essence de Malkia B. Si vous êtes passionné par la beauté et l'image, rejoignez-nous !", img:'team-photo' },
+  { id:'photo', name:'Photographe', role: LANG.current==='en'?'Coming soon':'À venir', bio:LANG.current==='en'?"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!":"Nous recrutons actuellement un photographe talentueux pour capturer l'essence de Malkia B. Si vous êtes passionné par la beauté et l'image, rejoignez-nous !", img:'team-photo' },
 ];
 
 function renderTeam(){
@@ -558,10 +558,10 @@ function renderHeader(){
     <div id="mobileMenu" class="hidden flex-col bg-background border-t border-outline-variant/20 px-5 pb-4">
       <a href="#/home" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest">${n.home}</a>
       <a href="#/products" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest font-semibold">${n.products}</a>
-      <a href="#/category/body" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">�$� ${n.body}</a>
-      <a href="#/category/face" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">�$� ${n.face}</a>
-      <a href="#/category/fragrance" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">�$� ${n.fragrance}</a>
-      <a href="#/category/wellness" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">�$� ${n.wellness}</a>
+      <a href="#/category/body" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">— ${n.body}</a>
+      <a href="#/category/face" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">— ${n.face}</a>
+      <a href="#/category/fragrance" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">— ${n.fragrance}</a>
+      <a href="#/category/wellness" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">— ${n.wellness}</a>
       <a href="#/story" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest">${n.story}</a>
       <a href="#/shops" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest">${n.shops}</a>
       <a href="#/contact" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest">${n.contact}</a>
@@ -843,8 +843,8 @@ function renderProduct(id){
       <div class="text-sm text-on-surface-variant leading-relaxed">
         ${activeTab==='desc' ? p.desc : activeTab==='ing' ? p.ingredients : `
           <div class="space-y-4">
-            <div class="pb-4 border-b border-outline-variant/10"><span class="text-primary text-xs">★★★★★</span><p class="mt-1">"Une merveille, ma peau n'a jamais été aussi lumineuse." �$� Aïcha K.</p></div>
-            <div><span class="text-primary text-xs">★★★★☆</span><p class="mt-1">"Très satisfaite, je recommande." �$� Fatou D.</p></div>
+            <div class="pb-4 border-b border-outline-variant/10"><span class="text-primary text-xs">★★★★★</span><p class="mt-1">"Une merveille, ma peau n'a jamais été aussi lumineuse." — Aïcha K.</p></div>
+            <div><span class="text-primary text-xs">★★★★☆</span><p class="mt-1">"Très satisfaite, je recommande." — Fatou D.</p></div>
           </div>`}
       </div>
     </div>
@@ -1032,14 +1032,14 @@ function renderAccount(){
         <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
           <div class="flex gap-6 items-center">
             <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order1',200,200)}" class="w-full h-full object-cover"></div>
-            <div><p class="text-[11px] text-primary uppercase mb-1">Livré le 12 juin 2026</p><h3 class="font-display text-base">Commande #MB-10423</h3><p class="text-sm text-on-surface-variant">3 articles �$� 84,00 $</p></div>
+            <div><p class="text-[11px] text-primary uppercase mb-1">Livré le 12 juin 2026</p><h3 class="font-display text-base">Commande #MB-10423</h3><p class="text-sm text-on-surface-variant">3 articles • 84,00 $</p></div>
           </div>
           <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">Livrée</span>
         </div>
         <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
           <div class="flex gap-6 items-center">
             <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order2',200,200)}" class="w-full h-full object-cover"></div>
-            <div><p class="text-[11px] text-primary uppercase mb-1">2 mai 2026</p><h3 class="font-display text-base">Commande #MB-10391</h3><p class="text-sm text-on-surface-variant">1 article �$� 65,00 $</p></div>
+            <div><p class="text-[11px] text-primary uppercase mb-1">2 mai 2026</p><h3 class="font-display text-base">Commande #MB-10391</h3><p class="text-sm text-on-surface-variant">1 article • 65,00 $</p></div>
           </div>
           <span class="text-[11px] border border-outline text-outline px-4 py-2 uppercase tracking-widest">En cours</span>
         </div>
