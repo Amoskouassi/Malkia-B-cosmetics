@@ -202,9 +202,10 @@ const PRODUCTS = [
   {id:'r9', cat:'fragrance', name:"Scandal", subtitle:"Parfums", price:55, seed:'parfum-scandal', desc:"Parfum audacieux aux notes de miel et de fleur d'oranger. Gourmand et sensuel.", ingredients:"Miel, fleur d'oranger, patchouli, vanille.", rating:4.6, reviews:19},
   {id:'r10', cat:'fragrance', name:"Dubai Chocolat", subtitle:"Parfums", price:45, seed:'parfum-dubai-chocolat', desc:"Fragrance gourmande au cacao et aux épices orientales. Un parfum réconfortant et luxueux.", ingredients:"Cacao, cannelle, vanille, musc.", rating:4.5, reviews:16},
   {id:'r11', cat:'fragrance', name:"Teriaq", subtitle:"Parfums", price:50, seed:'parfum-teriaq', desc:"Parfum oriental captivant. Notes épicées et boisées pour une signature forte.", ingredients:"Cardamome, cuir, oud, ambre.", rating:4.6, reviews:14},
-  {id:'r12', cat:'fragrance', name:"Yara Rouge", subtitle:"Parfums", price:35, seed:'parfum-yara-rouge', desc:"Yara dans sa version rouge passion. Notes fruitées et florales vibrantes.", ingredients:"Fraise, framboise, rose, musc blanc.", rating:4.5, reviews:18},
-  {id:'r13', cat:'fragrance', name:"Yara Jaune", subtitle:"Parfums", price:35, seed:'parfum-yara-jaune', desc:"Yara version solaire. Lumière et joie dans un flacon. Notes exotiques enveloppantes.", ingredients:"Mangue, ylang-ylang, vanille, santal.", rating:4.6, reviews:15},
-  {id:'r14', cat:'fragrance', name:"Yara Rose", subtitle:"Parfums", price:35, seed:'parfum-yara-rose', desc:"Yara version florale. Bouquet romantique de roses et de fruits rouges.", ingredients:"Rose bulgare, litchi, musc doux.", rating:4.7, reviews:20},
+  {id:'r12', cat:'fragrance', name:"Yara Rouge", subtitle:"Parfums", price:35, img:'images/Yara rouge.jpeg', seed:'parfum-yara-rouge', desc:"Yara dans sa version rouge passion. Notes fruitées et florales vibrantes.", ingredients:"Fraise, framboise, rose, musc blanc.", rating:4.5, reviews:18},
+  {id:'r13', cat:'fragrance', name:"Yara Jaune", subtitle:"Parfums", price:35, img:'images/Yara jaune.jpeg', seed:'parfum-yara-jaune', desc:"Yara version solaire. Lumière et joie dans un flacon. Notes exotiques enveloppantes.", ingredients:"Mangue, ylang-ylang, vanille, santal.", rating:4.6, reviews:15},
+  {id:'r14', cat:'fragrance', name:"Yara Rose", subtitle:"Parfums", price:35, img:'images/yara rose.jpeg', seed:'parfum-yara-rose', desc:"Yara version florale. Bouquet romantique de roses et de fruits rouges.", ingredients:"Rose bulgare, litchi, musc doux.", rating:4.7, reviews:20},
+  {id:'r27', cat:'fragrance', name:"Yara Gris", subtitle:"Parfums", price:35, img:'images/yara gris.jpeg', seed:'parfum-yara-gris', desc:"Yara version grisée. Élégance sobre et sophistiquée. Notes boisées et épicées.", ingredients:"Poivre rose, iris, cèdre, musc.", rating:4.6, reviews:10},
   {id:'r15', cat:'fragrance', name:"Nine Noire", subtitle:"Parfums", price:40, seed:'parfum-nine-noire', desc:"Nine en version sombre et intense. Mystère et élégance.", ingredients:"Cuir, oud, poivre noir, ambre.", rating:4.6, reviews:13},
   {id:'r16', cat:'fragrance', name:"Nine Beige", subtitle:"Parfums", price:40, seed:'parfum-nine-beige', desc:"Nine en version douce et lumineuse. Élégance minimaliste.", ingredients:"Musc blanc, fleur d'oranger, vanille.", rating:4.5, reviews:11},
   {id:'r17', cat:'fragrance', name:"Nine Blue", subtitle:"Parfums", price:40, seed:'parfum-nine-blue', desc:"Nine en version aquatique et fraîche. Brise marine et liberté.", ingredients:"Notes marines, bergamote, cèdre.", rating:4.6, reviews:14},
@@ -430,7 +431,7 @@ const TEAM = [
   { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionnée par la cosmétique, elle met son sens du service au service de l'expérience Malkia B.", img:'images/Fadhili.jpeg' },
   { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", img:'images/Wani Julia.jpeg' },
   { id:'narcisse', name:'Narcisse Baderhe', role:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", img:'images/Narcisse Baderhe.jpeg' },
-  { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'team-esther' },
+  { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'images/Janitor.jpeg' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
   { id:'elie', name:'Elie Binwa', role:'Sécurité', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", img:'team-elie' },
   { id:'photo', name:'Photographe', role: LANG.current==='en'?'Coming soon':'À venir', bio:LANG.current==='en'?"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!":"Nous recrutons actuellement un photographe talentueux pour capturer l'essence de Malkia B. Si vous êtes passionné par la beauté et l'image, rejoignez-nous !", img:'team-photo' },
@@ -767,8 +768,14 @@ function renderHome(){
 function renderCategory(catKey){
   const label = t('cat.'+catKey) || (CATS[catKey] || 'Boutique');
   const items = PRODUCTS.filter(p=>p.cat===catKey);
+  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil (2).jpg', wellness:'images/bien etre accueil.jpg' }[catKey];
   return `
-  <div class="px-5 md:px-margin-desktop pt-4 pb-24">
+  ${catHero ? `
+  <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative mb-10">
+    <img src="${catHero}" class="w-full h-full object-cover" alt="${label}">
+    <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
+  </div>` : ''}
+  <div class="px-5 md:px-margin-desktop pb-24">
     <div class="text-center mb-14 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4">${label}</h1>
