@@ -424,7 +424,7 @@ function toggleMobileMenu(){
 
 /* ===== TEAM ===== */
 const TEAM = [
-  { id:'hamin', name:'Hamin Banga', role:'CEO / Fondateur', roleKey:'boss', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.jpeg' },
+  { id:'hamin', name:'CEO & Fondateur', role:'', roleKey:'', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.jpeg' },
   { id:'samuel', name:'Samuel Buhendwa', role:'Sales & Marketing', bio:"Samuel est le moteur commercial de Malkia B. Stratège dans l'âme, il développe les marchés et fidélise une clientèle exigeante grâce à un accompagnement personnalisé.", img:'images/samuel.jpeg' },
   { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", img:'images/Wema.jpeg' },
   { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionnée par la cosmétique, elle met son sens du service au service de l'expérience Malkia B.", img:'images/Fadhili.jpeg' },
