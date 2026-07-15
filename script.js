@@ -1070,10 +1070,14 @@ function confirmOrder(){
   const shipping = subtotal > 150 ? 0 : 6;
   const total = subtotal + shipping;
   const orderLines = lines.map(l=>`• ${l.name} × ${l.qty} = ${fmt(l.lineTotal)}$`).join('\n');
+  const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery, payment:payLabel, name:fullName };
   const msg = LANG.current==='en'
-    ? `*NEW ORDER — Malkia B Cosmetics*\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${delivery}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
-    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${delivery}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
-  const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
+    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${delivery}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
+    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${delivery}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
+  const saved = JSON.parse(localStorage.getItem('malkia_orders')||'[]');
+  saved.unshift(order);
+  localStorage.setItem('malkia_orders', JSON.stringify(saved));
+  localStorage.setItem('malkia_profile', JSON.stringify(profile));
   cart = []; saveCart(); updateCartCount();
   window.open(wa, '_blank');
   location.hash = '#/account';
@@ -1082,52 +1086,94 @@ function confirmOrder(){
 /* ===== ACCOUNT ===== */
 function renderAccount(){
   const ac = t('account');
+  const profile = JSON.parse(localStorage.getItem('malkia_profile') || '{}');
+  const orders = JSON.parse(localStorage.getItem('malkia_orders') || '[]');
+  const name = (profile.firstName || '[Prénom]') + ' ' + (profile.lastName || '[Nom]');
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
-    <p class="text-sm text-on-surface-variant mb-12">${LANG.current==='en'?'Welcome, [First Name Last Name]':'Bienvenue, [Prénom Nom]'}</p>
+    <p class="text-sm text-on-surface-variant mb-12">${LANG.current==='en'?'Welcome, ':'Bienvenue, '}${name}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <aside class="lg:col-span-3 space-y-2">
-        <button class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
+        <button onclick="switchAccount('orders')" id="tab-orders" class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
           <span class="material-symbols-outlined">shopping_bag</span><span class="text-sm">${ac.orders}</span>
         </button>
-        <button class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
+        <button onclick="switchAccount('info')" id="tab-info" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
           <span class="material-symbols-outlined">person</span><span class="text-sm">Informations</span>
         </button>
-        <button class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
+        <button onclick="switchAccount('addresses')" id="tab-addresses" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
           <span class="material-symbols-outlined">location_on</span><span class="text-sm">Adresses</span>
         </button>
-        <button class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
+        <button onclick="switchAccount('payments')" id="tab-payments" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
           <span class="material-symbols-outlined">credit_card</span><span class="text-sm">Paiements</span>
         </button>
-        <button class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">Déconnexion</button>
+        <button onclick="localStorage.removeItem('malkia_profile');localStorage.removeItem('malkia_orders');showToast('${LANG.current==='en'?'Profile cleared':'Profil effacé'}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
       </aside>
-      <div class="lg:col-span-9 space-y-8">
-        <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">Historique des commandes</h2>
-        <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
-          <div class="flex gap-6 items-center">
-            <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order1',200,200)}" class="w-full h-full object-cover"></div>
-            <div><p class="text-[11px] text-primary uppercase mb-1">Livré le 12 juin 2026</p><h3 class="font-display text-base">Commande #MB-10423</h3><p class="text-sm text-on-surface-variant">3 articles • 84,00 $</p></div>
-          </div>
-          <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">Livrée</span>
-        </div>
-        <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
-          <div class="flex gap-6 items-center">
-            <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order2',200,200)}" class="w-full h-full object-cover"></div>
-            <div><p class="text-[11px] text-primary uppercase mb-1">2 mai 2026</p><h3 class="font-display text-base">Commande #MB-10391</h3><p class="text-sm text-on-surface-variant">1 article • 65,00 $</p></div>
-          </div>
-          <span class="text-[11px] border border-outline text-outline px-4 py-2 uppercase tracking-widest">En cours</span>
-        </div>
-        <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4 pt-6">Informations personnelles</h2>
-        <div class="border border-outline-variant/10 p-6 space-y-2 text-sm text-on-surface-variant">
-          <p>[Placeholder Nom Prénom]</p>
-          <p>[placeholder@email.com]</p>
-          <p>+225 [00 00 00 00 00]</p>
-        </div>
+      <div id="accountContent" class="lg:col-span-9 space-y-8">
+        ${renderAccountSection('orders', orders, profile)}
       </div>
     </div>
   </div>
   `;
+}
+
+function renderAccountSection(section, orders, profile){
+  const ac = t('account');
+  if(section==='orders'){
+    if(orders.length===0) return `<div class="text-center py-16"><span class="material-symbols-outlined text-4xl text-outline mb-4 block">shopping_bag</span><p class="text-on-surface-variant">${LANG.current==='en'?'No orders yet.':'Aucune commande pour le moment.'}</p><a href="#/products" class="inline-block mt-6 text-primary border-b border-primary/30 text-sm">${LANG.current==='en'?'Start shopping':'Commencer vos achats'}</a></div>`;
+    return `
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.orders}</h2>
+    ${orders.map((o,i)=>`
+    <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
+      <div class="flex gap-6 items-center">
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover"></div>
+        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(LANG.current==='en'?'en-US':'fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${LANG.current==='en'?'item':'article'}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
+      </div>
+      <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
+    </div>
+    `).join('')}
+    `;
+  }
+  if(section==='info'){
+    return `
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.info}</h2>
+    <div class="border border-outline-variant/10 p-6 space-y-2 text-sm">
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Name':'Nom'}</span><span class="font-medium">${(profile.firstName||'—') + ' ' + (profile.lastName||'')}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Phone':'Téléphone'}</span><span class="font-medium">${profile.phone||'—'}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Address':'Adresse'}</span><span class="font-medium">${profile.address||'—'}</span></div>
+      <div class="flex items-center justify-between py-2"><span class="text-on-surface-variant">${LANG.current==='en'?'City':'Ville'}</span><span class="font-medium">${profile.city||'—'}</span></div>
+    </div>
+    `;
+  }
+  if(section==='addresses'){
+    return `
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">Adresses</h2>
+    <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
+      <p>${profile.address ? profile.address + ', ' + profile.city : LANG.current==='en'?'No saved address.':'Aucune adresse enregistrée.'}</p>
+    </div>
+    `;
+  }
+  if(section==='payments'){
+    return `
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">Paiements</h2>
+    <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
+      <p>${LANG.current==='en'?'Payments are processed via WhatsApp or cash on delivery.':'Les paiements sont traités via WhatsApp ou à la livraison.'}</p>
+    </div>
+    `;
+  }
+}
+
+function switchAccount(section){
+  const tabs = ['orders','info','addresses','payments'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab-'+t);
+    if(btn) btn.className = btn.className.replace('bg-secondary-container text-on-secondary-container', 'text-on-surface-variant hover:bg-surface-container-low');
+  });
+  const active = document.getElementById('tab-'+section);
+  if(active) active.className = active.className.replace('text-on-surface-variant hover:bg-surface-container-low', 'bg-secondary-container text-on-secondary-container');
+  const profile = JSON.parse(localStorage.getItem('malkia_profile') || '{}');
+  const orders = JSON.parse(localStorage.getItem('malkia_orders') || '[]');
+  document.getElementById('accountContent').innerHTML = renderAccountSection(section, orders, profile);
 }
 
 /* ===== PRODUCTS PAGE ===== */
