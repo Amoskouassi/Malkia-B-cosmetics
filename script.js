@@ -597,9 +597,9 @@ function renderFooter(){
       <div class="space-y-4">
         <h4 class="text-xs uppercase tracking-widest text-primary font-semibold">${f.follow}</h4>
         <div class="flex gap-4 pt-2">
-          <a href="#" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
-          <a href="#" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">pin_drop</span></a>
-          <a href="#" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">music_note</span></a>
+          <a href="https://instagram.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
+          <a href="https://pinterest.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">pin_drop</span></a>
+          <a href="https://tiktok.com/@malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><span class="material-symbols-outlined text-sm">music_note</span></a>
         </div>
         <p class="text-[10px] text-on-surface-variant/60 pt-2">Instagram · Pinterest · TikTok</p>
       </div>
@@ -621,7 +621,7 @@ function navigate(){
   void app.offsetHeight;
   app.style.animation = 'page-enter 0.4s ease-out';
   if(page==='home'){ app.innerHTML = renderHome(); setTimeout(()=>{ initHeroCarousel(); initScrollReveal(); }, 50); }
-  else if(page==='category'){ app.innerHTML = renderCategory(param||'body'); setTimeout(initScrollReveal, 50); }
+  else if(page==='category'){ app.innerHTML = renderCategory(param||'body'); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
   else if(page==='product'){ activeTab='desc'; activeThumb=0; app.innerHTML = renderProduct(param); setTimeout(initScrollReveal, 50); }
   else if(page==='cart'){ app.innerHTML = renderCart(); setTimeout(initScrollReveal, 50); }
   else if(page==='checkout'){ app.innerHTML = renderCheckout(); setTimeout(initScrollReveal, 50); }
@@ -767,7 +767,7 @@ function renderHome(){
 function renderCategory(catKey){
   const label = t('cat.'+catKey) || (CATS[catKey] || 'Boutique');
   const items = PRODUCTS.filter(p=>p.cat===catKey);
-  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil.jpg', wellness:'images/bien etre accueil (2).jpg' }[catKey];
+  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil.jpg', fragrance:'images/cat-fragrance.jpg', wellness:'images/bien etre accueil (2).jpg' }[catKey];
   return `
   ${catHero ? `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative mb-10">
@@ -775,13 +775,23 @@ function renderCategory(catKey){
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
-    <div class="text-center mb-14 reveal">
+    <div class="text-center mb-10 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4">${label}</h1>
       <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto">${t('product.subtitle')}</p>
     </div>
+    <div class="mb-8 reveal">
+      <div class="relative max-w-md mx-auto">
+        <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
+        <input id="productSearch" type="text" placeholder="${LANG.current==='en'?'Search a product...':'Rechercher un produit...'}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
+      </div>
+    </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
       ${items.map((p,i)=>`<div data-name="${p.name.toLowerCase()}" class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
+    </div>
+    <div id="noResults" class="text-center py-16 hidden">
+      <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
+      <p class="text-on-surface-variant">${LANG.current==='en'?'No product matches your search.':'Aucun produit ne correspond à votre recherche.'}</p>
     </div>
   </div>
   `;
