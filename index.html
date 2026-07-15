@@ -6,8 +6,34 @@
 <title>Malkia B Cosmetics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: #fcf9f8;
+    --color-on-background: #1c1b1b;
+    --color-primary: #735c00;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #d4af37;
+    --color-on-primary-container: #554300;
+    --color-secondary: #70585b;
+    --color-secondary-container: #f8d8db;
+    --color-on-secondary-container: #755d5f;
+    --color-outline: #7f7663;
+    --color-outline-variant: #d0c5af;
+    --color-surface-container-low: #f6f3f2;
+    --color-surface-container: #f0eded;
+    --color-surface-container-lowest: #ffffff;
+    --color-on-surface-variant: #4d4635;
+    --color-error: #ba1a1a;
+    --font-display: "Playfair Display", serif;
+    --font-body: "Montserrat", sans-serif;
+    --spacing-container-max: 1440px;
+    --spacing-margin-desktop: 80px;
+    --spacing-margin-mobile: 20px;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,200&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-background text-on-background font-body overflow-x-hidden">

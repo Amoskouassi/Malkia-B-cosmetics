@@ -1,41 +1,3 @@
-/* ===== TAILWIND CONFIG ===== */
-if (typeof tailwind !== 'undefined') {
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "background": "#fcf9f8",
-          "on-background": "#1c1b1b",
-          "primary": "#735c00",
-          "on-primary": "#ffffff",
-          "primary-container": "#d4af37",
-          "on-primary-container": "#554300",
-          "secondary": "#70585b",
-          "secondary-container": "#f8d8db",
-          "on-secondary-container": "#755d5f",
-          "outline": "#7f7663",
-          "outline-variant": "#d0c5af",
-          "surface-container-low": "#f6f3f2",
-          "surface-container": "#f0eded",
-          "surface-container-lowest": "#ffffff",
-          "on-surface-variant": "#4d4635",
-          "error": "#ba1a1a"
-        },
-        fontFamily: {
-          "display": ["Playfair Display", "serif"],
-          "body": ["Montserrat", "sans-serif"]
-        },
-        spacing: {
-          "container-max": "1440px",
-          "margin-desktop": "80px",
-          "margin-mobile": "20px"
-        }
-      }
-    }
-  };
-}
-
 /* ===== I18N ===== */
 const LANG = { current: localStorage.getItem('malkia_lang') || 'fr' };
 const TR = {
@@ -455,7 +417,7 @@ function renderTeam(){
       ${TEAM.map((m,i)=>`
       <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''}">
         <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
-          <img src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
+          <img loading="lazy" src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
         <h3 class="font-display text-base md:text-lg font-medium">${m.name}</h3>
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
@@ -474,7 +436,7 @@ function renderTeamMember(id){
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
       <div class="md:col-span-5">
         <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg">
-          <img src="${ti(m,700,700)}" class="w-full h-full object-cover" alt="${m.name}">
+          <img loading="lazy" src="${ti(m,700,700)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
       </div>
       <div class="md:col-span-7">
@@ -500,7 +462,7 @@ function renderTeamMember(id){
         ${others.map(m=>`
         <a href="#/team/${m.id}" class="group text-center">
           <div class="aspect-square overflow-hidden mb-3 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
-            <img src="${ti(m,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
+            <img loading="lazy" src="${ti(m,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
           <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
@@ -651,7 +613,7 @@ function productCard(p){
   return `
   <a href="${link}" class="group block">
     <div class="relative aspect-square md:aspect-[3/4] overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low">
-      <img src="${imageUrl}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${p.name}">
+      <img loading="lazy" src="${imageUrl}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${p.name}">
       ${p.badge ? `<div class="absolute top-3 left-3 bg-primary text-on-primary text-[9px] px-3 py-1.5 uppercase tracking-widest font-semibold">${p.badge}</div>` : ''}
       <button onclick="event.preventDefault(); event.stopPropagation(); addToCart('${p.id}')" class="absolute bottom-4 right-4 bg-background/90 p-3 rounded-full opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-sm active:scale-90">
         <span class="material-symbols-outlined text-primary text-[20px]">add_shopping_cart</span>
@@ -888,7 +850,7 @@ function renderCart(){
         <div class="grid grid-cols-[80px_1fr_auto] md:grid-cols-12 items-center gap-4 md:gap-0 border-b border-outline-variant/10 py-6">
           <div class="md:col-span-6 flex items-center gap-4 md:gap-6">
             <div class="w-16 h-20 md:w-24 md:h-32 flex-shrink-0 bg-surface-container-low overflow-hidden">
-              <img src="${img(l.seed,200,250)}" class="w-full h-full object-cover" alt="${l.name}">
+              <img loading="lazy" src="${img(l.seed,200,250)}" class="w-full h-full object-cover" alt="${l.name}">
             </div>
             <div>
               <h3 class="font-display text-sm md:text-base mb-1">${l.name}</h3>
@@ -1182,7 +1144,7 @@ function renderAccountSection(section, orders, profile){
     ${orders.map((o,i)=>`
     <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
       <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover"></div>
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover"></div>
         <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(LANG.current==='en'?'en-US':'fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${LANG.current==='en'?'item':'article'}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
       </div>
       <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
@@ -1275,7 +1237,7 @@ function renderStory(){
       <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
     </div>
     <div class="aspect-[21/9] overflow-hidden rounded-2xl reveal">
-      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&h=514&fit=crop&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&h=514&fit=crop&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
     </div>
     <div class="space-y-6 text-on-surface-variant leading-relaxed reveal">
       <p class="text-base md:text-lg">${s.p1}</p>
@@ -1345,7 +1307,7 @@ function renderShops(){
         ${TEAM.map((m,i)=>`
         <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''} reveal reveal-d${(i%5)+1}">
           <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
-            <img src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
+            <img loading="lazy" src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h3 class="font-display text-sm md:text-base font-medium">${m.name}</h3>
           <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
