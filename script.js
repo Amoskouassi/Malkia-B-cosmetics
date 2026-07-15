@@ -980,25 +980,25 @@ function renderCheckout(){
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">03</span><h2 class="font-display text-xl">${co.title}</h2></div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center">
+            <label onclick="switchPay(this, 'mp')" class="flex flex-col items-center gap-2 p-4 border border-primary bg-surface-container-low cursor-pointer text-center">
               <input type="radio" name="pay" checked class="hidden">
               <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">M-PESA</span>
               <span class="text-[10px] text-on-surface-variant">Vodacom</span>
             </label>
-            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'am')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
               <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">Airtel Money</span>
               <span class="text-[10px] text-on-surface-variant">Airtel</span>
             </label>
-            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'om')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
               <svg class="w-8 h-8 text-on-surface-variant" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
               <span class="text-[11px] uppercase font-medium">Orange Money</span>
               <span class="text-[10px] text-on-surface-variant">Orange</span>
             </label>
-            <label onclick="switchPay(this)" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
+            <label onclick="switchPay(this, 'cod')" class="flex flex-col items-center gap-2 p-4 border border-outline-variant/30 cursor-pointer text-center">
               <input type="radio" name="pay" class="hidden">
               <span class="material-symbols-outlined text-2xl text-on-surface-variant">payments</span>
               <span class="text-[11px] uppercase font-medium">${co.cod}</span>
@@ -1007,17 +1007,21 @@ function renderCheckout(){
           </div>
           <div id="paymentInfo" class="p-5 bg-surface-container-low border border-outline-variant/10 rounded-lg text-sm space-y-2">
             <p class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">info</span> <span>${co.pay_info}</span></p>
-            <div class="flex items-center gap-3 py-2">
+            <div id="pay-mp" class="flex items-center gap-3 py-2">
               <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">MP</span>
               <div><p class="font-medium text-sm">M-PESA</p><p class="text-xs text-on-surface-variant">${co.mpresa_num}</p></div>
             </div>
-            <div class="flex items-center gap-3 py-2">
+            <div id="pay-am" class="flex items-center gap-3 py-2 hidden">
               <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">AM</span>
               <div><p class="font-medium text-sm">Airtel Money</p><p class="text-xs text-on-surface-variant">${co.airtel_num}</p></div>
             </div>
-            <div class="flex items-center gap-3 py-2">
+            <div id="pay-om" class="flex items-center gap-3 py-2 hidden">
               <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">OM</span>
               <div><p class="font-medium text-sm">Orange Money</p><p class="text-xs text-on-surface-variant">${co.orange_num}</p></div>
+            </div>
+            <div id="pay-cod" class="flex items-center gap-3 py-2 hidden">
+              <span class="material-symbols-outlined text-primary text-base">payments</span>
+              <div><p class="font-medium text-sm">${co.cod}</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'Pay upon delivery':'Paiement à la réception'}</p></div>
             </div>
           </div>
         </section>
@@ -1041,11 +1045,14 @@ function renderCheckout(){
   `;
 }
 
-function switchPay(el){
+function switchPay(el, key){
   document.querySelectorAll('label:has(input[name="pay"])').forEach(l=>{
-    l.className = l.className.replace(/border-primary bg-surface-container-low/g, 'border-outline-variant/30');
+    l.className = l.className.replace('border-primary bg-surface-container-low', 'border-outline-variant/30');
   });
-  el.className = el.className.replace(/border-outline-variant\/30/g, 'border-primary bg-surface-container-low');
+  el.className = el.className.replace('border-outline-variant/30', 'border-primary bg-surface-container-low');
+  document.querySelectorAll('#paymentInfo > div[id^="pay-"]').forEach(d=> d.classList.add('hidden'));
+  const info = document.getElementById('pay-'+key);
+  if(info) info.classList.remove('hidden');
 }
 
 function confirmOrder(){
