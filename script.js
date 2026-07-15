@@ -940,6 +940,29 @@ function renderCart(){
 }
 
 /* ===== CHECKOUT ===== */
+function toggleDelivery(yes){
+  document.getElementById('deliveryCity').classList.toggle('hidden', !yes);
+  const labels = document.querySelectorAll('label:has(input[name="wantDelivery"])');
+  labels.forEach(l => l.className = l.className.replace('border-primary bg-surface-container-low', 'border-outline-variant/30'));
+  labels[yes?0:1].className = labels[yes?0:1].className.replace('border-outline-variant/30', 'border-primary bg-surface-container-low');
+  updateShipping();
+}
+function updateShipping(){
+  const want = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
+  let s = 0, label = 'Gratuite';
+  if(want){
+    const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
+    if(dc==='bukavu'){ s = 1; }
+    else { s = 5; }
+  }
+  const subtotal = cart.reduce((t,c)=>{ const p=findProduct(c.id); return t + (p?p.price*c.qty:0); }, 0);
+  const total = subtotal + s;
+  const shipEl = document.getElementById('shipAmount');
+  const totalEl = document.getElementById('totalAmount');
+  if(shipEl) shipEl.textContent = s === 0 ? 'Gratuite' : fmt(s)+' $';
+  if(totalEl) totalEl.textContent = fmt(total) + ' $';
+}
+
 function renderCheckout(){
   const co = t('checkout'), ca = t('cart');
   if(cart.length===0){
@@ -947,7 +970,7 @@ function renderCheckout(){
   }
   const lines = cart.map(c=>{ const p=findProduct(c.id); return {...p, qty:c.qty, lineTotal:p.price*c.qty}; });
   const subtotal = lines.reduce((s,l)=>s+l.lineTotal,0);
-  const shipping = subtotal > 150 ? 0 : 6;
+  const shipping = 1;
   const total = subtotal + shipping;
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
@@ -965,16 +988,34 @@ function renderCheckout(){
           </div>
         </section>
         <section>
-          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${LANG.current==='en'?'Delivery Method':'Mode de livraison'}</h2></div>
-          <div class="space-y-3">
-            <label class="flex items-center justify-between p-5 border border-primary bg-surface-container-low cursor-pointer">
-              <div class="flex items-center gap-4"><input type="radio" name="delivery" checked class="accent-primary"><div><p class="text-sm font-medium">Standard</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'3-5 business days':'3-5 jours ouvrés'}</p></div></div>
-              <span class="text-sm">${ca.free}</span>
-            </label>
-            <label class="flex items-center justify-between p-5 border border-outline-variant/30 cursor-pointer">
-              <div class="flex items-center gap-4"><input type="radio" name="delivery" class="accent-primary"><div><p class="text-sm font-medium">Express</p><p class="text-xs text-on-surface-variant">24-48h</p></div></div>
-              <span class="text-sm">5 $</span>
-            </label>
+          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${LANG.current==='en'?'Delivery':'Livraison'}</h2></div>
+          <div class="space-y-4">
+            <p class="text-sm text-on-surface-variant">${LANG.current==='en'?'Do you want delivery?':'Souhaitez-vous une livraison ?'}</p>
+            <div class="flex gap-4">
+              <label onclick="toggleDelivery(true)" class="flex-1 flex items-center justify-center gap-3 p-5 border border-primary bg-surface-container-low cursor-pointer text-center">
+                <input type="radio" name="wantDelivery" value="yes" checked class="accent-primary"><span class="text-sm font-medium">Oui</span>
+              </label>
+              <label onclick="toggleDelivery(false)" class="flex-1 flex items-center justify-center gap-3 p-5 border border-outline-variant/30 cursor-pointer text-center">
+                <input type="radio" name="wantDelivery" value="no" class="accent-primary"><span class="text-sm font-medium">Non</span>
+              </label>
+            </div>
+            <div id="deliveryCity">
+              <p class="text-sm text-on-surface-variant mb-3">${LANG.current==='en'?'Delivery city:':'Ville de livraison :'}</p>
+              <div class="space-y-2">
+                <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-primary bg-surface-container-low cursor-pointer">
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="bukavu" checked class="accent-primary"><div><p class="text-sm font-medium">Bukavu</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'1-2 days':'1-2 jours'}</p></div></div>
+                  <span class="text-sm font-medium">1 $</span>
+                </label>
+                <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="goma" class="accent-primary"><div><p class="text-sm font-medium">Goma</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'2-4 days':'2-4 jours'}</p></div></div>
+                  <span class="text-sm font-medium">5 $</span>
+                </label>
+                <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${LANG.current==='en'?'Other city':'Autre ville'}</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'3-7 days':'3-7 jours'}</p></div></div>
+                  <span class="text-sm font-medium">5 $</span>
+                </label>
+              </div>
+            </div>
           </div>
         </section>
         <section>
@@ -1033,8 +1074,8 @@ function renderCheckout(){
             ${lines.map(l=>`<div class="flex justify-between text-sm"><span>${l.name} × ${l.qty}</span><span>${fmt(l.lineTotal)} $</span></div>`).join('')}
           </div>
           <div class="border-t border-outline-variant/30 pt-4 space-y-2 mb-8 text-sm">
-            <div class="flex justify-between"><span>${ca.delivery}</span><span>${shipping===0?ca.free:fmt(shipping)+' $'}</span></div>
-            <div class="flex justify-between font-display text-lg text-primary pt-2"><span>${ca.total}</span><span>${fmt(total)} $</span></div>
+            <div class="flex justify-between"><span>${ca.delivery}</span><span id="shipAmount">${shipping===0?ca.free:fmt(shipping)+' $'}</span></div>
+            <div class="flex justify-between font-display text-lg text-primary pt-2"><span>${ca.total}</span><span id="totalAmount">${fmt(total)} $</span></div>
           </div>
           <button onclick="confirmOrder()" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${co.place}</button>
           <p class="text-center mt-5 text-xs text-on-surface-variant flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">lock</span> ${ca.secure}</p>
@@ -1062,18 +1103,26 @@ function confirmOrder(){
   const address = inputs[2]?.value?.trim() || '';
   const city = inputs[3]?.value?.trim() || '';
   const phone = inputs[4]?.value?.trim() || '';
-  const delivery = document.querySelector('input[name="delivery"]:checked')?.closest('label')?.querySelector('p.text-sm')?.textContent || 'Standard';
+  const wantDelivery = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
+  let shipping = 0, deliveryLabel = LANG.current==='en'?'No delivery':'Pas de livraison';
+  if(wantDelivery){
+    const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
+    if(dc==='bukavu'){ shipping = 1; deliveryLabel = 'Bukavu'; }
+    else if(dc==='goma'){ shipping = 5; deliveryLabel = 'Goma'; }
+    else { shipping = 5; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; }
+  }
   const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
   const fullName = firstName + ' ' + lastName;
   const lines = cart.map(c=>{ const p=findProduct(c.id); return {...p, qty:c.qty, lineTotal:p.price*c.qty}; });
   const subtotal = lines.reduce((s,l)=>s+l.lineTotal,0);
-  const shipping = subtotal > 150 ? 0 : 6;
   const total = subtotal + shipping;
   const orderLines = lines.map(l=>`• ${l.name} × ${l.qty} = ${fmt(l.lineTotal)}$`).join('\n');
-  const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery, payment:payLabel, name:fullName };
+  const profile = { firstName, lastName, phone, address, city };
+  const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery:deliveryLabel, payment:payLabel, name:fullName };
   const msg = LANG.current==='en'
-    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${delivery}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
-    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${delivery}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
+    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
+    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
+  const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
   const saved = JSON.parse(localStorage.getItem('malkia_orders')||'[]');
   saved.unshift(order);
   localStorage.setItem('malkia_orders', JSON.stringify(saved));
