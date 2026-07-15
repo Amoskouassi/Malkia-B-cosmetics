@@ -766,7 +766,7 @@ function renderHome(){
 function renderCategory(catKey){
   const label = t('cat.'+catKey) || (CATS[catKey] || 'Boutique');
   const items = PRODUCTS.filter(p=>p.cat===catKey);
-  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil (2).jpg', wellness:'images/bien etre accueil.jpg' }[catKey];
+  const catHero = { body:'images/corps accueil.jpg', face:'images/visage accueil (2).jpg', wellness:'images/bien etre accueil (2).jpg' }[catKey];
   return `
   ${catHero ? `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative mb-10">
