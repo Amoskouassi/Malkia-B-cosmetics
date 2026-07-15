@@ -299,6 +299,7 @@ const PRODUCTS = [
 ];
 
 function img(seed, w=600, h=750){ return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
+function ti(m, w=500, h=500){ return m.img && m.img.startsWith('images/') ? m.img : img(m.img, w, h); }
 function findProduct(id){ return PRODUCTS.find(p=>p.id===id); }
 function fmt(n){ return n.toFixed(2).replace('.', ','); }
 
@@ -428,7 +429,7 @@ const TEAM = [
   { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", img:'team-wema' },
   { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionné par la cosmétique, il met son sens du service au service de l'expérience Malkia B.", img:'team-fadhili' },
   { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", img:'team-julia' },
-  { id:'narcisse', name:'Narcisse Baderha', role:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", img:'team-narcisse' },
+  { id:'narcisse', name:'Narcisse Baderhe', role:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", img:'images/Narcisse Baderhe.jpeg' },
   { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'team-esther' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
   { id:'elie', name:'Elie Binwa', role:'Sécurité', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", img:'team-elie' },
@@ -448,7 +449,7 @@ function renderTeam(){
       ${TEAM.map((m,i)=>`
       <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''}">
         <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
-          <img src="${img(m.img,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
+          <img src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
         <h3 class="font-display text-base md:text-lg font-medium">${m.name}</h3>
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
@@ -467,7 +468,7 @@ function renderTeamMember(id){
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
       <div class="md:col-span-5">
         <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg">
-          <img src="${img(m.img,700,700)}" class="w-full h-full object-cover" alt="${m.name}">
+          <img src="${ti(m,700,700)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
       </div>
       <div class="md:col-span-7">
@@ -493,7 +494,7 @@ function renderTeamMember(id){
         ${others.map(m=>`
         <a href="#/team/${m.id}" class="group text-center">
           <div class="aspect-square overflow-hidden mb-3 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
-            <img src="${img(m.img,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
+            <img src="${ti(m,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
           <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
@@ -1151,7 +1152,7 @@ function renderShops(){
         ${TEAM.map((m,i)=>`
         <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''} reveal reveal-d${(i%5)+1}">
           <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
-            <img src="${img(m.img,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
+            <img src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h3 class="font-display text-sm md:text-base font-medium">${m.name}</h3>
           <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
