@@ -213,7 +213,7 @@ const PRODUCTS = [
   {id:'w14', cat:'wellness', name:"Breas Tea", subtitle:"Wellness", price:25, seed:'wellness-breas-tea', desc:"Infusion bien-être aux plantes exotiques. Favorise la détente et l'équilibre.", ingredients:"Feuilles de bred, miel, gingembre, citronnelle.", rating:4.4, reviews:10},
   {id:'w15', cat:'wellness', name:"Acne Treatment", subtitle:"Wellness", price:40, seed:'wellness-acne', desc:"Soin anti-acné complet. Purifie la peau et prévient les imperfections.", ingredients:"Acide salicylique, niacinamide, tea tree, zinc.", rating:4.6, reviews:27},
   {id:'w16', cat:'wellness', name:"Super Collagène", subtitle:"Wellness", price:50, seed:'wellness-super-collagen-2', desc:"Collagène pur haute dose. Pour une peau ferme, des cheveux forts et des ongles solides.", ingredients:"Collagène hydrolysé type I, vitamine C, biotine.", rating:4.6, reviews:23},
-  {id:'w17', cat:'wellness', name:"FemFresh", subtitle:"Wellness", price:10, seed:'wellness-femfresh', desc:"Soin d'hygiène intime doux. Équilibre le pH et respecte la flore naturelle.", ingredients:"Extrait de camomille, acide lactique, aloe vera.", rating:4.5, reviews:19},
+  {id:'w17', cat:'wellness', name:"FemFresh", subtitle:"Wellness", price:10, seed:'wellness-femfresh', gallery:['images/Femfresh.jpeg','images/Femfresh (2).jpeg','images/femfresh (3).jpeg','images/femfresh (4).jpeg'], desc:"Soin d'hygiène intime doux. Équilibre le pH et respecte la flore naturelle.", ingredients:"Extrait de camomille, acide lactique, aloe vera.", rating:4.5, reviews:19},
   {id:'w18', cat:'wellness', name:"Vital Proteins Collagen", subtitle:"Wellness", price:100, seed:'wellness-vital-proteins', desc:"Collagène premium Vital Proteins. La référence américaine pour beauté intérieure.", ingredients:"Collagène bovin type I, III, acide hyaluronique, vitamine C.", rating:4.8, reviews:35, badge:'Premium'},
   {id:'w19', cat:'wellness', name:"Stretch Marks & Scar Oil", subtitle:"Wellness", price:30, seed:'wellness-stretch-oil', desc:"Huile anti-vergetures et cicatrices. Régénère et estompe les marques cutanées.", ingredients:"Huile de rose musquée, vitamine E, beurre de cacao, centella.", rating:4.5, reviews:21},
   {id:'w20', cat:'wellness', name:"Small Molecule Collagen Solid Drink", subtitle:"Wellness", price:150, seed:'wellness-collagen-drink', desc:"Boisson solide au collagène petite molécule. Absorption maximale pour un résultat visible.", ingredients:"Collagène tripeptide, céramides, extrait de raisin.", rating:4.7, reviews:26, badge:'Premium'},
@@ -793,8 +793,8 @@ function renderProduct(id){
   const p = findProduct(id), pr = t('product');
   if(!p) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${LANG.current==='en'?'Product not found':'Produit introuvable'}</h1></div>`;
   const related = PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
-  const mainImg = p.img || img(p.seed, 700, 875);
-  const thumbs = p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)];
+  const mainImg = (p.gallery && p.gallery[0]) || p.img || img(p.seed, 700, 875);
+  const thumbs = p.gallery || (p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)]);
   return `
   <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
