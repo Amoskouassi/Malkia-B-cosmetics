@@ -1056,18 +1056,27 @@ function switchPay(el, key){
 }
 
 function confirmOrder(){
-  const co = t('checkout');
-  const selected = document.querySelector('input[name="pay"]:checked');
-  const label = selected?.closest('label')?.querySelector('span:not(.material-symbols-outlined):not(.text-[10px])')?.textContent?.trim() || '';
-  const isCod = label === (LANG.current==='en'?'Cash on Delivery':'Paiement à la livraison');
-  if(isCod){
-    cart = []; saveCart(); updateCartCount();
-    showToast(co.confirm);
-    location.hash = '#/account';
-  } else {
-    showToast(`${co.confirm} ${LANG.current==='en'?'Pay via':'Payez via'} ${label} ${LANG.current==='en'?'at':'au'} ${co.mpresa_num}`);
-    setTimeout(()=>{ cart = []; saveCart(); updateCartCount(); location.hash = '#/account'; }, 2500);
-  }
+  const inputs = document.querySelectorAll('.lg\\:col-span-7 input');
+  const firstName = inputs[0]?.value?.trim() || '';
+  const lastName = inputs[1]?.value?.trim() || '';
+  const address = inputs[2]?.value?.trim() || '';
+  const city = inputs[3]?.value?.trim() || '';
+  const phone = inputs[4]?.value?.trim() || '';
+  const delivery = document.querySelector('input[name="delivery"]:checked')?.closest('label')?.querySelector('p.text-sm')?.textContent || 'Standard';
+  const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
+  const fullName = firstName + ' ' + lastName;
+  const lines = cart.map(c=>{ const p=findProduct(c.id); return {...p, qty:c.qty, lineTotal:p.price*c.qty}; });
+  const subtotal = lines.reduce((s,l)=>s+l.lineTotal,0);
+  const shipping = subtotal > 150 ? 0 : 6;
+  const total = subtotal + shipping;
+  const orderLines = lines.map(l=>`• ${l.name} × ${l.qty} = ${fmt(l.lineTotal)}$`).join('\n');
+  const msg = LANG.current==='en'
+    ? `*NEW ORDER — Malkia B Cosmetics*\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${delivery}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
+    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${delivery}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
+  const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
+  cart = []; saveCart(); updateCartCount();
+  window.open(wa, '_blank');
+  location.hash = '#/account';
 }
 
 /* ===== ACCOUNT ===== */
