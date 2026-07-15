@@ -878,8 +878,6 @@ function renderCart(){
   }
   const lines = cart.map(c=>{ const p=findProduct(c.id); return {...p, qty:c.qty, lineTotal:p.price*c.qty}; });
   const subtotal = lines.reduce((s,l)=>s+l.lineTotal,0);
-  const shipping = subtotal > 150 ? 0 : 6;
-  const total = subtotal + shipping;
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
@@ -921,11 +919,10 @@ function renderCart(){
           <h2 class="font-display text-xl mb-6">${ca.title}</h2>
           <div class="space-y-3 mb-6 text-sm">
             <div class="flex justify-between"><span class="text-on-surface-variant">${ca.sub}</span><span>${fmt(subtotal)} $</span></div>
-            <div class="flex justify-between"><span class="text-on-surface-variant">${ca.delivery}</span><span>${shipping===0?ca.free:fmt(shipping)+' $'}</span></div>
           </div>
           <div class="border-t border-outline-variant/30 pt-4 mb-8 flex justify-between items-center">
             <span class="font-display text-lg">${ca.total}</span>
-            <span class="font-display text-xl text-primary">${fmt(total)} $</span>
+            <span class="font-display text-xl text-primary">${fmt(subtotal)} $</span>
           </div>
           <div class="flex gap-2 mb-8">
             <input type="text" placeholder="${ca.promo}" class="flex-1 border-b border-outline-variant py-2 text-sm bg-transparent">
