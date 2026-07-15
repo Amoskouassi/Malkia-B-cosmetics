@@ -696,7 +696,7 @@ function renderHome(){
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
       ${Object.entries(CATS).map(([key,label], i)=>`
       <a href="#/category/${key}" class="relative aspect-[3/4] overflow-hidden group hover-lift border border-outline-variant/10 ${i%2===1?'md:mt-12':''} reveal reveal-d${(i%4)+1}">
-        <img src="${img('malkia-cat-'+key,400,500)}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${label}">
+        <img src="images/cat-${key}.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${label}">
         <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
         <div class="absolute bottom-6 left-6">
           <h3 class="font-display text-lg md:text-xl mb-1">${t('cat.'+key) || label}</h3>
