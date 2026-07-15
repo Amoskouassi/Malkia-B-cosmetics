@@ -29,24 +29,23 @@ const TR = {
       map:"Ouvrir dans Google Maps", map_hint:"Cliquez pour voir notre boutique sur Google Maps",
       see_more:"Voir plus" },
     story: { title:"Notre Histoire", subtitle:"L'héritage d'une beauté souveraine",
-      p1:"Malkia B Cosmetics est née d'une conviction : chaque femme mérite de révéler la reine qui sommeille en elle. Inspirée par les rituels de beauté ancestraux africains et les ingrédients les plus précieux du continent, notre maison allie tradition et innovation.",
-      p2:"Du beurre de karité du Burkina Faso à l'huile d'argan du Maroc, en passant par le miel d'Éthiopie et le baobab du Sénégal, chaque ingrédient est sélectionné avec la plus grande exigence pour offrir des soins d'une pureté et d'une efficacité exceptionnelles.",
-      p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage la même vision : célébrer la beauté authentique et souveraine de chaque femme.",
-      sig:"— Malkia B, Fondatrice" },
+      p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Tout est parti d'une conviction simple : chaque femme a le droit de se sentir souveraine. J'ai voulu créer des soins qui ne transforment pas seulement la peau, mais aussi la confiance.",
+      p2:"Mon parcours m'a amené à sélectionner les meilleurs ingrédients — du karité du Burkina à l'huile d'argan du Maroc — pour offrir des formules d'une efficacité rare. Chaque produit est le fruit d'une quête d'excellence.",
+      p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Goma, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
+      sig:"— Hamin Banga, Fondateur" },
+
     shops: { title:"Nos Boutiques", subtitle:"Des espaces dédiés à votre beauté",
       bukavu:{ name:"Boutique Bukavu", tag:"Beauty Specialists", addr:"Mosquée Nyawera — Bukavu, DRCongo",
         phone:"+243 995 945 889", hours:"Lun – Sam : 8h00 – 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      kigali:{ name:"Boutique Kigali", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
-        phone:"+250 788 000 000", hours:"Lun – Sam : 9h00 – 19h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
-        lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
+      goma:{ name:"Boutique Goma", tag:"Beauty Specialists", addr:"Himbi — Goma, DRCongo",
+        phone:"+243 995 945 889", hours:"Lun – Sam : 8h00 – 20h00", route:"Voir l'itinéraire", wa:"Contacter via WhatsApp",
+        lat:"-1.6745", lng:"29.2335", q:"Goma,DRC" } },
     contact: { title:"Contactez-nous", heading:"Une question sur nos rituels de beauté ?",
       desc:"Que vous recherchiez un conseil personnalisé ou des informations sur nos ingrédients, notre équipe est à votre écoute.",
       form:{ name:"Nom complet", email:"Email", subject:"Sujet", msg:"Message", send:"Envoyer le message",
         sent:"Message envoyé, merci !" },
       direct:"Contact direct", offices:"Nos Représentations",
-      abidjan:"Siège — Cocody, Rue des Jardins", paris:"Showroom — Le Marais, 75003",
-      dakar:"Point relais — Almadies", dubai:"Distributeur agréé — Dubai Mall",
       hours:"Lun – Sam : 9h00 – 18h00<br>Dim : Sur rendez-vous", map:"Voir sur Google Maps",
       wa:"Contactez-nous via WhatsApp", wa_sub:"Réponse sous 24h" },
     footer: { tagline:"L'excellence de la cosmétique artisanale, inspirée par la souveraineté de la femme moderne.",
@@ -101,24 +100,22 @@ const TR = {
       map:"Open in Google Maps", map_hint:"Click to view our store on Google Maps",
       see_more:"View More" },
     story: { title:"Our Story", subtitle:"The legacy of sovereign beauty",
-      p1:"Malkia B Cosmetics was born from a belief: every woman deserves to reveal the queen within. Inspired by ancient African beauty rituals and the continent's most precious ingredients, our house blends tradition with innovation.",
-      p2:"From shea butter from Burkina Faso to argan oil from Morocco, Ethiopian honey to Senegalese baobab, each ingredient is carefully selected to deliver products of exceptional purity and efficacy.",
-      p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team united by the same vision: celebrating the authentic and sovereign beauty of every woman.",
-      sig:"— Malkia B, Founder" },
+      p1:"I am Hamin Banga, founder of Malkia B Cosmetics. It all started with a simple belief: every woman deserves to feel sovereign. I wanted to create products that don't just transform the skin, but also transform confidence.",
+      p2:"My journey led me to select the finest ingredients — from Burkina’s shea butter to Morocco’s argan oil — to deliver formulas of exceptional efficacy. Every product is the result of a pursuit of excellence.",
+      p3:"Today, Malkia B shines from Bukavu and Goma, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
+      sig:"— Hamin Banga, Founder" },
     shops: { title:"Our Boutiques", subtitle:"Dedicated spaces for your beauty",
       bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque — Bukavu, DRCongo",
         phone:"+243 995 945 889", hours:"Mon – Sat: 8:00 AM – 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
         lat:"-2.4917", lng:"28.8487", q:"Nyawera+Mosque,Bukavu,DRC" },
-      kigali:{ name:"Kigali Boutique", tag:"Flagship Store", addr:"KG 123 St — Kigali, Rwanda",
-        phone:"+250 788 000 000", hours:"Mon – Sat: 9:00 AM – 7:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
-        lat:"-1.9441", lng:"30.0619", q:"Kigali,Rwanda" } },
+      goma:{ name:"Goma Boutique", tag:"Beauty Specialists", addr:"Himbi — Goma, DRCongo",
+        phone:"+243 995 945 889", hours:"Mon – Sat: 8:00 AM – 8:00 PM", route:"View Directions", wa:"Contact via WhatsApp",
+        lat:"-1.6745", lng:"29.2335", q:"Goma,DRC" } },
     contact: { title:"Contact Us", heading:"A question about your beauty rituals?",
       desc:"Whether you need personalized advice or information about our ingredients, our team is here to help.",
       form:{ name:"Full Name", email:"Email", subject:"Subject", msg:"Message", send:"Send Message",
         sent:"Message sent, thank you!" },
       direct:"Direct Contact", offices:"Our Locations",
-      abidjan:"Head Office — Cocody, Rue des Jardins", paris:"Showroom — Le Marais, 75003",
-      dakar:"Pickup Point — Almadies", dubai:"Authorized Distributor — Dubai Mall",
       hours:"Mon – Sat: 9:00 AM – 6:00 PM<br>Sun: By appointment", map:"View on Google Maps",
       wa:"Contact us via WhatsApp", wa_sub:"Reply within 24h" },
     footer: { tagline:"The excellence of artisanal cosmetics, inspired by the sovereignty of the modern woman.",
@@ -1237,7 +1234,7 @@ function renderStory(){
       <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
     </div>
     <div class="aspect-[21/9] overflow-hidden rounded-2xl reveal">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&h=514&fit=crop&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+      <img loading="lazy" src="images/CEO.jpeg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
     </div>
     <div class="space-y-6 text-on-surface-variant leading-relaxed reveal">
       <p class="text-base md:text-lg">${s.p1}</p>
@@ -1296,7 +1293,7 @@ function renderShops(){
       <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
     </div>
     ${shopCard('bukavu')}
-    ${shopCard('kigali')}
+    ${shopCard('goma')}
     <section class="pt-8">
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
@@ -1346,18 +1343,13 @@ function renderContact(){
           <div class="space-y-4">
             <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-base">mail</span></span><div><a href="mailto:contact@malkiab-cosmetics.com" class="text-sm text-primary luxury-underline">contact@malkiab-cosmetics.com</a><p class="text-[10px] text-on-surface-variant uppercase tracking-widest">${f.email}</p></div></div>
             <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-base">call</span></span><div><a href="tel:+243995945889" class="text-sm text-primary luxury-underline">+243 995 945 889</a><p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Bukavu</p></div></div>
-            <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-base">call</span></span><div><a href="tel:+250788000000" class="text-sm text-primary luxury-underline">+250 788 000 000</a><p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Kigali</p></div></div>
           </div>
         </div>
         <div>
           <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${c.offices}</h3>
           <div class="space-y-4">
             <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Bukavu, DRCongo</p><p class="text-xs text-on-surface-variant">${t('shops.bukavu.addr')}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Kigali, Rwanda</p><p class="text-xs text-on-surface-variant">${t('shops.kigali.addr')}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">location_city</span><div><p class="text-sm font-medium">Abidjan, Côte d'Ivoire</p><p class="text-xs text-on-surface-variant">${c.abidjan}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">flight</span><div><p class="text-sm font-medium">Paris, France</p><p class="text-xs text-on-surface-variant">${c.paris}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">flight</span><div><p class="text-sm font-medium">Dakar, Sénégal</p><p class="text-xs text-on-surface-variant">${c.dakar}</p></div></div>
-            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">flight</span><div><p class="text-sm font-medium">Dubai, UAE</p><p class="text-xs text-on-surface-variant">${c.dubai}</p></div></div>
+            <div class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-base mt-0.5">store</span><div><p class="text-sm font-medium">Goma, DRCongo</p><p class="text-xs text-on-surface-variant">${t('shops.goma.addr')}</p></div></div>
           </div>
         </div>
         <div>
