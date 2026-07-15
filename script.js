@@ -946,17 +946,18 @@ function toggleDelivery(yes){
 }
 function updateShipping(){
   const want = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
-  let s = 0, label = 'Gratuite';
+  let s = 0, isOther = false;
   if(want){
     const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
     if(dc==='bukavu'){ s = 1; }
-    else { s = 5; }
+    else if(dc==='goma'){ s = 5; }
+    else { s = 10; isOther = true; }
   }
   const subtotal = cart.reduce((t,c)=>{ const p=findProduct(c.id); return t + (p?p.price*c.qty:0); }, 0);
   const total = subtotal + s;
   const shipEl = document.getElementById('shipAmount');
   const totalEl = document.getElementById('totalAmount');
-  if(shipEl) shipEl.textContent = s === 0 ? 'Gratuite' : fmt(s)+' $';
+  if(shipEl) shipEl.textContent = s === 0 ? 'Gratuite' : (isOther ? (LANG.current==='en'?'From 10 $':'À partir de 10 $') : fmt(s)+' $');
   if(totalEl) totalEl.textContent = fmt(total) + ' $';
 }
 
@@ -1009,7 +1010,7 @@ function renderCheckout(){
                 </label>
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
                   <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${LANG.current==='en'?'Other city':'Autre ville'}</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'3-7 days':'3-7 jours'}</p></div></div>
-                  <span class="text-sm font-medium">5 $</span>
+                  <span class="text-sm font-medium">${LANG.current==='en'?'From 10 $':'À partir de 10 $'}</span>
                 </label>
               </div>
             </div>
@@ -1110,12 +1111,12 @@ function confirmOrder(){
   const city = inputs[3]?.value?.trim() || '';
   const phone = inputs[4]?.value?.trim() || '';
   const wantDelivery = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
-  let shipping = 0, deliveryLabel = LANG.current==='en'?'No delivery':'Pas de livraison';
+  let shipping = 0, deliveryLabel = LANG.current==='en'?'No delivery':'Pas de livraison', isOther = false;
   if(wantDelivery){
     const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
     if(dc==='bukavu'){ shipping = 1; deliveryLabel = 'Bukavu'; }
     else if(dc==='goma'){ shipping = 5; deliveryLabel = 'Goma'; }
-    else { shipping = 10; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; }
+    else { shipping = 10; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; isOther = true; }
   }
   const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
   const fullName = firstName + ' ' + lastName;
@@ -1126,8 +1127,8 @@ function confirmOrder(){
   const profile = { firstName, lastName, phone, address, city };
   const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery:deliveryLabel, payment:payLabel, name:fullName };
   const msg = LANG.current==='en'
-    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${shipping===0?'Free':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`
-    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${shipping===0?'Gratuite':fmt(shipping)+'$'}\n*Total:* ${fmt(total)}$`;
+    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(LANG.current==='en'?'From 10 $':'À partir de 10 $'):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
+    : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${isOther?'À partir de 10 $':(shipping===0?'Gratuite':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`;
   const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
   const saved = JSON.parse(localStorage.getItem('malkia_orders')||'[]');
   saved.unshift(order);
