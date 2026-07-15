@@ -979,13 +979,13 @@ function renderCheckout(){
       <div class="lg:col-span-7 space-y-16">
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">01</span><h2 class="font-display text-xl">${co.info_title}</h2></div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'First Name':'Prénom'}</label><input class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'First Name':'Prénom'}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Last Name':'Nom'}</label><input class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'Last Name':'Nom'}"></div>
-            <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.address}</label><input class="underline-input w-full py-2 text-sm" placeholder="${co.address}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.city}</label><input class="underline-input w-full py-2 text-sm" placeholder="${co.city}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Phone':'Téléphone'}</label><input class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
-          </div>
+          <form id="checkoutForm" onsubmit="event.preventDefault()" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'First Name':'Prénom'}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'First Name':'Prénom'}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Last Name':'Nom'}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'Last Name':'Nom'}"></div>
+            <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.address}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.address}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.city}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.city}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Phone':'Téléphone'}</label><input required type="tel" class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
+          </form>
         </section>
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${LANG.current==='en'?'Delivery':'Livraison'}</h2></div>
@@ -1097,7 +1097,8 @@ function switchPay(el, key){
 }
 
 function confirmOrder(){
-  const inputs = document.querySelectorAll('.lg\\:col-span-7 input');
+  const inputs = document.querySelectorAll('.lg\\:col-span-7 input[required]');
+  for(const inp of inputs){ if(!inp.value.trim()){ inp.focus(); showToast(LANG.current==='en'?'Please fill in all required fields':'Veuillez remplir tous les champs obligatoires'); return; } }
   const firstName = inputs[0]?.value?.trim() || '';
   const lastName = inputs[1]?.value?.trim() || '';
   const address = inputs[2]?.value?.trim() || '';
