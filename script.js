@@ -1,5 +1,19 @@
-﻿/* ===== I18N ===== */
-const LANG = { current: localStorage.getItem('malkia_lang') || 'fr' };
+﻿/* ===== LOCALSTORAGE WRAPPER ===== */
+function lsGet(k, def){
+  try{ const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : def; }catch(e){ return def; }
+}
+function lsSet(k, v){
+  try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){}
+}
+function lsGetRaw(k, def){
+  try{ const v = localStorage.getItem(k); return v !== null ? v : def; }catch(e){ return def; }
+}
+function lsSetRaw(k, v){
+  try{ localStorage.setItem(k, v); }catch(e){}
+}
+
+/* ===== I18N ===== */
+const LANG = { current: lsGetRaw('malkia_lang', 'fr') };
 const TR = {
   fr: {
     nav: { home:'Accueil', products:'Produits', story:'Notre histoire', shops:'Boutiques', contact:'Contact',
@@ -144,7 +158,7 @@ const TR = {
   }
 };
 function t(key){ return key.split('.').reduce((o,i)=>o&&o[i]!==undefined?o[i]:null, TR[LANG.current]) || key; }
-function setLang(l){ LANG.current=l; localStorage.setItem('malkia_lang',l); renderHeaderFooter(); navigate(); }
+function setLang(l){ LANG.current=l; lsSetRaw('malkia_lang',l); renderHeaderFooter(); navigate(); }
 
 /* ===== DATA ===== */
 const CATS = { body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Wellness" };
@@ -342,10 +356,10 @@ function initHeroCarousel(){
 }
 
 /* ===== STATE ===== */
-let cart = JSON.parse(localStorage.getItem('malkia_cart')) || [];
+let cart = lsGet('malkia_cart', []);
 
 function saveCart(){
-  localStorage.setItem('malkia_cart', JSON.stringify(cart));
+  lsSet('malkia_cart', cart);
 }
 let activeTab = 'desc';
 let activeThumb = 0;
@@ -597,7 +611,7 @@ function navigate(){
   else if(page==='story'){ app.innerHTML = renderStory(); setTimeout(initScrollReveal, 50); }
   else if(page==='shops'){ app.innerHTML = renderShops(); setTimeout(initScrollReveal, 50); }
   else if(page==='products'){ app.innerHTML = renderProducts(param); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
-  else{ app.innerHTML = renderHome(); setTimeout(()=>{ initHeroCarousel(); initScrollReveal(); }, 50); }
+  else{ app.innerHTML = renderNotFound(); }
   updateCartCount();
 }
 window.addEventListener('hashchange', navigate);
@@ -622,6 +636,16 @@ function productCard(p){
       <p class="text-sm text-primary font-medium">${fmt(p.price)} $</p>
     </div>
   </a>`;
+}
+
+/* ===== 404 ===== */
+function renderNotFound(){
+  return `
+  <div class="px-5 md:px-margin-desktop pb-24 text-center py-24">
+    <h1 class="font-display text-6xl md:text-8xl text-primary mb-6">404</h1>
+    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${LANG.current==='en'?'Page not found. The page you are looking for does not exist or has been moved.':'Page non trouvée. La page que vous recherchez n\'existe pas ou a été déplacée.'}</p>
+    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${LANG.current==='en'?'Back to home':'Retour à l\'accueil'}</a>
+  </div>`;
 }
 
 /* ===== HOME ===== */
@@ -697,7 +721,7 @@ function renderHome(){
         </div>
       </div>
       <div class="aspect-[4/5] overflow-hidden shadow-xl">
-        <img src="${'images/CEO.jpeg'}" class="w-full h-full object-cover" alt="Atelier Malkia B">
+        <img src="${'images/CEO.jpeg'}" class="w-full h-full object-cover" alt="Hamin Banga, fondateur de Malkia B Cosmetics">
       </div>
     </div>
   </section>
@@ -707,10 +731,12 @@ function renderHome(){
       <span class="material-symbols-outlined text-primary text-3xl mb-4 block animate-float">auto_awesome</span>
       <h2 class="font-display text-2xl md:text-3xl mb-4">${h.join}</h2>
       <p class="text-sm text-on-background/70 mb-8">${h.join_p}</p>
-      <form onsubmit="event.preventDefault(); showToast('${h.thanks}')" class="flex gap-4 max-w-md mx-auto border-b border-outline-variant pb-1">
-        <input type="email" required placeholder="votre@email.com" class="newsletter-input flex-1 py-2 text-sm">
-        <button type="submit" class="text-primary text-[12px] uppercase tracking-widest hover:tracking-[0.2em] transition-all">${h.subscribe}</button>
-      </form>
+      <div class="flex justify-center gap-6">
+        <a href="https://wa.me/243995945889" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform" aria-label="WhatsApp"><span class="material-symbols-outlined text-2xl">chat</span></a>
+        <a href="https://www.instagram.com/malkiabcosmetics" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform" aria-label="Instagram"><span class="material-symbols-outlined text-2xl">photo_camera</span></a>
+        <a href="https://www.facebook.com/malkiabcosmetics" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform" aria-label="Facebook"><span class="material-symbols-outlined text-2xl">facebook</span></a>
+        <a href="https://www.tiktok.com/@malkiabcosmetics" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform" aria-label="TikTok"><span class="material-symbols-outlined text-2xl">music_note</span></a>
+      </div>
     </div>
   </section>
 
@@ -770,13 +796,13 @@ function renderProduct(id){
   const mainImg = p.img || img(p.seed, 700, 875);
   const thumbs = p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)];
   return `
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
+  <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
         <img id="mainImg" src="${mainImg}" class="w-full h-full object-cover" alt="${p.name}">
       </div>
-      <div class="flex gap-3">
-        ${thumbs.map((t,i)=>`<img src="${t}" onclick="activeThumb=${i}; navigate();" class="w-16 h-20 object-cover cursor-pointer ${i===activeThumb?'opacity-100 border-b-2 border-primary':'opacity-50'}">`).join('')}
+      <div id="thumbRow" class="flex gap-3">
+        ${thumbs.map((t,i)=>`<img src="${t}" onclick="switchThumb(${i})" class="w-16 h-20 object-cover cursor-pointer ${i===activeThumb?'opacity-100 border-b-2 border-primary':'opacity-50'}" alt="${p.name}">`).join('')}
       </div>
     </div>
     <div>
@@ -800,12 +826,12 @@ function renderProduct(id){
         <button onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${pr.add}</button>
         <a href="#/checkout" onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full text-center border border-primary text-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${LANG.current==='en'?'Buy Now':'Acheter Maintenant'}</a>
       </div>
-      <div class="flex justify-center gap-8 border-b border-outline-variant/20 mb-6">
-        <button onclick="activeTab='desc'; navigate();" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='desc'?'tab-active':'text-outline'}">${pr.desc}</button>
-        <button onclick="activeTab='ing'; navigate();" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='ing'?'tab-active':'text-outline'}">${pr.ing}</button>
-        <button onclick="activeTab='avis'; navigate();" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='avis'?'tab-active':'text-outline'}">${pr.reviews} (${p.reviews})</button>
+      <div id="tabContainer" class="flex justify-center gap-8 border-b border-outline-variant/20 mb-6">
+        <button data-tab="desc" onclick="switchTab('desc')" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='desc'?'tab-active':'text-outline'}">${pr.desc}</button>
+        <button data-tab="ing" onclick="switchTab('ing')" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='ing'?'tab-active':'text-outline'}">${pr.ing}</button>
+        <button data-tab="avis" onclick="switchTab('avis')" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='avis'?'tab-active':'text-outline'}">${pr.reviews} (${p.reviews})</button>
       </div>
-      <div class="text-sm text-on-surface-variant leading-relaxed">
+      <div id="tabContent" class="text-sm text-on-surface-variant leading-relaxed">
         ${activeTab==='desc' ? p.desc : activeTab==='ing' ? p.ingredients : `
           <div class="space-y-4">
             <div class="pb-4 border-b border-outline-variant/10"><span class="text-primary text-xs">★★★★★</span><p class="mt-1">"Une merveille, ma peau n'a jamais été aussi lumineuse." — Aïcha K.</p></div>
@@ -822,6 +848,28 @@ function renderProduct(id){
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">${related.map(p=>productCard(p)).join('')}</div>
   </section>
   `;
+}
+
+/* ===== PRODUCT SWITCHERS (local DOM updates) ===== */
+function switchTab(tab){
+  const pid = document.getElementById('productView')?.dataset?.pid;
+  const p = PRODUCTS.find(x=>x.id===pid);
+  if(!p) return;
+  document.querySelectorAll('#tabContainer button').forEach(b=>{b.className='pb-3 text-[12px] uppercase tracking-widest text-outline';});
+  const btn = document.querySelector(`#tabContainer button[data-tab="${tab}"]`);
+  if(btn) btn.className='pb-3 text-[12px] uppercase tracking-widest tab-active';
+  const content = tab==='desc' ? p.desc : tab==='ing' ? p.ingredients : `
+    <div class="space-y-4">
+      <div class="pb-4 border-b border-outline-variant/10"><span class="text-primary text-xs">★★★★★</span><p class="mt-1">"Une merveille, ma peau n'a jamais été aussi lumineuse." — Aïcha K.</p></div>
+      <div><span class="text-primary text-xs">★★★★☆</span><p class="mt-1">"Très satisfaite, je recommande." — Fatou D.</p></div>
+    </div>`;
+  document.getElementById('tabContent').innerHTML = content;
+}
+function switchThumb(idx){
+  const imgs = document.querySelectorAll('#thumbRow img');
+  imgs.forEach((img,i)=>{img.className=`w-16 h-20 object-cover cursor-pointer ${i===idx?'opacity-100 border-b-2 border-primary':'opacity-50'}`;});
+  const main = document.getElementById('mainImg');
+  if(main&&imgs[idx]) main.src = imgs[idx].src;
 }
 
 /* ===== CART ===== */
@@ -1089,10 +1137,10 @@ function confirmOrder(){
     ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(LANG.current==='en'?'From 10 $':'À partir de 10 $'):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
     : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${isOther?'À partir de 10 $':(shipping===0?'Gratuite':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`;
   const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
-  const saved = JSON.parse(localStorage.getItem('malkia_orders')||'[]');
+  const saved = lsGet('malkia_orders', []);
   saved.unshift(order);
-  localStorage.setItem('malkia_orders', JSON.stringify(saved));
-  localStorage.setItem('malkia_profile', JSON.stringify(profile));
+  lsSet('malkia_orders', saved);
+  lsSet('malkia_profile', profile);
   cart = []; saveCart(); updateCartCount();
   window.open(wa, '_blank');
   location.hash = '#/account';
@@ -1101,8 +1149,8 @@ function confirmOrder(){
 /* ===== ACCOUNT ===== */
 function renderAccount(){
   const ac = t('account');
-  const profile = JSON.parse(localStorage.getItem('malkia_profile') || '{}');
-  const orders = JSON.parse(localStorage.getItem('malkia_orders') || '[]');
+  const profile = lsGet('malkia_profile', {});
+  const orders = lsGet('malkia_orders', []);
   const name = (profile.firstName || '[Prénom]') + ' ' + (profile.lastName || '[Nom]');
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
@@ -1122,7 +1170,7 @@ function renderAccount(){
         <button onclick="switchAccount('payments')" id="tab-payments" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
           <span class="material-symbols-outlined">credit_card</span><span class="text-sm">Paiements</span>
         </button>
-        <button onclick="localStorage.removeItem('malkia_profile');localStorage.removeItem('malkia_orders');showToast('${LANG.current==='en'?'Profile cleared':'Profil effacé'}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
+        <button onclick="lsSet('malkia_profile',{});lsSet('malkia_orders',[]);showToast('${LANG.current==='en'?'Profile cleared':'Profil effacé'}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
       </aside>
       <div id="accountContent" class="lg:col-span-9 space-y-8">
         ${renderAccountSection('orders', orders, profile)}
@@ -1141,7 +1189,7 @@ function renderAccountSection(section, orders, profile){
     ${orders.map((o,i)=>`
     <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
       <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover"></div>
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${LANG.current==='en'?'Order image':'Image commande'}"></div>
         <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(LANG.current==='en'?'en-US':'fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${LANG.current==='en'?'item':'article'}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
       </div>
       <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
@@ -1186,8 +1234,8 @@ function switchAccount(section){
   });
   const active = document.getElementById('tab-'+section);
   if(active) active.className = active.className.replace('text-on-surface-variant hover:bg-surface-container-low', 'bg-secondary-container text-on-secondary-container');
-  const profile = JSON.parse(localStorage.getItem('malkia_profile') || '{}');
-  const orders = JSON.parse(localStorage.getItem('malkia_orders') || '[]');
+  const profile = lsGet('malkia_profile', {});
+  const orders = lsGet('malkia_orders', []);
   document.getElementById('accountContent').innerHTML = renderAccountSection(section, orders, profile);
 }
 
@@ -1234,7 +1282,7 @@ function renderStory(){
       <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
     </div>
     <div class="aspect-[21/9] overflow-hidden rounded-2xl reveal">
-      <img loading="lazy" src="images/CEO.jpeg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+      <img loading="lazy" src="images/CEO.jpeg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Hamin Banga, fondateur de Malkia B Cosmetics">
     </div>
     <div class="space-y-6 text-on-surface-variant leading-relaxed reveal">
       <p class="text-base md:text-lg">${s.p1}</p>
@@ -1315,6 +1363,19 @@ function renderShops(){
 }
 
 /* ===== CONTACT ===== */
+function contactWhatsApp(form){
+  const n = form.querySelector('[name=name]')?.value.trim();
+  const e = form.querySelector('[name=email]')?.value.trim();
+  const s = form.querySelector('[name=subject]')?.value.trim();
+  const m = form.querySelector('[name=msg]')?.value.trim();
+  if(!n||!e||!m) return;
+  const msg = LANG.current==='en'
+    ? `*Contact — Malkia B Cosmetics*\n\n*Name:* ${n}\n*Email:* ${e}\n*Subject:* ${s||'-'}\n*Message:* ${m}`
+    : `*Contact — Malkia B Cosmetics*\n\n*Nom:* ${n}\n*Email:* ${e}\n*Sujet:* ${s||'-'}\n*Message:* ${m}`;
+  window.open(`https://wa.me/243995945889?text=${encodeURIComponent(msg)}`,'_blank');
+  const sent = document.getElementById('toast');
+  if(sent) showToast(LANG.current==='en'?'Message sent, thank you!':'Message envoyé, merci !');
+}
 function renderContact(){
   const c = t('contact'), f = c.form;
   return `
@@ -1327,13 +1388,13 @@ function renderContact(){
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16">
       <div class="lg:col-span-7 bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/10 reveal reveal-left">
-        <form onsubmit="event.preventDefault(); showToast('${f.sent}')" class="space-y-8">
+        <form onsubmit="event.preventDefault(); contactWhatsApp(this)" class="space-y-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.name}</label><input class="underline-input w-full py-2 text-sm" placeholder="${f.name}" required></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.email}</label><input type="email" class="underline-input w-full py-2 text-sm" placeholder="votre@email.com" required></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.name}</label><input name="name" class="underline-input w-full py-2 text-sm" placeholder="${f.name}" required></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.email}</label><input name="email" type="email" class="underline-input w-full py-2 text-sm" placeholder="votre@email.com" required></div>
           </div>
-          <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.subject}</label><input class="underline-input w-full py-2 text-sm" placeholder="${f.subject}"></div>
-          <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.msg}</label><textarea rows="4" class="underline-input w-full py-2 text-sm resize-none" placeholder="${f.msg}" required></textarea></div>
+          <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.subject}</label><input name="subject" class="underline-input w-full py-2 text-sm" placeholder="${f.subject}"></div>
+          <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.msg}</label><textarea name="msg" rows="4" class="underline-input w-full py-2 text-sm resize-none" placeholder="${f.msg}" required></textarea></div>
           <button type="submit" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${f.send}</button>
         </form>
       </div>
