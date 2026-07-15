@@ -1,4 +1,4 @@
-/* ===== I18N ===== */
+﻿/* ===== I18N ===== */
 const LANG = { current: localStorage.getItem('malkia_lang') || 'fr' };
 const TR = {
   fr: {
@@ -17,8 +17,8 @@ const TR = {
       slide3_tag:"Rituels Bien-être", slide3_title:"Prenez Soin de Vous",
       slide3_text:"Des rituels de beauté pensés pour votre bien-être au quotidien." },
     home: { latest:"Dernières Créations", see_all:"Voir toute la boutique", story:"Notre histoire",
-      story_h:"Une passion née en 2015", story_p1:"Malkia B Cosmetics est née d'une vision simple mais puissante : offrir à chaque femme des soins de beauté premium à des prix accessibles, avec la promesse d'un résultat visible et durable.",
-      story_p2:"Depuis nos débuts, nous avons accompagné des milliers de femmes avec des produits soigneusement sélectionnés, pensés pour mettre en valeur la beauté naturelle et l'éclat intérieur.",
+      story_h:"Un visionnaire, une mission", story_p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Mon parcours m'a appris que la vraie beauté réside dans la confiance en soi. J'ai créé cette marque pour offrir à chaque femme les clés de son éclat, à travers des soins premium, authentiques et accessibles. Aujourd'hui, Malkia B rayonne depuis Bukavu jusqu'à l'international.",
+      story_p2:"Chaque produit que nous proposons est le fruit d'une sélection rigoureuse. Mon équipe et moi mettons un point d'honneur à choisir des formules qui allient efficacité, sécurité et élégance. Notre succès, je le dois à la confiance de milliers de femmes qui ont choisi la beauté souveraine.",
       since:"Depuis", delivery:"Livraison",
       join:"Rejoignez le Cercle Malkia", join_p:"Inscrivez-vous pour recevoir nos rituels de beauté exclusifs, nos nouvelles collections et des invitations pour nos évènements privés.",
       subscribe:"S'inscrire", thanks:"Merci, vous êtes inscrit(e) !",
@@ -89,8 +89,8 @@ const TR = {
       slide3_tag:"Wellness Rituals", slide3_title:"Take Care of Yourself",
       slide3_text:"Beauty rituals designed for your daily well-being." },
     home: { latest:"Latest Creations", see_all:"View All Products", story:"Our Story",
-      story_h:"A passion born in 2015", story_p1:"Malkia B Cosmetics was born from a simple yet powerful vision: to offer every woman premium beauty care at accessible prices, with the promise of visible and lasting results.",
-      story_p2:"Since our beginnings, we have accompanied thousands of women with carefully selected products, designed to enhance natural beauty and inner radiance.",
+      story_h:"A visionary, a mission", story_p1:"I am Hamin Banga, founder of Malkia B Cosmetics. My journey taught me that true beauty lies in self-confidence. I created this brand to offer every woman the keys to her radiance, through premium, authentic and accessible care. Today, Malkia B shines from Bukavu to the international stage.",
+      story_p2:"Every product we offer is the result of rigorous selection. My team and I take great care in choosing formulas that combine effectiveness, safety and elegance. Our success I owe to the trust of thousands of women who have chosen sovereign beauty.",
       since:"Since", delivery:"Delivery",
       join:"Join the Malkia Circle", join_p:"Sign up to receive our exclusive beauty rituals, new collections, and invitations to our private events.",
       subscribe:"Subscribe", thanks:"Thank you for subscribing!",
@@ -700,7 +700,7 @@ function renderHome(){
         </div>
       </div>
       <div class="aspect-[4/5] overflow-hidden shadow-xl">
-        <img src="${img('malkia-atelier-femme',700,875)}" class="w-full h-full object-cover" alt="Atelier Malkia B">
+        <img src="${'images/CEO.jpeg'}" class="w-full h-full object-cover" alt="Atelier Malkia B">
       </div>
     </div>
   </section>
