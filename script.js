@@ -42,7 +42,7 @@ const TR = {
     nav: { home:'Accueil', products:'Produits', story:'Notre histoire', shops:'Boutiques', contact:'Contact',
       body:'Corps', face:'Visage', fragrance:'Parfums', wellness:'Bien-être', account:'Mon compte',
       cart:'Panier', team:'Équipe' },
-    hero: { title:["L'Éclat de la","Reine en Vous"], subtitle:"Des soins de beauté artisanaux, inspirés par la richesse de l'Afrique.",
+    hero: { title:["L'Éclat de la","Reine en Vous"], subtitle:"Des soins de beauté soigneusement sélectionnés, inspirés par la richesse de l'Afrique.",
       cta:"Découvrir la collection", s1:"Soin Corps", s2:"Soin Visage", s3:"Parfums Signature", s4:"Bien-être Essentiel",
       cta1:"Découvrir", cta2:"En savoir plus",
       slide0_tag:"Since 2015 · Livraison mondiale", slide0_title:"La vraie beauté vient de l'intérieur.",
@@ -67,7 +67,7 @@ const TR = {
       see_more:"Voir plus" },
     story: { title:"Notre Histoire", subtitle:"L'héritage d'une beauté souveraine",
       p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Tout est parti d'une conviction simple : chaque femme a le droit de se sentir souveraine. J'ai voulu créer des soins qui ne transforment pas seulement la peau, mais aussi la confiance.",
-      p2:"Mon parcours m'a amené à sélectionner les meilleurs ingrédients — du karité du Burkina à l'huile d'argan du Maroc — pour offrir des formules d'une efficacité rare. Chaque produit est le fruit d'une quête d'excellence.",
+      p2:"Mon parcours m'a amené à sélectionner les meilleurs produits de beauté — des laits corporels aux parfums de luxe — pour offrir une expérience d'exception. Chaque produit que je propose est le fruit d'une quête d'excellence.",
       p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
       credo:"La vraie beauté vient de l'intérieur.",
       sig:"— Hamin Banga, Fondateur" },
@@ -88,7 +88,7 @@ const TR = {
       wa:"Contactez-nous via WhatsApp", wa_sub:"Réponse sous 24h" },
     footer: { tagline:"La vraie beauté vient de l'intérieur.",
       shop:"Boutique", support:"Assistance", follow:"Suivez-nous", delivery:"Livraison & retours",
-      copyright:"© 2026 Malkia B Cosmetics. Fabrication artisanale." },
+      copyright:"© 2026 Malkia B Cosmetics. Distribution de cosmétiques de luxe." },
     team: { title:"Notre Équipe", subtitle:"Des passionnés à votre service", boss:"Fondatrice & Directrice Artistique",
       ceo:"CEO & Fondateur", emp:"Spécialiste Beauté",
       desc:"Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme." },
@@ -145,7 +145,7 @@ const TR = {
     nav: { home:'Home', products:'Products', story:'Our Story', shops:'Shops', contact:'Contact',
       body:'Body', face:'Face', fragrance:'Fragrances', wellness:'Wellness', account:'My Account',
       cart:'Cart', team:'Team' },
-    hero: { title:["The Radiance of the","Queen Within You"], subtitle:"Handcrafted beauty care, inspired by Africa's richness.",
+    hero: { title:["The Radiance of the","Queen Within You"], subtitle:"Curated beauty care, inspired by Africa's richness.",
       cta:"Discover the Collection", s1:"Body Care", s2:"Face Care", s3:"Signature Fragrances", s4:"Essential Wellness",
       cta1:"Discover", cta2:"Learn More",
       slide0_tag:"Since 2015 · Worldwide Delivery", slide0_title:"True beauty comes from within.",
@@ -170,7 +170,7 @@ const TR = {
       see_more:"View More" },
     story: { title:"Our Story", subtitle:"The legacy of sovereign beauty",
       p1:"I am Hamin Banga, founder of Malkia B Cosmetics. It all started with a simple belief: every woman deserves to feel sovereign. I wanted to create products that don't just transform the skin, but also transform confidence.",
-      p2:"My journey led me to select the finest ingredients — from Burkina’s shea butter to Morocco’s argan oil — to deliver formulas of exceptional efficacy. Every product is the result of a pursuit of excellence.",
+      p2:"My journey led me to select the finest beauty products — from body lotions to luxury fragrances — to deliver an exceptional experience. Every product I offer is the result of a pursuit of excellence.",
       p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
       credo:"True beauty comes from within.",
       sig:"— Hamin Banga, Founder" },
@@ -190,7 +190,7 @@ const TR = {
       wa:"Contact us via WhatsApp", wa_sub:"Reply within 24h" },
     footer: { tagline:"True beauty comes from within.",
       shop:"Shop", support:"Support", follow:"Follow Us", delivery:"Shipping & Returns",
-      copyright:"© 2026 Malkia B Cosmetics. Handmade with care." },
+      copyright:"© 2026 Malkia B Cosmetics. Luxury cosmetics distribution." },
     team: { title:"Our Team", subtitle:"Passionate people at your service", boss:"Founder & Art Director",
       ceo:"CEO & Founder", emp:"Beauty Specialist",
       desc:"Behind every product is a passionate team, united by the same vision: revealing the sovereign in every woman." },
@@ -702,7 +702,7 @@ function navigate(){
   app.style.animation = 'none';
   void app.offsetHeight;
   app.style.animation = 'page-enter 0.4s ease-out';
-  let st='Malkia B Cosmetics', sd='Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.';
+  let st='Malkia B Cosmetics', sd='Cosmétiques de luxe sélectionnés avec soin à Bukavu et Kigali.';
   if(page==='home'){ app.innerHTML = renderHome(); st='Accueil'; setTimeout(()=>{ initHeroCarousel(); initScrollReveal(); }, 50); }
   else if(page==='category'){ app.innerHTML = renderCategory(param||'body'); st=t('cat.'+(param||'body')); sd=t('product.subtitle'); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
   else if(page==='product'){ activeTab='desc'; activeThumb=0; const p=findProduct(param); if(p){st=p.name;sd=p.desc;} app.innerHTML = renderProduct(param); setTimeout(initScrollReveal, 50); }
@@ -723,11 +723,11 @@ window.addEventListener('hashchange', navigate);
 function setMeta(title, desc){
   document.title = title ? `${title} — Malkia B Cosmetics` : 'Malkia B Cosmetics';
   const d = document.querySelector('meta[name="description"]');
-  if(d) d.setAttribute('content', desc || 'Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.');
+  if(d) d.setAttribute('content', desc || 'Cosmétiques de luxe sélectionnés avec soin à Bukavu et Kigali.');
   const og = document.querySelector('meta[property="og:title"]');
   if(og) og.setAttribute('content', document.title);
   const od = document.querySelector('meta[property="og:description"]');
-  if(od) od.setAttribute('content', desc || 'Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.');
+  if(od) od.setAttribute('content', desc || 'Cosmétiques de luxe sélectionnés avec soin à Bukavu et Kigali.');
 }
 
 /* ===== SHARED COMPONENTS ===== */
