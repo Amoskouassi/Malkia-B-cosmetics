@@ -226,7 +226,6 @@ function setLang(l){ LANG.current=l; lsSetRaw('malkia_lang',l); renderHeaderFoot
 const CATS = { body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Wellness" };
 
 const PRODUCTS = [
-  {id:'b1', cat:'body', name:"Lotion Corps AHA 3 Jours (Lovska)", subtitle:"Lait", price:15, img:'images/S1944c55855ca4c9b97e3a6d9c185f47aO.webp', seed:'body-aha', desc:"Exfoliation chimique douce et efficace. Résultats visibles en 3 jours. Texture onctueuse et absorbante. Parfaite pour une peau lisse et éclatante.", ingredients:"Acide glycolique 5%, aloe vera, extrait de camomille.", rating:4.8, reviews:24, badge:'Vedette'},
   {id:'f1', cat:'face', name:"Kojic Glow Skin — Set Complet", subtitle:"Visage", price:35, img:'images/15d056d007a32fae0eb37fbd8826e419.webp', seed:'face-biovene', desc:"Soin visage éclat premium. Texture divine et nourrissante. Résultats visibles rapidement. Pour une peau lumineuse, hydratée et protégée.", ingredients:"Vitamine C stabilisée, niacinamide, beurre de karité bio.", rating:4.9, reviews:31, badge:'Vedette'},
   {id:'f2', cat:'face', name:"Anti acné _ set complet", subtitle:"Visage", price:40, img:'images/img_0001.webp', seed:'face-serum', desc:"Sérum concentré pour sublimer l'éclat naturel du teint. Améliore la texture et raffermit. Anti-âge haute performance.", ingredients:"Acide hyaluronique haut & bas poids moléculaire, extrait de rose, panthénol.", rating:4.7, reviews:22},
   /* ===== PARFUMS ===== */
