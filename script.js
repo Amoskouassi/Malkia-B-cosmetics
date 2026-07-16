@@ -69,6 +69,7 @@ const TR = {
       p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Tout est parti d'une conviction simple : chaque femme a le droit de se sentir souveraine. J'ai voulu créer des soins qui ne transforment pas seulement la peau, mais aussi la confiance.",
       p2:"Mon parcours m'a amené à sélectionner les meilleurs ingrédients — du karité du Burkina à l'huile d'argan du Maroc — pour offrir des formules d'une efficacité rare. Chaque produit est le fruit d'une quête d'excellence.",
       p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
+      credo:"« La vraie beauté vient de l'intérieur. » — Le Credo Malkia",
       sig:"— Hamin Banga, Fondateur" },
 
     shops: { title:"Nos Boutiques", subtitle:"Des espaces dédiés à votre beauté",
@@ -171,6 +172,7 @@ const TR = {
       p1:"I am Hamin Banga, founder of Malkia B Cosmetics. It all started with a simple belief: every woman deserves to feel sovereign. I wanted to create products that don't just transform the skin, but also transform confidence.",
       p2:"My journey led me to select the finest ingredients — from Burkina’s shea butter to Morocco’s argan oil — to deliver formulas of exceptional efficacy. Every product is the result of a pursuit of excellence.",
       p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
+      credo:"« True beauty comes from within. » — The Malkia Credo",
       sig:"— Hamin Banga, Founder" },
     shops: { title:"Our Boutiques", subtitle:"Dedicated spaces for your beauty",
       bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque — Bukavu, DRCongo",
@@ -1422,6 +1424,10 @@ function renderStory(){
       <p class="text-base md:text-lg">${s.p1}</p>
       <p class="text-base md:text-lg reveal reveal-d2">${s.p2}</p>
       <p class="text-base md:text-lg reveal reveal-d3">${s.p3}</p>
+    </div>
+    <div class="text-center py-10 px-6 reveal-scale">
+      <span class="material-symbols-outlined text-3xl text-primary/40 mb-4 block">format_quote</span>
+      <blockquote class="font-display text-2xl md:text-3xl text-primary italic leading-relaxed max-w-2xl mx-auto">${s.credo}</blockquote>
     </div>
     <div class="text-center reveal reveal-d2">
       <p class="font-display text-xl text-primary">${s.sig}</p>
