@@ -12,6 +12,15 @@ function lsSetRaw(k, v){
   try{ localStorage.setItem(k, v); }catch(e){}
 }
 
+let productLimit = 8;
+function loadMoreProducts(){
+  productLimit += 8;
+  const [page, param] = parseRoute();
+  const app = document.getElementById('app');
+  if(app) app.innerHTML = renderProducts(param||undefined);
+  setTimeout(initScrollReveal, 50);
+  initProductSearch();
+}
 /* ===== I18N ===== */
 const LANG = { current: lsGetRaw('malkia_lang', 'fr') };
 const TR = {
@@ -93,7 +102,7 @@ const TR = {
     new_arrivals:"Nouveautés", view_all:"Voir tout", categories:"Nos Catégories",
     ui:{
       ui_001:"À venir", ui_002:"Page non trouvée. La page que vous recherchez n'existe pas ou a été déplacée.",
-      ui_003:"Retour", ui_050:"Tous nos produits", ui_004:"Rechercher un produit...",
+      ui_003:"Retour", ui_050:"Tous nos produits", ui_051:"Voir plus", ui_004:"Rechercher un produit...",
       ui_005:"Aucun produit ne correspond à votre recherche.", ui_006:"Produit introuvable",
       ui_007:"Acheter Maintenant", ui_008:"Complétez Votre Routine",
       ui_009:"À partir de 10 $", ui_010:"Prénom", ui_011:"Prénom",
@@ -194,7 +203,7 @@ const TR = {
     new_arrivals:"New Arrivals", view_all:"View All", categories:"Our Categories",
     ui:{
       ui_001:"Coming soon", ui_002:"Page not found. The page you are looking for does not exist or has been moved.",
-      ui_003:"Back", ui_050:"All Products", ui_004:"Search a product...",
+      ui_003:"Back", ui_050:"All Products", ui_051:"Load more", ui_004:"Search a product...",
       ui_005:"No product matches your search.", ui_006:"Product not found",
       ui_007:"Buy Now", ui_008:"Complete Your Routine",
       ui_009:"From 10 $", ui_010:"First Name", ui_011:"First Name",
@@ -560,12 +569,14 @@ function renderTeamMember(id){
 }
 
 /* ===== PRODUCT SEARCH ===== */
+let searchHandler = null;
 function initProductSearch(){
   const input = document.getElementById('productSearch');
   const grid = document.getElementById('productGrid');
   const noResults = document.getElementById('noResults');
   if(!input || !grid) return;
-  input.addEventListener('input', function(){
+  if(searchHandler) input.removeEventListener('input', searchHandler);
+  searchHandler = function(){
     const q = this.value.toLowerCase().trim();
     let visible = 0;
     Array.from(grid.children).forEach(card => {
@@ -574,7 +585,8 @@ function initProductSearch(){
       else{ card.style.display = 'none'; }
     });
     if(noResults) noResults.classList.toggle('hidden', visible>0);
-  });
+  };
+  input.addEventListener('input', searchHandler);
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -675,22 +687,33 @@ function navigate(){
   app.style.animation = 'none';
   void app.offsetHeight;
   app.style.animation = 'page-enter 0.4s ease-out';
-  if(page==='home'){ app.innerHTML = renderHome(); setTimeout(()=>{ initHeroCarousel(); initScrollReveal(); }, 50); }
-  else if(page==='category'){ app.innerHTML = renderCategory(param||'body'); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
-  else if(page==='product'){ activeTab='desc'; activeThumb=0; app.innerHTML = renderProduct(param); setTimeout(initScrollReveal, 50); }
-  else if(page==='cart'){ app.innerHTML = renderCart(); setTimeout(initScrollReveal, 50); }
-  else if(page==='checkout'){ app.innerHTML = renderCheckout(); setTimeout(initScrollReveal, 50); }
-  else if(page==='account'){ app.innerHTML = renderAccount(); setTimeout(initScrollReveal, 50); }
-  else if(page==='contact'){ app.innerHTML = renderContact(); setTimeout(initScrollReveal, 50); }
-  else if(page==='team' && param){ app.innerHTML = renderTeamMember(param); setTimeout(initScrollReveal, 50); }
-  else if(page==='team'){ app.innerHTML = renderTeam(); setTimeout(initScrollReveal, 50); }
-  else if(page==='story'){ app.innerHTML = renderStory(); setTimeout(initScrollReveal, 50); }
-  else if(page==='shops'){ app.innerHTML = renderShops(); setTimeout(()=>{ initScrollReveal(); const st=sessionStorage.getItem('scrollTeam'); if(st){ sessionStorage.removeItem('scrollTeam'); const el=document.getElementById('teamSection'); if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),100); } }, 50); }
-  else if(page==='products'){ app.innerHTML = renderProducts(param); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
-  else{ app.innerHTML = renderNotFound(); }
+  let st='Malkia B Cosmetics', sd='Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.';
+  if(page==='home'){ app.innerHTML = renderHome(); st='Accueil'; setTimeout(()=>{ initHeroCarousel(); initScrollReveal(); }, 50); }
+  else if(page==='category'){ app.innerHTML = renderCategory(param||'body'); st=t('cat.'+(param||'body')); sd=t('product.subtitle'); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
+  else if(page==='product'){ activeTab='desc'; activeThumb=0; const p=findProduct(param); if(p){st=p.name;sd=p.desc;} app.innerHTML = renderProduct(param); setTimeout(initScrollReveal, 50); }
+  else if(page==='cart'){ app.innerHTML = renderCart(); st=t('nav.cart'); sd='Votre panier Malkia B Cosmetics'; setTimeout(initScrollReveal, 50); }
+  else if(page==='checkout'){ app.innerHTML = renderCheckout(); st=t('checkout.title'); sd='Finalisez votre commande Malkia B Cosmetics'; setTimeout(initScrollReveal, 50); }
+  else if(page==='account'){ app.innerHTML = renderAccount(); st=t('account.title'); sd='Votre compte Malkia B Cosmetics'; setTimeout(initScrollReveal, 50); }
+  else if(page==='contact'){ app.innerHTML = renderContact(); st=t('nav.contact'); sd=t('contact.desc'); setTimeout(initScrollReveal, 50); }
+  else if(page==='team' && param){ const m=TEAM.find(t=>t.id===param); if(m){st=m.name;sd=m.bio;} app.innerHTML = renderTeamMember(param); setTimeout(initScrollReveal, 50); }
+  else if(page==='team'){ app.innerHTML = renderTeam(); st=t('team.title'); sd=t('team.desc'); setTimeout(initScrollReveal, 50); }
+  else if(page==='story'){ app.innerHTML = renderStory(); st=t('story.title'); sd=t('story.p1'); setTimeout(initScrollReveal, 50); }
+  else if(page==='shops'){ app.innerHTML = renderShops(); st=t('nav.shops'); sd='Retrouvez nos boutiques Malkia B Cosmetics à Bukavu et Kigali'; setTimeout(()=>{ initScrollReveal(); const sts=sessionStorage.getItem('scrollTeam'); if(sts){ sessionStorage.removeItem('scrollTeam'); const el=document.getElementById('teamSection'); if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),100); } }, 50); }
+  else if(page==='products'){ app.innerHTML = renderProducts(param); st=param ? t('cat.'+param+'_title')||t('nav.products') : t('ui.ui_050'); sd=param ? t('cat.'+param+'_sub') : t('product.subtitle'); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
+  else{ app.innerHTML = renderNotFound(); st='404'; sd='Page introuvable'; }
+  setMeta(st, sd);
   updateCartCount();
 }
 window.addEventListener('hashchange', navigate);
+function setMeta(title, desc){
+  document.title = title ? `${title} — Malkia B Cosmetics` : 'Malkia B Cosmetics';
+  const d = document.querySelector('meta[name="description"]');
+  if(d) d.setAttribute('content', desc || 'Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.');
+  const og = document.querySelector('meta[property="og:title"]');
+  if(og) og.setAttribute('content', document.title);
+  const od = document.querySelector('meta[property="og:description"]');
+  if(od) od.setAttribute('content', desc || 'Cosmétiques naturels artisanaux fabriqués à Bukavu et Kigali.');
+}
 
 /* ===== SHARED COMPONENTS ===== */
 function productCard(p){
@@ -700,7 +723,7 @@ function productCard(p){
   return `
   <a href="${link}" class="group block">
     <div class="relative aspect-square md:aspect-[3/4] overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low">
-      <img loading="lazy" src="${imageUrl}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${p.name}">
+      <img loading="lazy" src="${imageUrl}" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=500&fit=crop&q=80'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${p.name}">
       ${p.badge ? `<div class="absolute top-3 left-3 bg-primary text-on-primary text-[9px] px-3 py-1.5 uppercase tracking-widest font-semibold">${p.badge}</div>` : ''}
       <button onclick="event.preventDefault(); event.stopPropagation(); addToCart('${p.id}')" class="absolute bottom-4 right-4 bg-background/90 p-3 rounded-full opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-sm active:scale-90 hover-glow">
         <span class="material-symbols-outlined text-primary text-[20px]">add_shopping_cart</span>
@@ -877,10 +900,10 @@ function renderProduct(id){
   <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
-        <img id="mainImg" src="${mainImg}" class="w-full h-full object-cover" alt="${p.name}">
+        <img id="mainImg" src="${mainImg}" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700&h=875&fit=crop&q=80'" class="w-full h-full object-cover" alt="${p.name}">
       </div>
       <div id="thumbRow" class="flex gap-3 overflow-x-auto pb-2">
-        ${thumbs.map((t,i)=>`<img src="${t}" onclick="switchThumb(${i})" class="w-16 h-20 object-cover cursor-pointer ${i===activeThumb?'opacity-100 border-b-2 border-primary':'opacity-50'}" alt="${p.name}">`).join('')}
+        ${thumbs.map((t,i)=>`<img src="${t}" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=140&h=175&fit=crop&q=80'" onclick="switchThumb(${i})" class="w-16 h-20 object-cover cursor-pointer ${i===activeThumb?'opacity-100 border-b-2 border-primary':'opacity-50'}" alt="${p.name}">`).join('')}
       </div>
     </div>
     <div>
@@ -1325,14 +1348,16 @@ function switchAccount(section){
 }
 
 /* ===== PRODUCTS PAGE ===== */
+let lastCat = null;
 function renderProducts(cat){
+  if(cat!==lastCat){ productLimit = 8; lastCat = cat; }
   const p = t('product'), cats = t('cat'), n = t('nav');
   const active = cat || 'all';
   const filtered = cat ? PRODUCTS.filter(x=>x.cat===cat) : PRODUCTS;
   const heroImgs = { all:'images/gamme de produit new.jpg', body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }; const catHero = heroImgs[cat||'all'];
   return `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative">
-    <img src="${catHero}" class="w-full h-full object-cover" alt="${cat ? t('cat.'+cat) : t('product.all_products')}">
+    <img src="${catHero}" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=1600&h=600&fit=crop&q=80'" class="w-full h-full object-cover" alt="${cat ? t('cat.'+cat) : t('product.all_products')}">
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>
   <div class="px-5 md:px-margin-desktop pb-24">
@@ -1354,12 +1379,16 @@ function renderProducts(cat){
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
-      ${filtered.map((p,i)=>`<div data-name="${p.name.toLowerCase()}" class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
+      ${filtered.slice(0, productLimit).map((p,i)=>`<div data-name="${p.name.toLowerCase()}" class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_042')}</p>
     </div>
+    ${filtered.length > productLimit ? `
+    <div id="loadMoreWrap" class="text-center mt-12">
+      <button onclick="loadMoreProducts()" class="inline-flex items-center gap-2 text-sm border border-primary text-primary px-8 py-3 uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${t('ui.ui_051')}</button>
+    </div>` : ''}
   </div>`;
 }
 
@@ -1468,12 +1497,14 @@ function contactWhatsApp(form){
   const s = form.querySelector('[name=subject]')?.value.trim();
   const m = form.querySelector('[name=msg]')?.value.trim();
   if(!n||!e||!m) return;
-  const msg = LANG.current==='en'
-    ? `*Contact — Malkia B Cosmetics*\n\n*Name:* ${n}\n*Email:* ${e}\n*Subject:* ${s||'-'}\n*Message:* ${m}`
-    : `*Contact — Malkia B Cosmetics*\n\n*Nom:* ${n}\n*Email:* ${e}\n*Sujet:* ${s||'-'}\n*Message:* ${m}`;
-  window.open(`https://wa.me/243995945889?text=${encodeURIComponent(msg)}`,'_blank');
-  const sent = document.getElementById('toast');
-  if(sent) showToast(t('ui.ui_047'));
+  const subj = encodeURIComponent(s || (LANG.current==='en' ? 'Contact — Malkia B Cosmetics' : 'Contact — Malkia B Cosmetics'));
+  const body = encodeURIComponent(
+    LANG.current==='en'
+      ? `Name: ${n}\nEmail: ${e}\n\n${m}`
+      : `Nom: ${n}\nEmail: ${e}\n\n${m}`
+  );
+  window.open(`mailto:contact@malkiab-cosmetics.com?subject=${subj}&body=${body}`,'_blank');
+  showToast(t('ui.ui_047'));
 }
 function renderContact(){
   const c = t('contact'), f = c.form;
