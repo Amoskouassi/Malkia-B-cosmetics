@@ -1242,12 +1242,17 @@ function renderAccountSection(section, orders, profile){
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.orders}</h2>
     ${orders.map((o,i)=>`
-    <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
-      <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${o.items && o.items[0] ? pi(o.items[0],200,200) : img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui.ui_032')}"></div>
-        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui.ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${t('ui.ui_034')}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
+    <div class="border border-outline-variant/10 p-6">
+      <div class="flex items-center justify-between flex-wrap gap-4 mb-3">
+        <div class="flex gap-6 items-center">
+          <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${o.items && o.items[0] ? pi(o.items[0],200,200) : img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui.ui_032')}"></div>
+          <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui.ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><p class="text-sm text-on-surface-variant">${fmt(o.total)}$</p></div>
+        </div>
+        <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
       </div>
-      <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
+      <div class="border-t border-outline-variant/10 pt-3 space-y-1 text-sm text-on-surface-variant">
+        ${o.items.map(item => `<div class="flex justify-between"><span>${item.name} × ${item.qty}</span><span>${fmt(item.lineTotal || item.price * item.qty)}$</span></div>`).join('')}
+      </div>
     </div>
     `).join('')}
     `;
