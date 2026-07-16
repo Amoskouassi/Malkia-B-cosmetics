@@ -506,15 +506,7 @@ function renderTeam(){
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
       </a>`).join('')}
     </div>
-    <div class="mt-16 text-center border-t border-outline-variant/20 pt-10">
-      <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">${t('home.see_all')}</p>
-      <div class="flex flex-wrap justify-center gap-6 text-sm">
-        <a href="#/products" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.products')}</a>
-        <a href="#/story" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.story')}</a>
-        <a href="#/shops" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.shops')}</a>
-        <a href="#/contact" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.contact')}</a>
-      </div>
-    </div>
+    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mx-auto mt-16"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
   </div>`;
 }
 
@@ -559,16 +551,6 @@ function renderTeamMember(id){
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
           <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
         </a>`).join('')}
-      </div>
-    </div>
-    <div class="mt-16 text-center border-t border-outline-variant/20 pt-10">
-      <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">${t('home.see_all')}</p>
-      <div class="flex flex-wrap justify-center gap-6 text-sm">
-        <a href="#/products" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.products')}</a>
-        <a href="#/story" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.story')}</a>
-        <a href="#/shops" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.shops')}</a>
-        <a href="#/contact" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.contact')}</a>
-        <a href="#/home" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.home')}</a>
       </div>
     </div>
   </div>`;
@@ -857,6 +839,7 @@ function renderCategory(catKey){
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-6"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('product.all_products')}</a>
     <div class="text-center mb-10">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${t('categories')}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${label}</h1>
@@ -889,6 +872,7 @@ function renderProduct(id){
   return `
   <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
+      <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-6"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('product.all_products')}</a>
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
         <img id="mainImg" src="${mainImg}" class="w-full h-full object-cover" alt="${p.name}">
       </div>
@@ -980,6 +964,7 @@ function renderCart(){
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
     <p class="text-sm text-on-surface-variant italic mb-12">${t('ui.ui_002')}</p>
+    <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('cart.cta')}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-8">
         ${lines.map(l=>`
@@ -1071,6 +1056,7 @@ function renderCheckout(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-12">${co.title}</h1>
+    <a href="#/cart" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${ca.title}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-7 space-y-16">
         <section>
@@ -1247,6 +1233,7 @@ function renderAccount(){
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
     <p class="text-sm text-on-surface-variant mb-12">${t('ui.ui_028')}${name}</p>
+    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <aside class="lg:col-span-3 space-y-2">
         <button onclick="switchAccount('orders')" id="tab-orders" class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
@@ -1379,6 +1366,7 @@ function renderStory(){
   const s = t('story');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 max-w-4xl mx-auto space-y-16">
+    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
@@ -1438,7 +1426,8 @@ function renderShops(){
   const s = t('shops'), tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-16">
-    <div class="text-center">
+    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+    <div class="text-center reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
     </div>
@@ -1482,6 +1471,7 @@ function renderContact(){
   const c = t('contact'), f = c.form;
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-20">
+    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="max-w-2xl mx-auto text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${c.title}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${c.heading}</h1>
