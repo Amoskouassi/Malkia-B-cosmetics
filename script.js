@@ -449,8 +449,8 @@ function showToast(msg, icon='check_circle'){
   msgEl.textContent = msg;
   if(iconEl) iconEl.textContent = icon;
   clearTimeout(el._hide);
-  el.classList.remove('translate-y-full');
-  el._hide = setTimeout(() => el.classList.add('translate-y-full'), 2800);
+  el.classList.remove('opacity-0', 'pointer-events-none');
+  el._hide = setTimeout(() => el.classList.add('opacity-0', 'pointer-events-none'), 3000);
 }
   function toggleMobileMenu(){
     const m = document.getElementById('mobileMenu');
