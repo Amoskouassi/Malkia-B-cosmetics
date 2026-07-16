@@ -795,10 +795,6 @@ function renderHome(){
     </div>
   </section>
 
-  <div class="text-center py-5 md:py-7 bg-primary/5 border-y border-primary/10 mb-16 md:mb-24 reveal">
-    <p class="font-display text-base md:text-xl text-primary italic tracking-wide">${t('story.credo')}</p>
-  </div>
-
   <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
       ${Object.entries(CATS).map(([key,label], i)=>`
@@ -833,6 +829,10 @@ function renderHome(){
         <h2 class="font-display text-3xl md:text-4xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${h.story_h}</h2>
         <p class="text-base text-on-background/80 mb-6 animate-fade-in-up" style="animation-delay:0.3s">${h.story_p1}</p>
         <p class="text-sm text-on-background/70 mb-10 animate-fade-in-up" style="animation-delay:0.4s">${h.story_p2}</p>
+        <div class="text-center mb-10 reveal-scale">
+          <span class="material-symbols-outlined text-2xl text-primary/40 mb-2 block">format_quote</span>
+          <blockquote class="font-display text-xl md:text-2xl text-primary italic leading-relaxed">${t('story.credo')}</blockquote>
+        </div>
         <div class="grid grid-cols-2 gap-8 animate-fade-in-up" style="animation-delay:0.5s">
           <div><span class="block font-display text-2xl text-primary mb-1">2015</span><span class="text-[11px] text-outline uppercase tracking-widest">${h.since}</span></div>
           <div><span class="block font-display text-2xl text-primary mb-1">Global</span><span class="text-[11px] text-outline uppercase tracking-widest">${h.delivery}</span></div>
