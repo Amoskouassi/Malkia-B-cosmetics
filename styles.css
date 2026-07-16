@@ -153,6 +153,14 @@ html{ scroll-behavior:smooth; }
 .border-glow{ transition:border-color 0.3s, box-shadow 0.3s; }
 .border-glow:focus-within{ border-color:#d4af37; box-shadow:0 0 0 3px rgba(212,175,55,0.1); }
 
+/* ===== MOBILE MENU ===== */
+#mobileMenu{ overflow:hidden; transition:max-height 0.3s ease-out, opacity 0.25s ease-out; max-height:0; opacity:0; }
+#mobileMenu.flex{ max-height:80vh; opacity:1; }
+
+/* ===== LOGO ===== */
+.logo-link{ transition:transform 0.4s ease-out; display:inline-block; }
+.logo-link:hover{ transform:scale(1.02); }
+
 /* ===== COUNTER BADGE ===== */
 .cart-badge{ transition:transform 0.2s; }
 .cart-badge.bump{ transform:scale(1.3); }

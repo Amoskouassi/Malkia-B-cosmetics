@@ -448,13 +448,23 @@ function showToast(msg){
   t.classList.remove('translate-y-24');
   setTimeout(()=>t.classList.add('translate-y-24'), 2200);
 }
-function toggleMobileMenu(){
-  const m = document.getElementById('mobileMenu');
-  if (m) {
-    m.classList.toggle('hidden');
-    m.classList.toggle('flex');
+  function toggleMobileMenu(){
+    const m = document.getElementById('mobileMenu');
+    if (!m) return;
+    const isOpen = m.classList.contains('flex');
+    if(isOpen){
+      m.style.maxHeight = '0';
+      m.style.opacity = '0';
+      setTimeout(()=>{ m.classList.remove('flex'); m.classList.add('hidden'); }, 300);
+    } else {
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+      requestAnimationFrame(()=>{
+        m.style.maxHeight = m.scrollHeight + 'px';
+        m.style.opacity = '1';
+      });
+    }
   }
-}
 
 /* ===== TEAM ===== */
 const TEAM = [
@@ -572,13 +582,13 @@ function renderHeader(){
   <header class="fixed top-0 left-0 w-full z-50 bg-background/85 backdrop-blur-md border-b border-outline-variant/20">
     <div class="flex justify-between items-center px-5 md:px-margin-desktop py-5 max-w-container-max mx-auto">
       <button class="md:hidden" onclick="toggleMobileMenu()"><span class="material-symbols-outlined">menu</span></button>
-      <a href="#/home" class="font-display text-xl md:text-2xl text-primary uppercase tracking-widest mx-auto md:mx-0">Malkia B <span class="italic normal-case">Cosmetics</span></a>
+      <a href="#/home" class="font-display text-xl md:text-2xl text-primary uppercase tracking-widest mx-auto md:mx-0 logo-link">Malkia B <span class="italic normal-case">Cosmetics</span></a>
       <nav class="hidden md:flex gap-8 items-center" id="megaNav">
-        <a href="#/home" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">${n.home}</a>
-        <a href="#/products" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">${n.products}</a>
-        <a href="#/story" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">${n.story}</a>
-        <a href="#/shops" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">${n.shops}</a>
-        <a href="#/contact" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">${n.contact}</a>
+        <a href="#/home" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-all luxury-underline pb-0">${n.home}</a>
+        <a href="#/products" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-all luxury-underline pb-0">${n.products}</a>
+        <a href="#/story" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-all luxury-underline pb-0">${n.story}</a>
+        <a href="#/shops" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-all luxury-underline pb-0">${n.shops}</a>
+        <a href="#/contact" class="font-body text-[13px] tracking-widest uppercase text-on-background/70 hover:text-primary transition-all luxury-underline pb-0">${n.contact}</a>
       </nav>
       <div class="flex items-center gap-4 text-on-background">
         <button onclick="setLang('${isEn?'fr':'en'}')" class="text-[11px] uppercase tracking-widest font-semibold text-primary hover:text-primary-container transition-colors border border-primary/30 px-2.5 py-1 rounded">${isEn?'FR':'EN'}</button>
@@ -756,7 +766,7 @@ function renderHome(){
         <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block animate-fade-in-down">${h.latest}</span>
         <h2 class="font-display text-2xl md:text-3xl animate-slide-right" style="animation-delay:0.15s">${t('new_arrivals')}</h2>
       </div>
-      <a href="#/products" class="text-[13px] text-primary border-b border-primary/30 pb-1 hover:border-primary transition-all hidden sm:block">${h.see_all}</a>
+      <a href="#/products" class="flex-shrink-0 flex items-center gap-2 text-[12px] md:text-[13px] text-primary border-b border-primary/30 pb-1 hover:border-primary hover:gap-3 transition-all"><span>${h.see_all}</span><span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
       ${newArrivals.map((p,i)=>`<div class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
