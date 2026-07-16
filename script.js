@@ -333,6 +333,7 @@ const PRODUCTS = [
 
 function img(seed, w=600, h=750){ return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
 function ti(m, w=500, h=500){ return m.img && m.img.startsWith('images/') ? m.img : img(m.img, w, h); }
+function pi(p, w, h){ return p.img ? p.img : (p.seed ? img(p.seed, w, h) : 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w='+w+'&h='+h+'&fit=crop&q=80'); }
 function findProduct(id){ return PRODUCTS.find(p=>p.id===id); }
 function fmt(n){ return n.toFixed(2).replace('.', ','); }
 
@@ -949,7 +950,7 @@ function renderCart(){
         <div class="grid grid-cols-[80px_1fr_auto] md:grid-cols-12 items-center gap-4 md:gap-0 border-b border-outline-variant/10 py-6">
           <div class="md:col-span-6 flex items-center gap-4 md:gap-6">
             <div class="w-16 h-20 md:w-24 md:h-32 flex-shrink-0 bg-surface-container-low overflow-hidden">
-              <img loading="lazy" src="${img(l.seed,200,250)}" class="w-full h-full object-cover" alt="${l.name}">
+              <img loading="lazy" src="${pi(l,200,250)}" class="w-full h-full object-cover" alt="${l.name}">
             </div>
             <div>
               <h3 class="font-display text-sm md:text-base mb-1">${l.name}</h3>
@@ -1134,7 +1135,7 @@ function renderCheckout(){
         <div class="sticky top-28 border border-outline-variant/10 p-8 bg-surface-container-low">
           <h3 class="font-display text-xl mb-6">${co.summary}</h3>
           <div class="space-y-4 mb-6">
-            ${lines.map(l=>`<div class="flex justify-between text-sm"><span>${l.name} × ${l.qty}</span><span>${fmt(l.lineTotal)} $</span></div>`).join('')}
+            ${lines.map(l=>`<div class="flex items-center gap-3 text-sm"><img src="${pi(l,40,50)}" class="w-10 h-12 object-cover flex-shrink-0"><span class="flex-1">${l.name} × ${l.qty}</span><span>${fmt(l.lineTotal)} $</span></div>`).join('')}
           </div>
           <div class="border-t border-outline-variant/30 pt-4 space-y-2 mb-8 text-sm">
             <div class="flex justify-between"><span>${ca.delivery}</span><span id="shipAmount">${shipping===0?ca.free:fmt(shipping)+' $'}</span></div>
@@ -1243,7 +1244,7 @@ function renderAccountSection(section, orders, profile){
     ${orders.map((o,i)=>`
     <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
       <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui.ui_032')}"></div>
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${o.items && o.items[0] ? pi(o.items[0],200,200) : img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui.ui_032')}"></div>
         <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui.ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${t('ui.ui_034')}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
       </div>
       <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
