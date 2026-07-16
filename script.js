@@ -525,7 +525,7 @@ function renderTeamMember(id){
         <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
         <h2 class="font-display text-2xl md:text-3xl">${t('account.members')}</h2>
       </div>
-      <div class="grid grid-cols-5 gap-3 md:gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-6">
         ${rot.map(m=>`
         <a href="#/team/${m.id}" class="group text-center">
           <div class="aspect-square overflow-hidden mb-2 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
@@ -590,7 +590,7 @@ function renderHeader(){
         </a>
       </div>
     </div>
-    <div id="mobileMenu" class="hidden flex-col bg-background border-t border-outline-variant/20 px-5 pb-4">
+    <div id="mobileMenu" class="hidden flex-col bg-background border-t border-outline-variant/20 px-5 pb-4 overflow-y-auto max-h-[80vh]">
       <a href="#/home" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest">${n.home}</a>
       <a href="#/products" onclick="toggleMobileMenu()" class="py-3 border-b border-outline-variant/10 uppercase text-[13px] tracking-widest font-semibold">${n.products}</a>
       <a href="#/category/body" onclick="toggleMobileMenu()" class="py-3 pl-4 border-b border-outline-variant/10 uppercase text-[12px] tracking-widest text-on-surface-variant">— ${n.body}</a>
@@ -709,7 +709,7 @@ function renderHome(){
   const h = t('home'), hr = t('hero'), c = t('cat');
   const newArrivals = PRODUCTS.slice(0,4);
   return `
-  <section id="heroCarousel" class="relative h-[75vh] md:h-[85vh] w-full overflow-hidden mb-24 group">
+  <section id="heroCarousel" class="relative h-[60vh] md:h-[85vh] w-full overflow-hidden mb-16 md:mb-24 group">
     <div id="heroTrack" class="flex h-full transition-transform duration-700 ease-in-out">
       ${HERO_SLIDES.map((s,i) => `
       <div class="relative min-w-full h-full flex-shrink-0 overflow-hidden">
@@ -737,7 +737,7 @@ function renderHome(){
     </div>
   </section>
 
-  <section class="px-5 md:px-margin-desktop mb-24 reveal">
+  <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
       ${Object.entries(CATS).map(([key,label], i)=>`
       <a href="#/category/${key}" class="relative aspect-[3/4] overflow-hidden group hover-lift border border-outline-variant/10 ${i%2===1?'md:mt-12':''} reveal reveal-d${(i%4)+1}">
@@ -751,7 +751,7 @@ function renderHome(){
     </div>
   </section>
 
-  <section class="px-5 md:px-margin-desktop mb-24 reveal">
+  <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
     <div class="flex justify-between items-end mb-10 md:mb-14 reveal">
       <div>
         <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${h.latest}</span>
@@ -764,7 +764,7 @@ function renderHome(){
     </div>
   </section>
 
-  <section class="bg-surface-container-low py-20 md:py-28 mb-24 reveal">
+  <section class="bg-surface-container-low py-16 md:py-28 mb-16 md:mb-24 reveal">
     <div class="px-5 md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
       <div>
         <span class="text-[11px] text-primary uppercase tracking-widest mb-5 block">${h.story}</span>
@@ -796,7 +796,7 @@ function renderHome(){
     </div>
   </section>
 
-  <section class="bg-surface-container-low py-20 md:py-28 text-center">
+  <section class="bg-surface-container-low py-16 md:py-28 text-center">
     <div class="px-5 md:px-margin-desktop max-w-2xl mx-auto reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block">${h.find}</span>
       <h2 class="font-display text-3xl md:text-4xl mb-6">${h.contacts}</h2>
@@ -857,7 +857,7 @@ function renderProduct(id){
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
         <img id="mainImg" src="${mainImg}" class="w-full h-full object-cover" alt="${p.name}">
       </div>
-      <div id="thumbRow" class="flex gap-3">
+      <div id="thumbRow" class="flex gap-3 overflow-x-auto pb-2">
         ${thumbs.map((t,i)=>`<img src="${t}" onclick="switchThumb(${i})" class="w-16 h-20 object-cover cursor-pointer ${i===activeThumb?'opacity-100 border-b-2 border-primary':'opacity-50'}" alt="${p.name}">`).join('')}
       </div>
     </div>
@@ -1359,7 +1359,7 @@ function shopCard(key){
   const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d${s.lng}!3d${s.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s${s.q}!5e0!3m2!1sfr!2scd!4v1`;
   const dirUrl = `https://maps.google.com/?q=${s.q}`;
   return `
-  <div class="grid md:grid-cols-2 gap-8 reveal">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
     <div class="relative rounded-2xl overflow-hidden h-64 md:h-full min-h-[300px] shadow-xl">
       <iframe src="${mapUrl}" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="${s.name}" style="border:0;"></iframe>
       <div class="absolute top-4 left-4 bg-primary text-on-primary px-4 py-2 rounded-full flex items-center gap-2 shadow-md text-sm font-medium"><span>${flag}</span><span>${isB?'Bukavu':'Kigali'}</span></div>
