@@ -83,8 +83,36 @@ const TR = {
     account: { title:"Mon Compte", orders:"Historique des commandes", info:"Informations personnelles", logout:"Déconnexion",
       order:"Commande", delivered:"Livrée", pending:"En cours", items:"articles", share:"Partager",
       also:"Découvrez aussi", members:"Les autres membres", not_found:"Membre introuvable", back:"Retour à l'équipe",
-      all_team:"Toute l'équipe", team_sub:"Notre équipe" },
-    new_arrivals:"Nouveautés", view_all:"Voir tout", categories:"Nos Catégories"
+      all_team:"Toute l'équipe", team_sub:"Notre équipe",
+      yes:"Oui", no:"Non", addresses:"Adresses", payments:"Paiements" },
+    team: { boss:"Fondatrice & Directrice Artistique", emp:"Spécialiste Beauté",
+      desc:"Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme." },
+    new_arrivals:"Nouveautés", view_all:"Voir tout", categories:"Nos Catégories",
+    ui:{
+      ui_001:"À venir", ui_002:"Page non trouvée. La page que vous recherchez n'existe pas ou a été déplacée.",
+      ui_003:"Retour à l'accueil", ui_004:"Rechercher un produit...",
+      ui_005:"Aucun produit ne correspond à votre recherche.", ui_006:"Produit introuvable",
+      ui_007:"Acheter Maintenant", ui_008:"Complétez Votre Rituel",
+      ui_009:"À partir de 10 $", ui_010:"Prénom", ui_011:"Prénom",
+      ui_012:"Nom", ui_013:"Nom", ui_014:"Téléphone",
+      ui_015:"Livraison", ui_016:"Souhaitez-vous une livraison ?",
+      ui_017:"Ville de livraison :", ui_018:"1-2 jours", ui_019:"2-4 jours",
+      ui_020:"Autre ville", ui_021:"3-7 jours", ui_022:"À partir de 10 $",
+      ui_023:"Paiement à la réception", ui_024:"Veuillez remplir tous les champs obligatoires",
+      ui_025:"Pas de livraison", ui_026:"Autre ville", ui_027:"À partir de 10 $",
+      ui_028:"Bienvenue, ", ui_029:"Profil effacé",
+      ui_030:"Aucune commande pour le moment.", ui_031:"Commencer vos achats",
+      ui_032:"Image commande", ui_033:"fr-FR", ui_034:"article",
+      ui_035:"Nom", ui_036:"Téléphone", ui_037:"Adresse", ui_038:"Ville",
+      ui_039:"Aucune adresse enregistrée.",
+      ui_040:"Les paiements sont traités via WhatsApp ou à la livraison.",
+      ui_041:"Rechercher un produit...",
+      ui_042:"Aucun produit ne correspond à votre recherche.",
+      ui_043:"Adresse", ui_044:"Téléphone", ui_045:"Horaires",
+      ui_046:"Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme.",
+      ui_047:"Message envoyé, merci !", ui_048:"Horaires",
+      ui_049:"Nous recrutons actuellement un photographe talentueux pour capturer l'essence de Malkia B. Si vous êtes passionné par la beauté et l'image, rejoignez-nous !"
+    }
   },
   en: {
     nav: { home:'Home', products:'Products', story:'Our Story', shops:'Shops', contact:'Contact',
@@ -153,8 +181,36 @@ const TR = {
     account: { title:"My Account", orders:"Order History", info:"Personal Information", logout:"Log Out",
       order:"Order", delivered:"Delivered", pending:"Pending", items:"items", share:"Share",
       also:"Also discover", members:"Other members", not_found:"Member not found", back:"Back to team",
-      all_team:"All team", team_sub:"Our team" },
-    new_arrivals:"New Arrivals", view_all:"View All", categories:"Our Categories"
+      all_team:"All team", team_sub:"Our team",
+      yes:"Yes", no:"No", addresses:"Addresses", payments:"Payments" },
+    team: { boss:"Founder & Art Director", emp:"Beauty Specialist",
+      desc:"Behind every product is a passionate team, united by the same vision: revealing the sovereign in every woman." },
+    new_arrivals:"New Arrivals", view_all:"View All", categories:"Our Categories",
+    ui:{
+      ui_001:"Coming soon", ui_002:"Page not found. The page you are looking for does not exist or has been moved.",
+      ui_003:"Back to home", ui_004:"Search a product...",
+      ui_005:"No product matches your search.", ui_006:"Product not found",
+      ui_007:"Buy Now", ui_008:"Complete Your Ritual",
+      ui_009:"From 10 $", ui_010:"First Name", ui_011:"First Name",
+      ui_012:"Last Name", ui_013:"Last Name", ui_014:"Phone",
+      ui_015:"Delivery", ui_016:"Do you want delivery?",
+      ui_017:"Delivery city:", ui_018:"1-2 days", ui_019:"2-4 days",
+      ui_020:"Other city", ui_021:"3-7 days", ui_022:"From 10 $",
+      ui_023:"Pay upon delivery", ui_024:"Please fill in all required fields",
+      ui_025:"No delivery", ui_026:"Other city", ui_027:"From 10 $",
+      ui_028:"Welcome, ", ui_029:"Profile cleared",
+      ui_030:"No orders yet.", ui_031:"Start shopping",
+      ui_032:"Order image", ui_033:"en-US", ui_034:"item",
+      ui_035:"Name", ui_036:"Phone", ui_037:"Address", ui_038:"City",
+      ui_039:"No saved address.",
+      ui_040:"Payments are processed via WhatsApp or cash on delivery.",
+      ui_041:"Search a product...",
+      ui_042:"No product matches your search.",
+      ui_043:"Address", ui_044:"Phone", ui_045:"Hours",
+      ui_046:"Behind every product is a passionate team, united by the same vision.",
+      ui_047:"Message sent, thank you!", ui_048:"Hours",
+      ui_049:"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!"
+    }
   }
 };
 function t(key){ return key.split('.').reduce((o,i)=>o&&o[i]!==undefined?o[i]:null, TR[LANG.current]) || key; }
@@ -369,7 +425,7 @@ function addToCart(id, qty=1){
   if(existing) existing.qty += qty; else cart.push({id, qty});
   saveCart();
   updateCartCount();
-  showToast("Ajouté au panier");
+  showToast(t('product.added'));
 }
 function removeFromCart(id){ cart = cart.filter(c=>c.id!==id); saveCart(); updateCartCount(); navigate(); }
 function changeQty(id, delta){
@@ -412,7 +468,7 @@ const TEAM = [
   { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'images/Janitor.webp' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
   { id:'elie', name:'Elie Binwa', role:'Sécurité', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", img:'team-elie' },
-  { id:'photo', name:'Photographe', role: LANG.current==='en'?'Coming soon':'À venir', bio:LANG.current==='en'?"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!":"Nous recrutons actuellement un photographe talentueux pour capturer l'essence de Malkia B. Si vous êtes passionné par la beauté et l'image, rejoignez-nous !", img:'team-photo' },
+  { id:'photo', name:'Photographe', role: t('ui_001'), bio:t('ui_049'), img:'team-photo' },
 ];
 
 function renderTeam(){
@@ -422,7 +478,7 @@ function renderTeam(){
     <div class="text-center mb-16">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4">${tm.title}</h1>
-      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto">Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme.</p>
+      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto">${t('team.desc')}</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
       ${TEAM.map((m,i)=>`
@@ -439,11 +495,11 @@ function renderTeam(){
 
 function renderTeamMember(id){
   const tm = t('team'), m = TEAM.find(t=>t.id===id);
-  if(!m) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('contact.form.name')!=='Full Name'?'Membre introuvable':'Member not found'}</h1><a href="#/team" class="inline-block mt-6 text-primary border-b border-primary/30">${t('contact.form.name')!=='Full Name'?'Retour à l\'équipe':'Back to team'}</a></div>`;
+  if(!m) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('account.not_found')}</h1><a href="#/team" class="inline-block mt-6 text-primary border-b border-primary/30">${t('account.back')}</a></div>`;
   const others = TEAM.filter(t=>t.id!==id).slice(0,4);
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
-    <a href="#/team" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('contact.form.name')!=='Full Name'?"Toute l'équipe":"All team"}</a>
+    <a href="#/team" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('account.all_team')}</a>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
       <div class="md:col-span-5">
         <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg">
@@ -466,8 +522,8 @@ function renderTeamMember(id){
     </div>
     <div class="mt-24">
       <div class="text-center mb-10">
-        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('contact.form.name')!=='Full Name'?'Découvrez aussi':'Also discover'}</span>
-        <h2 class="font-display text-2xl md:text-3xl">${t('contact.form.name')!=='Full Name'?'Les autres membres':'Other members'}</h2>
+        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
+        <h2 class="font-display text-2xl md:text-3xl">${t('account.members')}</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         ${others.map(m=>`
@@ -643,8 +699,8 @@ function renderNotFound(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24 text-center py-24">
     <h1 class="font-display text-6xl md:text-8xl text-primary mb-6">404</h1>
-    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${LANG.current==='en'?'Page not found. The page you are looking for does not exist or has been moved.':'Page non trouvée. La page que vous recherchez n\'existe pas ou a été déplacée.'}</p>
-    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${LANG.current==='en'?'Back to home':'Retour à l\'accueil'}</a>
+    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${t('ui_002')}</p>
+    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${t('ui_003')}</a>
   </div>`;
 }
 
@@ -756,7 +812,7 @@ function renderHome(){
 
 /* ===== CATEGORY ===== */
 function renderCategory(catKey){
-  const label = t('cat.'+catKey) || (CATS[catKey] || 'Boutique');
+  const label = t('cat.'+catKey) || (CATS[catKey] || t('product.shop'));
   const items = PRODUCTS.filter(p=>p.cat===catKey);
   const catHero = { body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }[catKey];
   return `
@@ -774,7 +830,7 @@ function renderCategory(catKey){
     <div class="mb-8 reveal">
       <div class="relative max-w-md mx-auto">
         <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
-        <input id="productSearch" type="text" placeholder="${LANG.current==='en'?'Search a product...':'Rechercher un produit...'}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
+        <input id="productSearch" type="text" placeholder="${t('ui_004')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
@@ -782,7 +838,7 @@ function renderCategory(catKey){
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
-      <p class="text-on-surface-variant">${LANG.current==='en'?'No product matches your search.':'Aucun produit ne correspond à votre recherche.'}</p>
+      <p class="text-on-surface-variant">${t('ui_005')}</p>
     </div>
   </div>
   `;
@@ -791,7 +847,7 @@ function renderCategory(catKey){
 /* ===== PRODUCT ===== */
 function renderProduct(id){
   const p = findProduct(id), pr = t('product');
-  if(!p) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${LANG.current==='en'?'Product not found':'Produit introuvable'}</h1></div>`;
+  if(!p) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('ui_006')}</h1></div>`;
   const related = PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
   const mainImg = (p.gallery && p.gallery[0]) || p.img || img(p.seed, 700, 875);
   const thumbs = p.gallery || (p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)]);
@@ -824,7 +880,7 @@ function renderProduct(id){
       </div>
       <div class="flex flex-col gap-4 mb-10">
         <button onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${pr.add}</button>
-        <a href="#/checkout" onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full text-center border border-primary text-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${LANG.current==='en'?'Buy Now':'Acheter Maintenant'}</a>
+        <a href="#/checkout" onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full text-center border border-primary text-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${t('ui_007')}</a>
       </div>
       <div id="tabContainer" class="flex justify-center gap-8 border-b border-outline-variant/20 mb-6">
         <button data-tab="desc" onclick="switchTab('desc')" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='desc'?'tab-active':'text-outline'}">${pr.desc}</button>
@@ -843,7 +899,7 @@ function renderProduct(id){
   <section class="px-5 md:px-margin-desktop pb-24">
     <div class="text-center mb-10">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
-      <h2 class="font-display text-2xl md:text-3xl">${LANG.current==='en'?'Complete Your Ritual':'Complétez Votre Rituel'}</h2>
+      <h2 class="font-display text-2xl md:text-3xl">${t('ui_008')}</h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">${related.map(p=>productCard(p)).join('')}</div>
   </section>
@@ -879,7 +935,7 @@ function renderCart(){
     return `<div class="px-5 text-center py-24">
       <span class="font-display text-4xl text-primary block mb-4">✦</span>
       <h1 class="font-display text-2xl mb-2">${ca.empty}</h1>
-      <p class="text-sm text-on-surface-variant mb-8">${LANG.current==='en'?'The art of sovereign beauty begins here.':"L'art de la beauté souveraine commence ici."}</p>
+      <p class="text-sm text-on-surface-variant mb-8">${t('ui_001')}</p>
       <a href="#/products" class="inline-block bg-primary text-on-primary px-10 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${ca.cta}</a>
     </div>`;
   }
@@ -888,7 +944,7 @@ function renderCart(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
-    <p class="text-sm text-on-surface-variant italic mb-12">${LANG.current==='en'?'The art of sovereign beauty begins here.':"L'art de la beauté souveraine commence ici."}</p>
+    <p class="text-sm text-on-surface-variant italic mb-12">${t('ui_002')}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-8">
         ${lines.map(l=>`
@@ -964,7 +1020,7 @@ function updateShipping(){
   const total = subtotal + s;
   const shipEl = document.getElementById('shipAmount');
   const totalEl = document.getElementById('totalAmount');
-  if(shipEl) shipEl.textContent = s === 0 ? 'Gratuite' : (isOther ? (LANG.current==='en'?'From 10 $':'À partir de 10 $') : fmt(s)+' $');
+  if(shipEl) shipEl.textContent = s === 0 ? t('cart.free') : (isOther ? (t('ui_009')) : fmt(s)+' $');
   if(totalEl) totalEl.textContent = fmt(total) + ' $';
 }
 
@@ -985,39 +1041,39 @@ function renderCheckout(){
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">01</span><h2 class="font-display text-xl">${co.info_title}</h2></div>
           <form id="checkoutForm" onsubmit="event.preventDefault()" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'First Name':'Prénom'}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'First Name':'Prénom'}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Last Name':'Nom'}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${LANG.current==='en'?'Last Name':'Nom'}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_010')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui_011')}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_012')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui_013')}"></div>
             <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.address}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.address}"></div>
             <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.city}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.city}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${LANG.current==='en'?'Phone':'Téléphone'}</label><input required type="tel" class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_014')}</label><input required type="tel" class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
           </form>
         </section>
         <section>
-          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${LANG.current==='en'?'Delivery':'Livraison'}</h2></div>
+          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${t('ui_015')}</h2></div>
           <div class="space-y-4">
-            <p class="text-sm text-on-surface-variant">${LANG.current==='en'?'Do you want delivery?':'Souhaitez-vous une livraison ?'}</p>
+            <p class="text-sm text-on-surface-variant">${t('ui_016')}</p>
             <div class="flex gap-4">
               <label onclick="toggleDelivery(true)" class="flex-1 flex items-center justify-center gap-3 p-5 border border-primary bg-surface-container-low cursor-pointer text-center">
-                <input type="radio" name="wantDelivery" value="yes" checked class="accent-primary"><span class="text-sm font-medium">Oui</span>
+                <input type="radio" name="wantDelivery" value="yes" checked class="accent-primary"><span class="text-sm font-medium">${t("account.yes")}</span>
               </label>
               <label onclick="toggleDelivery(false)" class="flex-1 flex items-center justify-center gap-3 p-5 border border-outline-variant/30 cursor-pointer text-center">
-                <input type="radio" name="wantDelivery" value="no" class="accent-primary"><span class="text-sm font-medium">Non</span>
+                <input type="radio" name="wantDelivery" value="no" class="accent-primary"><span class="text-sm font-medium">${t("account.no")}</span>
               </label>
             </div>
             <div id="deliveryCity">
-              <p class="text-sm text-on-surface-variant mb-3">${LANG.current==='en'?'Delivery city:':'Ville de livraison :'}</p>
+              <p class="text-sm text-on-surface-variant mb-3">${t('ui_017')}</p>
               <div class="space-y-2">
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-primary bg-surface-container-low cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="bukavu" checked class="accent-primary"><div><p class="text-sm font-medium">Bukavu</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'1-2 days':'1-2 jours'}</p></div></div>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="bukavu" checked class="accent-primary"><div><p class="text-sm font-medium">Bukavu</p><p class="text-xs text-on-surface-variant">${t('ui_018')}</p></div></div>
                   <span class="text-sm font-medium">1 $</span>
                 </label>
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="goma" class="accent-primary"><div><p class="text-sm font-medium">Goma</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'2-4 days':'2-4 jours'}</p></div></div>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="goma" class="accent-primary"><div><p class="text-sm font-medium">Goma</p><p class="text-xs text-on-surface-variant">${t('ui_019')}</p></div></div>
                   <span class="text-sm font-medium">5 $</span>
                 </label>
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${LANG.current==='en'?'Other city':'Autre ville'}</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'3-7 days':'3-7 jours'}</p></div></div>
-                  <span class="text-sm font-medium">${LANG.current==='en'?'From 10 $':'À partir de 10 $'}</span>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${t('ui_020')}</p><p class="text-xs text-on-surface-variant">${t('ui_021')}</p></div></div>
+                  <span class="text-sm font-medium">${t('ui_022')}</span>
                 </label>
               </div>
             </div>
@@ -1071,7 +1127,7 @@ function renderCheckout(){
             </div>
             <div id="pay-cod" class="flex items-center gap-3 py-2 hidden">
               <span class="material-symbols-outlined text-primary text-base">payments</span>
-              <div><p class="font-medium text-sm">${co.cod}</p><p class="text-xs text-on-surface-variant">${LANG.current==='en'?'Pay upon delivery':'Paiement à la réception'}</p></div>
+              <div><p class="font-medium text-sm">${co.cod}</p><p class="text-xs text-on-surface-variant">${t('ui_023')}</p></div>
             </div>
           </div>
         </section>
@@ -1111,19 +1167,19 @@ function switchPay(el, key){
 
 function confirmOrder(){
   const inputs = document.querySelectorAll('.lg\\:col-span-7 input[required]');
-  for(const inp of inputs){ if(!inp.value.trim()){ inp.focus(); showToast(LANG.current==='en'?'Please fill in all required fields':'Veuillez remplir tous les champs obligatoires'); return; } }
+  for(const inp of inputs){ if(!inp.value.trim()){ inp.focus(); showToast(t('ui_024')); return; } }
   const firstName = inputs[0]?.value?.trim() || '';
   const lastName = inputs[1]?.value?.trim() || '';
   const address = inputs[2]?.value?.trim() || '';
   const city = inputs[3]?.value?.trim() || '';
   const phone = inputs[4]?.value?.trim() || '';
   const wantDelivery = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
-  let shipping = 0, deliveryLabel = LANG.current==='en'?'No delivery':'Pas de livraison', isOther = false;
+  let shipping = 0, deliveryLabel = t('ui_025'), isOther = false;
   if(wantDelivery){
     const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
     if(dc==='bukavu'){ shipping = 1; deliveryLabel = 'Bukavu'; }
     else if(dc==='goma'){ shipping = 5; deliveryLabel = 'Goma'; }
-    else { shipping = 10; deliveryLabel = LANG.current==='en'?'Other city':'Autre ville'; isOther = true; }
+    else { shipping = 10; deliveryLabel = t('ui_026'); isOther = true; }
   }
   const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
   const fullName = firstName + ' ' + lastName;
@@ -1134,7 +1190,7 @@ function confirmOrder(){
   const profile = { firstName, lastName, phone, address, city };
   const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery:deliveryLabel, payment:payLabel, name:fullName };
   const msg = LANG.current==='en'
-    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(LANG.current==='en'?'From 10 $':'À partir de 10 $'):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
+    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(t('ui_027')):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
     : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${isOther?'À partir de 10 $':(shipping===0?'Gratuite':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`;
   const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
   const saved = lsGet('malkia_orders', []);
@@ -1155,22 +1211,22 @@ function renderAccount(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
-    <p class="text-sm text-on-surface-variant mb-12">${LANG.current==='en'?'Welcome, ':'Bienvenue, '}${name}</p>
+    <p class="text-sm text-on-surface-variant mb-12">${t('ui_028')}${name}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <aside class="lg:col-span-3 space-y-2">
         <button onclick="switchAccount('orders')" id="tab-orders" class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
           <span class="material-symbols-outlined">shopping_bag</span><span class="text-sm">${ac.orders}</span>
         </button>
         <button onclick="switchAccount('info')" id="tab-info" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
-          <span class="material-symbols-outlined">person</span><span class="text-sm">Informations</span>
+          <span class="material-symbols-outlined">person</span><span class="text-sm">${t("account.info")}</span>
         </button>
         <button onclick="switchAccount('addresses')" id="tab-addresses" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
-          <span class="material-symbols-outlined">location_on</span><span class="text-sm">Adresses</span>
+          <span class="material-symbols-outlined">location_on</span><span class="text-sm">${t("account.addresses")}</span>
         </button>
         <button onclick="switchAccount('payments')" id="tab-payments" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
-          <span class="material-symbols-outlined">credit_card</span><span class="text-sm">Paiements</span>
+          <span class="material-symbols-outlined">credit_card</span><span class="text-sm">${t("account.payments")}</span>
         </button>
-        <button onclick="lsSet('malkia_profile',{});lsSet('malkia_orders',[]);showToast('${LANG.current==='en'?'Profile cleared':'Profil effacé'}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
+        <button onclick="lsSet('malkia_profile',{});lsSet('malkia_orders',[]);showToast('${t('ui_029')}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
       </aside>
       <div id="accountContent" class="lg:col-span-9 space-y-8">
         ${renderAccountSection('orders', orders, profile)}
@@ -1183,14 +1239,14 @@ function renderAccount(){
 function renderAccountSection(section, orders, profile){
   const ac = t('account');
   if(section==='orders'){
-    if(orders.length===0) return `<div class="text-center py-16"><span class="material-symbols-outlined text-4xl text-outline mb-4 block">shopping_bag</span><p class="text-on-surface-variant">${LANG.current==='en'?'No orders yet.':'Aucune commande pour le moment.'}</p><a href="#/products" class="inline-block mt-6 text-primary border-b border-primary/30 text-sm">${LANG.current==='en'?'Start shopping':'Commencer vos achats'}</a></div>`;
+    if(orders.length===0) return `<div class="text-center py-16"><span class="material-symbols-outlined text-4xl text-outline mb-4 block">shopping_bag</span><p class="text-on-surface-variant">${t('ui_030')}</p><a href="#/products" class="inline-block mt-6 text-primary border-b border-primary/30 text-sm">${t('ui_031')}</a></div>`;
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.orders}</h2>
     ${orders.map((o,i)=>`
     <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
       <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${LANG.current==='en'?'Order image':'Image commande'}"></div>
-        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(LANG.current==='en'?'en-US':'fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${LANG.current==='en'?'item':'article'}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui_032')}"></div>
+        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${t('ui_034')}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
       </div>
       <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
     </div>
@@ -1201,26 +1257,26 @@ function renderAccountSection(section, orders, profile){
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.info}</h2>
     <div class="border border-outline-variant/10 p-6 space-y-2 text-sm">
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Name':'Nom'}</span><span class="font-medium">${(profile.firstName||'—') + ' ' + (profile.lastName||'')}</span></div>
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Phone':'Téléphone'}</span><span class="font-medium">${profile.phone||'—'}</span></div>
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${LANG.current==='en'?'Address':'Adresse'}</span><span class="font-medium">${profile.address||'—'}</span></div>
-      <div class="flex items-center justify-between py-2"><span class="text-on-surface-variant">${LANG.current==='en'?'City':'Ville'}</span><span class="font-medium">${profile.city||'—'}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_035')}</span><span class="font-medium">${(profile.firstName||'—') + ' ' + (profile.lastName||'')}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_036')}</span><span class="font-medium">${profile.phone||'—'}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_037')}</span><span class="font-medium">${profile.address||'—'}</span></div>
+      <div class="flex items-center justify-between py-2"><span class="text-on-surface-variant">${t('ui_038')}</span><span class="font-medium">${profile.city||'—'}</span></div>
     </div>
     `;
   }
   if(section==='addresses'){
     return `
-    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">Adresses</h2>
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${t("account.addresses")}</h2>
     <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
-      <p>${profile.address ? profile.address + ', ' + profile.city : LANG.current==='en'?'No saved address.':'Aucune adresse enregistrée.'}</p>
+      <p>${profile.address ? profile.address + ', ' + profile.city : t('ui_039')}</p>
     </div>
     `;
   }
   if(section==='payments'){
     return `
-    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">Paiements</h2>
+    <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${t("account.payments")}</h2>
     <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
-      <p>${LANG.current==='en'?'Payments are processed via WhatsApp or cash on delivery.':'Les paiements sont traités via WhatsApp ou à la livraison.'}</p>
+      <p>${t('ui_040')}</p>
     </div>
     `;
   }
@@ -1259,7 +1315,7 @@ function renderProducts(cat){
     <div class="mb-8 reveal">
       <div class="relative max-w-md">
         <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
-        <input id="productSearch" type="text" placeholder="${LANG.current==='en'?'Search a product...':'Rechercher un produit...'}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
+        <input id="productSearch" type="text" placeholder="${t('ui_041')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
@@ -1267,7 +1323,7 @@ function renderProducts(cat){
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
-      <p class="text-on-surface-variant">${LANG.current==='en'?'No product matches your search.':'Aucun produit ne correspond à votre recherche.'}</p>
+      <p class="text-on-surface-variant">${t('ui_042')}</p>
     </div>
   </div>`;
 }
@@ -1314,15 +1370,15 @@ function shopCard(key){
       <div class="space-y-4 mb-8">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">location_on</span></div>
-          <div><p class="text-sm font-semibold">${LANG.current==='en'?'Address':'Adresse'}</p><p class="text-sm text-on-surface-variant">${s.addr}</p></div>
+          <div><p class="text-sm font-semibold">${t('ui_043')}</p><p class="text-sm text-on-surface-variant">${s.addr}</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">call</span></div>
-          <div><p class="text-sm font-semibold">${LANG.current==='en'?'Phone':'Téléphone'}</p><a href="tel:${s.phone.replace(/[^0-9+]/g,'')}" class="text-sm text-on-surface-variant hover:text-primary transition-colors">${s.phone}</a></div>
+          <div><p class="text-sm font-semibold">${t('ui_044')}</p><a href="tel:${s.phone.replace(/[^0-9+]/g,'')}" class="text-sm text-on-surface-variant hover:text-primary transition-colors">${s.phone}</a></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">schedule</span></div>
-          <div><p class="text-sm font-semibold">${LANG.current==='en'?'Hours':'Horaires'}</p><p class="text-sm text-on-surface-variant">${s.hours}</p></div>
+          <div><p class="text-sm font-semibold">${t('ui_045')}</p><p class="text-sm text-on-surface-variant">${s.hours}</p></div>
         </div>
       </div>
       <div class="flex flex-col gap-3">
@@ -1346,7 +1402,7 @@ function renderShops(){
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
         <h2 class="font-display text-2xl md:text-4xl">${tm.title}</h2>
-        <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto mt-4">${LANG.current==='en'?'Behind every product is a passionate team, united by the same vision.':'Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme.'}</p>
+        <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto mt-4">${t('ui_046')}</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
         ${TEAM.map((m,i)=>`
@@ -1374,7 +1430,7 @@ function contactWhatsApp(form){
     : `*Contact — Malkia B Cosmetics*\n\n*Nom:* ${n}\n*Email:* ${e}\n*Sujet:* ${s||'-'}\n*Message:* ${m}`;
   window.open(`https://wa.me/243995945889?text=${encodeURIComponent(msg)}`,'_blank');
   const sent = document.getElementById('toast');
-  if(sent) showToast(LANG.current==='en'?'Message sent, thank you!':'Message envoyé, merci !');
+  if(sent) showToast(t('ui_047'));
 }
 function renderContact(){
   const c = t('contact'), f = c.form;
@@ -1414,7 +1470,7 @@ function renderContact(){
           </div>
         </div>
         <div>
-          <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${LANG.current==='en'?'Hours':'Horaires'}</h3>
+          <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${t('ui_048')}</h3>
           <p class="text-sm text-on-surface-variant">${c.hours}</p>
         </div>
         <div class="flex flex-col gap-3">
