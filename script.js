@@ -468,7 +468,7 @@ const TEAM = [
   { id:'esther', name:'Esther Birindwa', role:'Janitor', roleEn:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", bioEn:"Esther ensures every Malkia B space is spotless. Her discreet yet essential work guarantees an exceptional environment for our clients and teams.", img:'images/Janitor.webp' },
   { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', roleEn:'Security', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilant et bienveillant, il accueille chaque visiteur avec professionnalisme.", bioEn:"Guillaine ensures the security and serenity of our boutiques. Vigilant and caring, he welcomes every visitor with professionalism.", img:'team-guillaine' },
   { id:'elie', name:'Elie Binwa', role:'Sécurité', roleEn:'Security', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", bioEn:"Elie is the guarantor of tranquility in our spaces. His seriousness and availability make him an essential member of the Malkia B family.", img:'team-elie' },
-  { id:'photo', name:'Photographer', roleEn:'Coming soon', role: t('ui_001'), bio:t('ui_049'), bioEn:"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!", img:'team-photo' },
+  { id:'photo', name:'Photographer', roleEn:'Coming soon', role: t('ui.ui_001'), bio:t('ui.ui_049'), bioEn:"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!", img:'team-photo' },
 ];
 
 function renderTeam(){
@@ -699,8 +699,8 @@ function renderNotFound(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24 text-center py-24">
     <h1 class="font-display text-6xl md:text-8xl text-primary mb-6">404</h1>
-    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${t('ui_002')}</p>
-    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${t('ui_003')}</a>
+    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${t('ui.ui_002')}</p>
+    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${t('ui.ui_003')}</a>
   </div>`;
 }
 
@@ -830,7 +830,7 @@ function renderCategory(catKey){
     <div class="mb-8 reveal">
       <div class="relative max-w-md mx-auto">
         <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
-        <input id="productSearch" type="text" placeholder="${t('ui_004')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
+        <input id="productSearch" type="text" placeholder="${t('ui.ui_004')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
@@ -838,7 +838,7 @@ function renderCategory(catKey){
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
-      <p class="text-on-surface-variant">${t('ui_005')}</p>
+      <p class="text-on-surface-variant">${t('ui.ui_005')}</p>
     </div>
   </div>
   `;
@@ -847,7 +847,7 @@ function renderCategory(catKey){
 /* ===== PRODUCT ===== */
 function renderProduct(id){
   const p = findProduct(id), pr = t('product');
-  if(!p) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('ui_006')}</h1></div>`;
+  if(!p) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('ui.ui_006')}</h1></div>`;
   const related = PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
   const mainImg = (p.gallery && p.gallery[0]) || p.img || img(p.seed, 700, 875);
   const thumbs = p.gallery || (p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)]);
@@ -880,7 +880,7 @@ function renderProduct(id){
       </div>
       <div class="flex flex-col gap-4 mb-10">
         <button onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${pr.add}</button>
-        <a href="#/checkout" onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full text-center border border-primary text-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${t('ui_007')}</a>
+        <a href="#/checkout" onclick="addToCart('${p.id}', parseInt(document.getElementById('qtyVal').textContent))" class="w-full text-center border border-primary text-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${t('ui.ui_007')}</a>
       </div>
       <div id="tabContainer" class="flex justify-center gap-8 border-b border-outline-variant/20 mb-6">
         <button data-tab="desc" onclick="switchTab('desc')" class="pb-3 text-[12px] uppercase tracking-widest ${activeTab==='desc'?'tab-active':'text-outline'}">${pr.desc}</button>
@@ -899,7 +899,7 @@ function renderProduct(id){
   <section class="px-5 md:px-margin-desktop pb-24">
     <div class="text-center mb-10">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
-      <h2 class="font-display text-2xl md:text-3xl">${t('ui_008')}</h2>
+      <h2 class="font-display text-2xl md:text-3xl">${t('ui.ui_008')}</h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">${related.map(p=>productCard(p)).join('')}</div>
   </section>
@@ -935,7 +935,7 @@ function renderCart(){
     return `<div class="px-5 text-center py-24">
       <span class="font-display text-4xl text-primary block mb-4">✦</span>
       <h1 class="font-display text-2xl mb-2">${ca.empty}</h1>
-      <p class="text-sm text-on-surface-variant mb-8">${t('ui_001')}</p>
+      <p class="text-sm text-on-surface-variant mb-8">${t('ui.ui_001')}</p>
       <a href="#/products" class="inline-block bg-primary text-on-primary px-10 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${ca.cta}</a>
     </div>`;
   }
@@ -944,7 +944,7 @@ function renderCart(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
-    <p class="text-sm text-on-surface-variant italic mb-12">${t('ui_002')}</p>
+    <p class="text-sm text-on-surface-variant italic mb-12">${t('ui.ui_002')}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-8">
         ${lines.map(l=>`
@@ -1020,7 +1020,7 @@ function updateShipping(){
   const total = subtotal + s;
   const shipEl = document.getElementById('shipAmount');
   const totalEl = document.getElementById('totalAmount');
-  if(shipEl) shipEl.textContent = s === 0 ? t('cart.free') : (isOther ? (t('ui_009')) : fmt(s)+' $');
+  if(shipEl) shipEl.textContent = s === 0 ? t('cart.free') : (isOther ? (t('ui.ui_009')) : fmt(s)+' $');
   if(totalEl) totalEl.textContent = fmt(total) + ' $';
 }
 
@@ -1041,17 +1041,17 @@ function renderCheckout(){
         <section>
           <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">01</span><h2 class="font-display text-xl">${co.info_title}</h2></div>
           <form id="checkoutForm" onsubmit="event.preventDefault()" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_010')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui_011')}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_012')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui_013')}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui.ui_010')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui.ui_011')}"></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui.ui_012')}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${t('ui.ui_013')}"></div>
             <div class="md:col-span-2"><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.address}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.address}"></div>
             <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${co.city}</label><input required class="underline-input w-full py-2 text-sm" placeholder="${co.city}"></div>
-            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui_014')}</label><input required type="tel" class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
+            <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${t('ui.ui_014')}</label><input required type="tel" class="underline-input w-full py-2 text-sm" placeholder="+243 ..."></div>
           </form>
         </section>
         <section>
-          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${t('ui_015')}</h2></div>
+          <div class="flex items-center gap-4 mb-8"><span class="font-display text-xl text-primary">02</span><h2 class="font-display text-xl">${t('ui.ui_015')}</h2></div>
           <div class="space-y-4">
-            <p class="text-sm text-on-surface-variant">${t('ui_016')}</p>
+            <p class="text-sm text-on-surface-variant">${t('ui.ui_016')}</p>
             <div class="flex gap-4">
               <label onclick="toggleDelivery(true)" class="flex-1 flex items-center justify-center gap-3 p-5 border border-primary bg-surface-container-low cursor-pointer text-center">
                 <input type="radio" name="wantDelivery" value="yes" checked class="accent-primary"><span class="text-sm font-medium">${t("account.yes")}</span>
@@ -1061,19 +1061,19 @@ function renderCheckout(){
               </label>
             </div>
             <div id="deliveryCity">
-              <p class="text-sm text-on-surface-variant mb-3">${t('ui_017')}</p>
+              <p class="text-sm text-on-surface-variant mb-3">${t('ui.ui_017')}</p>
               <div class="space-y-2">
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-primary bg-surface-container-low cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="bukavu" checked class="accent-primary"><div><p class="text-sm font-medium">Bukavu</p><p class="text-xs text-on-surface-variant">${t('ui_018')}</p></div></div>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="bukavu" checked class="accent-primary"><div><p class="text-sm font-medium">Bukavu</p><p class="text-xs text-on-surface-variant">${t('ui.ui_018')}</p></div></div>
                   <span class="text-sm font-medium">1 $</span>
                 </label>
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="goma" class="accent-primary"><div><p class="text-sm font-medium">Goma</p><p class="text-xs text-on-surface-variant">${t('ui_019')}</p></div></div>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="goma" class="accent-primary"><div><p class="text-sm font-medium">Goma</p><p class="text-xs text-on-surface-variant">${t('ui.ui_019')}</p></div></div>
                   <span class="text-sm font-medium">5 $</span>
                 </label>
                 <label onclick="updateShipping()" class="flex items-center justify-between p-4 border border-outline-variant/30 cursor-pointer">
-                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${t('ui_020')}</p><p class="text-xs text-on-surface-variant">${t('ui_021')}</p></div></div>
-                  <span class="text-sm font-medium">${t('ui_022')}</span>
+                  <div class="flex items-center gap-4"><input type="radio" name="deliveryCity" value="other" class="accent-primary"><div><p class="text-sm font-medium">${t('ui.ui_020')}</p><p class="text-xs text-on-surface-variant">${t('ui.ui_021')}</p></div></div>
+                  <span class="text-sm font-medium">${t('ui.ui_022')}</span>
                 </label>
               </div>
             </div>
@@ -1127,7 +1127,7 @@ function renderCheckout(){
             </div>
             <div id="pay-cod" class="flex items-center gap-3 py-2 hidden">
               <span class="material-symbols-outlined text-primary text-base">payments</span>
-              <div><p class="font-medium text-sm">${co.cod}</p><p class="text-xs text-on-surface-variant">${t('ui_023')}</p></div>
+              <div><p class="font-medium text-sm">${co.cod}</p><p class="text-xs text-on-surface-variant">${t('ui.ui_023')}</p></div>
             </div>
           </div>
         </section>
@@ -1167,19 +1167,19 @@ function switchPay(el, key){
 
 function confirmOrder(){
   const inputs = document.querySelectorAll('.lg\\:col-span-7 input[required]');
-  for(const inp of inputs){ if(!inp.value.trim()){ inp.focus(); showToast(t('ui_024')); return; } }
+  for(const inp of inputs){ if(!inp.value.trim()){ inp.focus(); showToast(t('ui.ui_024')); return; } }
   const firstName = inputs[0]?.value?.trim() || '';
   const lastName = inputs[1]?.value?.trim() || '';
   const address = inputs[2]?.value?.trim() || '';
   const city = inputs[3]?.value?.trim() || '';
   const phone = inputs[4]?.value?.trim() || '';
   const wantDelivery = document.querySelector('input[name="wantDelivery"]:checked')?.value === 'yes';
-  let shipping = 0, deliveryLabel = t('ui_025'), isOther = false;
+  let shipping = 0, deliveryLabel = t('ui.ui_025'), isOther = false;
   if(wantDelivery){
     const dc = document.querySelector('input[name="deliveryCity"]:checked')?.value || 'other';
     if(dc==='bukavu'){ shipping = 1; deliveryLabel = 'Bukavu'; }
     else if(dc==='goma'){ shipping = 5; deliveryLabel = 'Goma'; }
-    else { shipping = 10; deliveryLabel = t('ui_026'); isOther = true; }
+    else { shipping = 10; deliveryLabel = t('ui.ui_026'); isOther = true; }
   }
   const payLabel = document.querySelector('input[name="pay"]:checked')?.closest('label')?.querySelector('span.text-\\[11px\\].uppercase')?.textContent?.trim() || '';
   const fullName = firstName + ' ' + lastName;
@@ -1190,7 +1190,7 @@ function confirmOrder(){
   const profile = { firstName, lastName, phone, address, city };
   const order = { id:'MB-'+Date.now().toString(36).toUpperCase(), date:new Date().toISOString(), items:lines, subtotal, shipping, total, delivery:deliveryLabel, payment:payLabel, name:fullName };
   const msg = LANG.current==='en'
-    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(t('ui_027')):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
+    ? `*NEW ORDER — Malkia B Cosmetics*\n*Order:* ${order.id}\n\n*Customer:* ${fullName}\n*Phone:* ${phone}\n*Address:* ${address}, ${city}\n*Delivery:* ${deliveryLabel}\n*Payment:* ${payLabel}\n\n*Order:*\n${orderLines}\n\n*Subtotal:* ${fmt(subtotal)}$\n*Shipping:* ${isOther?(t('ui.ui_027')):(shipping===0?'Free':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`
     : `*NOUVELLE COMMANDE — Malkia B Cosmetics*\n*Commande:* ${order.id}\n\n*Client:* ${fullName}\n*Téléphone:* ${phone}\n*Adresse:* ${address}, ${city}\n*Livraison:* ${deliveryLabel}\n*Paiement:* ${payLabel}\n\n*Commande:*\n${orderLines}\n\n*Sous-total:* ${fmt(subtotal)}$\n*Livraison:* ${isOther?'À partir de 10 $':(shipping===0?'Gratuite':fmt(shipping)+'$')}\n*Total:* ${fmt(total)}$`;
   const wa = `https://wa.me/243995945889?text=${encodeURIComponent(msg)}`;
   const saved = lsGet('malkia_orders', []);
@@ -1211,7 +1211,7 @@ function renderAccount(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
-    <p class="text-sm text-on-surface-variant mb-12">${t('ui_028')}${name}</p>
+    <p class="text-sm text-on-surface-variant mb-12">${t('ui.ui_028')}${name}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <aside class="lg:col-span-3 space-y-2">
         <button onclick="switchAccount('orders')" id="tab-orders" class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
@@ -1226,7 +1226,7 @@ function renderAccount(){
         <button onclick="switchAccount('payments')" id="tab-payments" class="w-full flex items-center gap-4 py-3 px-4 text-on-surface-variant hover:bg-surface-container-low">
           <span class="material-symbols-outlined">credit_card</span><span class="text-sm">${t("account.payments")}</span>
         </button>
-        <button onclick="lsSet('malkia_profile',{});lsSet('malkia_orders',[]);showToast('${t('ui_029')}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
+        <button onclick="lsSet('malkia_profile',{});lsSet('malkia_orders',[]);showToast('${t('ui.ui_029')}');navigate();" class="w-full py-4 mt-6 border border-primary text-primary text-[11px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">${ac.logout}</button>
       </aside>
       <div id="accountContent" class="lg:col-span-9 space-y-8">
         ${renderAccountSection('orders', orders, profile)}
@@ -1239,14 +1239,14 @@ function renderAccount(){
 function renderAccountSection(section, orders, profile){
   const ac = t('account');
   if(section==='orders'){
-    if(orders.length===0) return `<div class="text-center py-16"><span class="material-symbols-outlined text-4xl text-outline mb-4 block">shopping_bag</span><p class="text-on-surface-variant">${t('ui_030')}</p><a href="#/products" class="inline-block mt-6 text-primary border-b border-primary/30 text-sm">${t('ui_031')}</a></div>`;
+    if(orders.length===0) return `<div class="text-center py-16"><span class="material-symbols-outlined text-4xl text-outline mb-4 block">shopping_bag</span><p class="text-on-surface-variant">${t('ui.ui_030')}</p><a href="#/products" class="inline-block mt-6 text-primary border-b border-primary/30 text-sm">${t('ui.ui_031')}</a></div>`;
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.orders}</h2>
     ${orders.map((o,i)=>`
     <div class="border border-outline-variant/10 p-6 flex items-center justify-between flex-wrap gap-4">
       <div class="flex gap-6 items-center">
-        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui_032')}"></div>
-        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${t('ui_034')}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
+        <div class="w-20 h-20 bg-surface-container-low overflow-hidden"><img loading="lazy" src="${img('malkia-order'+(i+1),200,200)}" class="w-full h-full object-cover" alt="${t('ui.ui_032')}"></div>
+        <div><p class="text-[11px] text-primary uppercase mb-1">${new Date(o.date).toLocaleDateString(t('ui.ui_033'), {year:'numeric',month:'long',day:'numeric'})}</p><h3 class="font-display text-base">${o.id}</h3><p class="text-sm text-on-surface-variant">${o.items.length} ${t('ui.ui_034')}${o.items.length>1?'s':''} • ${fmt(o.total)}$</p></div>
       </div>
       <span class="text-[11px] border border-primary text-primary px-4 py-2 uppercase tracking-widest">${ac.delivered}</span>
     </div>
@@ -1257,10 +1257,10 @@ function renderAccountSection(section, orders, profile){
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${ac.info}</h2>
     <div class="border border-outline-variant/10 p-6 space-y-2 text-sm">
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_035')}</span><span class="font-medium">${(profile.firstName||'—') + ' ' + (profile.lastName||'')}</span></div>
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_036')}</span><span class="font-medium">${profile.phone||'—'}</span></div>
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui_037')}</span><span class="font-medium">${profile.address||'—'}</span></div>
-      <div class="flex items-center justify-between py-2"><span class="text-on-surface-variant">${t('ui_038')}</span><span class="font-medium">${profile.city||'—'}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui.ui_035')}</span><span class="font-medium">${(profile.firstName||'—') + ' ' + (profile.lastName||'')}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui.ui_036')}</span><span class="font-medium">${profile.phone||'—'}</span></div>
+      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10"><span class="text-on-surface-variant">${t('ui.ui_037')}</span><span class="font-medium">${profile.address||'—'}</span></div>
+      <div class="flex items-center justify-between py-2"><span class="text-on-surface-variant">${t('ui.ui_038')}</span><span class="font-medium">${profile.city||'—'}</span></div>
     </div>
     `;
   }
@@ -1268,7 +1268,7 @@ function renderAccountSection(section, orders, profile){
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${t("account.addresses")}</h2>
     <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
-      <p>${profile.address ? profile.address + ', ' + profile.city : t('ui_039')}</p>
+      <p>${profile.address ? profile.address + ', ' + profile.city : t('ui.ui_039')}</p>
     </div>
     `;
   }
@@ -1276,7 +1276,7 @@ function renderAccountSection(section, orders, profile){
     return `
     <h2 class="font-display text-xl border-b border-outline-variant/20 pb-4">${t("account.payments")}</h2>
     <div class="border border-outline-variant/10 p-6 text-sm text-on-surface-variant">
-      <p>${t('ui_040')}</p>
+      <p>${t('ui.ui_040')}</p>
     </div>
     `;
   }
@@ -1315,7 +1315,7 @@ function renderProducts(cat){
     <div class="mb-8 reveal">
       <div class="relative max-w-md">
         <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
-        <input id="productSearch" type="text" placeholder="${t('ui_041')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
+        <input id="productSearch" type="text" placeholder="${t('ui.ui_041')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
@@ -1323,7 +1323,7 @@ function renderProducts(cat){
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
-      <p class="text-on-surface-variant">${t('ui_042')}</p>
+      <p class="text-on-surface-variant">${t('ui.ui_042')}</p>
     </div>
   </div>`;
 }
@@ -1370,15 +1370,15 @@ function shopCard(key){
       <div class="space-y-4 mb-8">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">location_on</span></div>
-          <div><p class="text-sm font-semibold">${t('ui_043')}</p><p class="text-sm text-on-surface-variant">${s.addr}</p></div>
+          <div><p class="text-sm font-semibold">${t('ui.ui_043')}</p><p class="text-sm text-on-surface-variant">${s.addr}</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">call</span></div>
-          <div><p class="text-sm font-semibold">${t('ui_044')}</p><a href="tel:${s.phone.replace(/[^0-9+]/g,'')}" class="text-sm text-on-surface-variant hover:text-primary transition-colors">${s.phone}</a></div>
+          <div><p class="text-sm font-semibold">${t('ui.ui_044')}</p><a href="tel:${s.phone.replace(/[^0-9+]/g,'')}" class="text-sm text-on-surface-variant hover:text-primary transition-colors">${s.phone}</a></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-base">schedule</span></div>
-          <div><p class="text-sm font-semibold">${t('ui_045')}</p><p class="text-sm text-on-surface-variant">${s.hours}</p></div>
+          <div><p class="text-sm font-semibold">${t('ui.ui_045')}</p><p class="text-sm text-on-surface-variant">${s.hours}</p></div>
         </div>
       </div>
       <div class="flex flex-col gap-3">
@@ -1402,7 +1402,7 @@ function renderShops(){
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
         <h2 class="font-display text-2xl md:text-4xl">${tm.title}</h2>
-        <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto mt-4">${t('ui_046')}</p>
+        <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto mt-4">${t('ui.ui_046')}</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
         ${TEAM.map((m,i)=>`
@@ -1430,7 +1430,7 @@ function contactWhatsApp(form){
     : `*Contact — Malkia B Cosmetics*\n\n*Nom:* ${n}\n*Email:* ${e}\n*Sujet:* ${s||'-'}\n*Message:* ${m}`;
   window.open(`https://wa.me/243995945889?text=${encodeURIComponent(msg)}`,'_blank');
   const sent = document.getElementById('toast');
-  if(sent) showToast(t('ui_047'));
+  if(sent) showToast(t('ui.ui_047'));
 }
 function renderContact(){
   const c = t('contact'), f = c.form;
@@ -1470,7 +1470,7 @@ function renderContact(){
           </div>
         </div>
         <div>
-          <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${t('ui_048')}</h3>
+          <h3 class="font-display text-lg border-b border-outline-variant/20 pb-3 mb-4">${t('ui.ui_048')}</h3>
           <p class="text-sm text-on-surface-variant">${c.hours}</p>
         </div>
         <div class="flex flex-col gap-3">
