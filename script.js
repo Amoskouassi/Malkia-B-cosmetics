@@ -85,7 +85,7 @@ const TR = {
       also:"Découvrez aussi", members:"Les autres membres", not_found:"Membre introuvable", back:"Retour à l'équipe",
       all_team:"Toute l'équipe", team_sub:"Notre équipe",
       yes:"Oui", no:"Non", addresses:"Adresses", payments:"Paiements" },
-    team: { boss:"Fondatrice & Directrice Artistique", emp:"Spécialiste Beauté",
+    team: { boss:"Fondatrice & Directrice Artistique", ceo:"CEO & Fondateur", emp:"Spécialiste Beauté",
       desc:"Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme." },
     new_arrivals:"Nouveautés", view_all:"Voir tout", categories:"Nos Catégories",
     ui:{
@@ -183,7 +183,7 @@ const TR = {
       also:"Also discover", members:"Other members", not_found:"Member not found", back:"Back to team",
       all_team:"All team", team_sub:"Our team",
       yes:"Yes", no:"No", addresses:"Addresses", payments:"Payments" },
-    team: { boss:"Founder & Art Director", emp:"Beauty Specialist",
+    team: { boss:"Founder & Art Director", ceo:"CEO & Founder", emp:"Beauty Specialist",
       desc:"Behind every product is a passionate team, united by the same vision: revealing the sovereign in every woman." },
     new_arrivals:"New Arrivals", view_all:"View All", categories:"Our Categories",
     ui:{
@@ -459,16 +459,16 @@ function toggleMobileMenu(){
 
 /* ===== TEAM ===== */
 const TEAM = [
-  { id:'hamin', name:'Hamin Banga', role:'CEO & Fondateur', roleKey:'', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", img:'images/CEO.webp' },
-  { id:'samuel', name:'Samuel Buhendwa', role:'Sales & Marketing', bio:"Samuel est le moteur commercial de Malkia B. Stratège dans l'âme, il développe les marchés et fidélise une clientèle exigeante grâce à un accompagnement personnalisé.", img:'images/samuel.webp' },
-  { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", img:'images/Wema.webp' },
-  { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionnée par la cosmétique, elle met son sens du service au service de l'expérience Malkia B.", img:'images/Fadhili.webp' },
-  { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", img:'images/Wani Julia.webp' },
-  { id:'narcisse', name:'Narcisse Baderhe', role:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", img:'images/Narcisse-Baderhe.webp' },
-  { id:'esther', name:'Esther Birindwa', role:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", img:'images/Janitor.webp' },
-  { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", img:'team-guillaine' },
-  { id:'elie', name:'Elie Binwa', role:'Sécurité', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", img:'team-elie' },
-  { id:'photo', name:'Photographe', role: t('ui_001'), bio:t('ui_049'), img:'team-photo' },
+  { id:'hamin', name:'Hamin Banga', role:'CEO & Fondateur', roleEn:'CEO & Founder', roleKey:'ceo', bio:"Visionnaire et fondateur de Malkia B Cosmetics, Hamin incarne l'ambition de rendre la beauté premium accessible à toutes. Sous sa direction, la marque rayonne depuis Bukavu et Kigali vers le monde.", bioEn:"Visionary and founder of Malkia B Cosmetics, Hamin embodies the ambition to make premium beauty accessible to all. Under his leadership, the brand shines from Bukavu and Kigali to the world.", img:'images/CEO.webp' },
+  { id:'samuel', name:'Samuel Buhendwa', role:'Sales & Marketing', roleEn:'Sales & Marketing', bio:"Samuel est le moteur commercial de Malkia B. Stratège dans l'âme, il développe les marchés et fidélise une clientèle exigeante grâce à un accompagnement personnalisé.", bioEn:"Samuel is the commercial engine of Malkia B. A strategist at heart, he develops markets and builds loyalty among discerning clients through personalized support.", img:'images/samuel.webp' },
+  { id:'wema', name:'Wema Birindwa', role:'Sales & Marketing', roleEn:'Sales & Marketing', bio:"Wema allie écoute et expertise pour conseiller chaque cliente. Son énergie positive et sa connaissance des produits font d'elle une ambassadrice de choix.", bioEn:"Wema combines listening and expertise to advise every client. Her positive energy and product knowledge make her a valued ambassador.", img:'images/Wema.webp' },
+  { id:'fadhili', name:'Fadhili Mushikazi', role:'Sales & Marketing', roleEn:'Sales & Marketing', bio:"Fadhili excelle dans l'art de la relation client. Passionnée par la cosmétique, elle met son sens du service au service de l'expérience Malkia B.", bioEn:"Fadhili excels in the art of customer relations. Passionate about cosmetics, she dedicates her service mindset to the Malkia B experience.", img:'images/Fadhili.webp' },
+  { id:'julia', name:'Wani Mugaruka Julia', role:'Sales & Marketing', roleEn:'Sales & Marketing', bio:"Julia est une force de vente naturelle. Sa détermination et sa chaleur humaine créent un lien unique avec chaque cliente qui franchit les portes de la boutique.", bioEn:"Julia is a natural sales force. Her determination and warmth create a unique bond with every client who walks through the store doors.", img:'images/Wani Julia.webp' },
+  { id:'narcisse', name:'Narcisse Baderhe', role:'Sales & Marketing', roleEn:'Sales & Marketing', bio:"Narcisse apporte rigueur et professionnalisme à l'équipe commerciale. Son expertise des marchés locaux contribue à l'ancrage régional de la marque.", bioEn:"Narcisse brings rigor and professionalism to the commercial team. His expertise in local markets contributes to the brand's regional roots.", img:'images/Narcisse-Baderhe.webp' },
+  { id:'esther', name:'Esther Birindwa', role:'Janitor', roleEn:'Janitor', bio:"Esther veille à ce que chaque espace Malkia B soit impeccable. Son travail discret mais essentiel garantit un cadre d'exception pour nos clients et nos équipes.", bioEn:"Esther ensures every Malkia B space is spotless. Her discreet yet essential work guarantees an exceptional environment for our clients and teams.", img:'images/Janitor.webp' },
+  { id:'guillaine', name:'Guillaine Kuchirabwinja', role:'Sécurité', roleEn:'Security', bio:"Guillaine assure la sécurité et la sérénité de nos boutiques. Vigilante et bienveillante, elle accueille chaque visiteur avec professionnalisme.", bioEn:"Guillaine ensures the security and serenity of our boutiques. Vigilant and caring, she welcomes every visitor with professionalism.", img:'team-guillaine' },
+  { id:'elie', name:'Elie Binwa', role:'Sécurité', roleEn:'Security', bio:"Elie est le garant de la tranquillité de nos espaces. Son sérieux et sa disponibilité font de lui un membre essentiel de la famille Malkia B.", bioEn:"Elie is the guarantor of tranquility in our spaces. His seriousness and availability make him an essential member of the Malkia B family.", img:'team-elie' },
+  { id:'photo', name:'Photographer', roleEn:'Coming soon', role: t('ui_001'), bio:t('ui_049'), bioEn:"We are currently hiring a talented photographer to capture the essence of Malkia B. If you are passionate about beauty and imagery, join us!", img:'team-photo' },
 ];
 
 function renderTeam(){
@@ -487,7 +487,7 @@ function renderTeam(){
           <img loading="lazy" src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
         <h3 class="font-display text-base md:text-lg font-medium">${m.name}</h3>
-        <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
+        <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
       </a>`).join('')}
     </div>
   </div>`;
@@ -496,7 +496,7 @@ function renderTeam(){
 function renderTeamMember(id){
   const tm = t('team'), m = TEAM.find(t=>t.id===id);
   if(!m) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('account.not_found')}</h1><a href="#/team" class="inline-block mt-6 text-primary border-b border-primary/30">${t('account.back')}</a></div>`;
-  const others = TEAM.filter(t=>t.id!==id).slice(0,4);
+  const others = TEAM.filter(t=>t.id!==id); const startIdx = TEAM.findIndex(t=>t.id===id) % others.length; const rot = [...others.slice(startIdx), ...others.slice(0, startIdx)].slice(0, 5);
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <a href="#/team" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('account.all_team')}</a>
@@ -509,8 +509,8 @@ function renderTeamMember(id){
       <div class="md:col-span-7">
         <span class="text-[11px] text-primary uppercase tracking-widest block mb-3">${tm.subtitle}</span>
         <h1 class="font-display text-3xl md:text-5xl mb-2">${m.name}</h1>
-        <p class="text-sm text-primary uppercase tracking-widest mb-8 border-b border-outline-variant/20 pb-6">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
-        <p class="text-base text-on-surface-variant leading-relaxed mb-10">${m.bio}</p>
+        <p class="text-sm text-primary uppercase tracking-widest mb-8 border-b border-outline-variant/20 pb-6">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' ? m.roleEn : m.role)}</p>
+        <p class="text-base text-on-surface-variant leading-relaxed mb-10">${LANG.current==='en' ? m.bioEn : m.bio}</p>
         <div class="border-t border-outline-variant/10 pt-6">
           <h3 class="text-xs uppercase tracking-widest font-semibold mb-4">${t('account.share')}</h3>
           <div class="flex gap-4 text-outline">
@@ -526,13 +526,13 @@ function renderTeamMember(id){
         <h2 class="font-display text-2xl md:text-3xl">${t('account.members')}</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        ${others.map(m=>`
+        ${rot.map(m=>`
         <a href="#/team/${m.id}" class="group text-center">
           <div class="aspect-square overflow-hidden mb-3 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
             <img loading="lazy" src="${ti(m,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
-          <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
+          <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
         </a>`).join('')}
       </div>
     </div>
@@ -1411,7 +1411,7 @@ function renderShops(){
             <img loading="lazy" src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h3 class="font-display text-sm md:text-base font-medium">${m.name}</h3>
-          <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : m.role}</p>
+          <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
         </a>`).join('')}
       </div>
     </section>
