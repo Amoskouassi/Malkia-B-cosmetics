@@ -69,7 +69,7 @@ const TR = {
       p1:"Je suis Hamin Banga, fondateur de Malkia B Cosmetics. Tout est parti d'une conviction simple : chaque femme a le droit de se sentir souveraine. J'ai voulu créer des soins qui ne transforment pas seulement la peau, mais aussi la confiance.",
       p2:"Mon parcours m'a amené à sélectionner les meilleurs ingrédients — du karité du Burkina à l'huile d'argan du Maroc — pour offrir des formules d'une efficacité rare. Chaque produit est le fruit d'une quête d'excellence.",
       p3:"Aujourd'hui, Malkia B rayonne depuis Bukavu et Kigali, portée par une équipe passionnée qui partage ma vision : célébrer la beauté authentique et souveraine de chaque femme.",
-      credo:"« La vraie beauté vient de l'intérieur. »",
+      credo:"La vraie beauté vient de l'intérieur.",
       sig:"— Hamin Banga, Fondateur" },
 
     shops: { title:"Nos Boutiques", subtitle:"Des espaces dédiés à votre beauté",
@@ -86,7 +86,7 @@ const TR = {
       direct:"Contact direct", offices:"Nos Représentations",
       hours:"Lun – Sam : 9h00 – 18h00<br>Dim : Sur rendez-vous", map:"Voir sur Google Maps",
       wa:"Contactez-nous via WhatsApp", wa_sub:"Réponse sous 24h" },
-    footer: { tagline:"« La vraie beauté vient de l'intérieur. » — Hamin Banga",
+    footer: { tagline:"La vraie beauté vient de l'intérieur. — Hamin Banga",
       shop:"Boutique", support:"Assistance", follow:"Suivez-nous", delivery:"Livraison & retours",
       copyright:"© 2026 Malkia B Cosmetics. Fabrication artisanale." },
     team: { title:"Notre Équipe", subtitle:"Des passionnés à votre service", boss:"Fondatrice & Directrice Artistique",
@@ -172,7 +172,7 @@ const TR = {
       p1:"I am Hamin Banga, founder of Malkia B Cosmetics. It all started with a simple belief: every woman deserves to feel sovereign. I wanted to create products that don't just transform the skin, but also transform confidence.",
       p2:"My journey led me to select the finest ingredients — from Burkina’s shea butter to Morocco’s argan oil — to deliver formulas of exceptional efficacy. Every product is the result of a pursuit of excellence.",
       p3:"Today, Malkia B shines from Bukavu and Kigali, driven by a passionate team that shares my vision: celebrating the authentic and sovereign beauty of every woman.",
-      credo:"« True beauty comes from within. »",
+      credo:"True beauty comes from within.",
       sig:"— Hamin Banga, Founder" },
     shops: { title:"Our Boutiques", subtitle:"Dedicated spaces for your beauty",
       bukavu:{ name:"Bukavu Boutique", tag:"Beauty Specialists", addr:"Nyawera Mosque — Bukavu, DRCongo",
@@ -188,7 +188,7 @@ const TR = {
       direct:"Direct Contact", offices:"Our Locations",
       hours:"Mon – Sat: 9:00 AM – 6:00 PM<br>Sun: By appointment", map:"View on Google Maps",
       wa:"Contact us via WhatsApp", wa_sub:"Reply within 24h" },
-    footer: { tagline:"« True beauty comes from within. » — Hamin Banga",
+    footer: { tagline:"True beauty comes from within. — Hamin Banga",
       shop:"Shop", support:"Support", follow:"Follow Us", delivery:"Shipping & Returns",
       copyright:"© 2026 Malkia B Cosmetics. Handmade with care." },
     team: { title:"Our Team", subtitle:"Passionate people at your service", boss:"Founder & Art Director",
@@ -794,6 +794,10 @@ function renderHome(){
       ${HERO_SLIDES.map((_, i) => `<button class="hero-dot w-2.5 h-2.5 rounded-full bg-outline-variant transition-all duration-300 hover:scale-125"></button>`).join('')}
     </div>
   </section>
+
+  <div class="text-center py-5 md:py-7 bg-primary/5 border-y border-primary/10 mb-16 md:mb-24 reveal">
+    <p class="font-display text-base md:text-xl text-primary italic tracking-wide">${t('story.credo')} — Hamin Banga</p>
+  </div>
 
   <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
