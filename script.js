@@ -1318,7 +1318,13 @@ function renderProducts(cat){
   const p = t('product'), cats = t('cat'), n = t('nav');
   const active = cat || 'all';
   const filtered = cat ? PRODUCTS.filter(x=>x.cat===cat) : PRODUCTS;
+  const catHero = cat ? { body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }[cat] : null;
   return `
+  ${catHero ? `
+  <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative">
+    <img src="${catHero}" class="w-full h-full object-cover" alt="${t('cat.'+cat)}">
+    <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
+  </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
     <div class="max-w-2xl mb-10 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
