@@ -474,15 +474,15 @@ function renderTeam(){
   const tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
-    <div class="text-center mb-16">
-      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
-      <h1 class="font-display text-3xl md:text-5xl mb-4">${tm.title}</h1>
-      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto">${t('team.desc')}</p>
+    <div class="text-center mb-16 reveal">
+      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${tm.subtitle}</span>
+      <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${tm.title}</h1>
+      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto animate-fade-in-up" style="animation-delay:0.3s">${t('team.desc')}</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
       ${TEAM.map((m,i)=>`
-      <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''}">
-        <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
+      <a href="#/team/${m.id}" class="group text-center ${i>0 ? 'mt-0 md:mt-8' : ''} reveal reveal-d${(i%5)+1}">
+        <div class="aspect-square overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg image-zoom">
           <img loading="lazy" src="${ti(m,500,500)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
         <h3 class="font-display text-base md:text-lg font-medium">${m.name}</h3>
@@ -500,12 +500,12 @@ function renderTeamMember(id){
   <div class="px-5 md:px-margin-desktop pb-24">
     <a href="#/team" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('account.all_team')}</a>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
-      <div class="md:col-span-5">
-        <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg">
+      <div class="md:col-span-5 reveal-left">
+        <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg image-zoom">
           <img loading="lazy" src="${ti(m,700,700)}" class="w-full h-full object-cover" alt="${m.name}">
         </div>
       </div>
-      <div class="md:col-span-7">
+      <div class="md:col-span-7 reveal-right">
         <span class="text-[11px] text-primary uppercase tracking-widest block mb-3">${tm.subtitle}</span>
         <h1 class="font-display text-3xl md:text-5xl mb-2">${m.name}</h1>
         <p class="text-sm text-primary uppercase tracking-widest mb-8 border-b border-outline-variant/20 pb-6">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' ? m.roleEn : m.role)}</p>
@@ -519,15 +519,15 @@ function renderTeamMember(id){
         </div>
       </div>
     </div>
-    <div class="mt-24">
+    <div class="mt-24 reveal">
       <div class="text-center mb-10">
-        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
-        <h2 class="font-display text-2xl md:text-3xl">${t('account.members')}</h2>
+        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block animate-fade-in-down">${t('account.also')}</span>
+        <h2 class="font-display text-2xl md:text-3xl animate-zoom-in" style="animation-delay:0.15s">${t('account.members')}</h2>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-6">
-        ${rot.map(m=>`
-        <a href="#/team/${m.id}" class="group text-center">
-          <div class="aspect-square overflow-hidden mb-2 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
+        ${rot.map((m,i)=>`
+        <a href="#/team/${m.id}" class="group text-center reveal reveal-d${(i%5)+1}">
+          <div class="aspect-square overflow-hidden mb-2 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105 image-zoom">
             <img loading="lazy" src="${ti(m,300,300)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
@@ -631,9 +631,9 @@ function renderFooter(){
       <div class="space-y-4">
         <h4 class="text-xs uppercase tracking-widest text-primary font-semibold">${f.follow}</h4>
         <div class="flex gap-4 pt-2">
-          <a href="https://instagram.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://facebook.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="https://tiktok.com/@malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://instagram.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all hover-rotate"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://facebook.com/malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all hover-rotate"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://tiktok.com/@malkiabetes" target="_blank" rel="noopener" class="w-9 h-9 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary hover:border-primary transition-all hover-rotate"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
         </div>
         <p class="text-[10px] text-on-surface-variant/60 pt-2">Instagram · Facebook · TikTok</p>
       </div>
@@ -681,7 +681,7 @@ function productCard(p){
     <div class="relative aspect-square md:aspect-[3/4] overflow-hidden mb-4 border border-outline-variant/10 bg-surface-container-low">
       <img loading="lazy" src="${imageUrl}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${p.name}">
       ${p.badge ? `<div class="absolute top-3 left-3 bg-primary text-on-primary text-[9px] px-3 py-1.5 uppercase tracking-widest font-semibold">${p.badge}</div>` : ''}
-      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart('${p.id}')" class="absolute bottom-4 right-4 bg-background/90 p-3 rounded-full opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-sm active:scale-90">
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart('${p.id}')" class="absolute bottom-4 right-4 bg-background/90 p-3 rounded-full opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-sm active:scale-90 hover-glow">
         <span class="material-symbols-outlined text-primary text-[20px]">add_shopping_cart</span>
       </button>
     </div>
@@ -697,9 +697,9 @@ function productCard(p){
 function renderNotFound(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24 text-center py-24">
-    <h1 class="font-display text-6xl md:text-8xl text-primary mb-6">404</h1>
-    <p class="text-on-surface-variant mb-8 max-w-md mx-auto">${t('ui.ui_002')}</p>
-    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all">${t('ui.ui_003')}</a>
+    <h1 class="font-display text-6xl md:text-8xl text-primary mb-6 animate-zoom-in">404</h1>
+    <p class="text-on-surface-variant mb-8 max-w-md mx-auto animate-fade-in-up" style="animation-delay:0.2s">${t('ui.ui_002')}</p>
+    <a href="#/home" class="inline-block bg-primary text-on-primary px-8 py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all animate-fade-in-up" style="animation-delay:0.4s">${t('ui.ui_003')}</a>
   </div>`;
 }
 
@@ -751,10 +751,10 @@ function renderHome(){
   </section>
 
   <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
-    <div class="flex justify-between items-end mb-10 md:mb-14 reveal">
+    <div class="flex justify-between items-end mb-10 md:mb-14">
       <div>
-        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${h.latest}</span>
-        <h2 class="font-display text-2xl md:text-3xl">${t('new_arrivals')}</h2>
+        <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block animate-fade-in-down">${h.latest}</span>
+        <h2 class="font-display text-2xl md:text-3xl animate-slide-right" style="animation-delay:0.15s">${t('new_arrivals')}</h2>
       </div>
       <a href="#/products" class="text-[13px] text-primary border-b border-primary/30 pb-1 hover:border-primary transition-all hidden sm:block">${h.see_all}</a>
     </div>
@@ -763,28 +763,28 @@ function renderHome(){
     </div>
   </section>
 
-  <section class="bg-surface-container-low py-16 md:py-28 mb-16 md:mb-24 reveal">
+  <section class="bg-surface-container-low py-16 md:py-28 mb-16 md:mb-24">
     <div class="px-5 md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-      <div>
-        <span class="text-[11px] text-primary uppercase tracking-widest mb-5 block">${h.story}</span>
-        <h2 class="font-display text-3xl md:text-4xl mb-6 leading-tight">${h.story_h}</h2>
-        <p class="text-base text-on-background/80 mb-6">${h.story_p1}</p>
-        <p class="text-sm text-on-background/70 mb-10">${h.story_p2}</p>
-        <div class="grid grid-cols-2 gap-8">
+      <div class="reveal-left">
+        <span class="text-[11px] text-primary uppercase tracking-widest mb-5 block animate-fade-in-down">${h.story}</span>
+        <h2 class="font-display text-3xl md:text-4xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${h.story_h}</h2>
+        <p class="text-base text-on-background/80 mb-6 animate-fade-in-up" style="animation-delay:0.3s">${h.story_p1}</p>
+        <p class="text-sm text-on-background/70 mb-10 animate-fade-in-up" style="animation-delay:0.4s">${h.story_p2}</p>
+        <div class="grid grid-cols-2 gap-8 animate-fade-in-up" style="animation-delay:0.5s">
           <div><span class="block font-display text-2xl text-primary mb-1">2015</span><span class="text-[11px] text-outline uppercase tracking-widest">${h.since}</span></div>
           <div><span class="block font-display text-2xl text-primary mb-1">Global</span><span class="text-[11px] text-outline uppercase tracking-widest">${h.delivery}</span></div>
         </div>
       </div>
-      <div class="aspect-[4/5] overflow-hidden shadow-xl">
+      <div class="aspect-[4/5] overflow-hidden shadow-xl reveal-right image-zoom">
         <img src="${'images/CEO.webp'}" class="w-full h-full object-cover" alt="Hamin Banga, fondateur de Malkia B Cosmetics">
       </div>
     </div>
   </section>
 
-  <section class="px-5 md:px-margin-desktop py-16 text-center">
+  <section class="px-5 md:px-margin-desktop py-16 text-center reveal">
     <div class="max-w-xl mx-auto">
-      <span class="material-symbols-outlined text-primary text-3xl mb-4 block animate-float">auto_awesome</span>
-      <h2 class="font-display text-2xl md:text-3xl mb-4">${h.join}</h2>
+      <span class="material-symbols-outlined text-primary text-3xl mb-4 block animate-bounce-gentle">auto_awesome</span>
+      <h2 class="font-display text-2xl md:text-3xl mb-4 animate-zoom-in">${h.join}</h2>
       <p class="text-sm text-on-background/70 mb-8">${h.join_p}</p>
       <div class="flex justify-center gap-6">
         <a href="https://wa.me/243995945889" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
@@ -821,12 +821,12 @@ function renderCategory(catKey){
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
-    <div class="text-center mb-10 reveal">
-      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
-      <h1 class="font-display text-3xl md:text-5xl mb-4">${label}</h1>
-      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto">${t('product.subtitle')}</p>
+    <div class="text-center mb-10">
+      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${t('categories')}</span>
+      <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${label}</h1>
+      <p class="text-sm md:text-base text-on-background/70 max-w-xl mx-auto animate-fade-in-up" style="animation-delay:0.3s">${t('product.subtitle')}</p>
     </div>
-    <div class="mb-8 reveal">
+    <div class="mb-8">
       <div class="relative max-w-md mx-auto">
         <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline text-base">search</span>
         <input id="productSearch" type="text" placeholder="${t('ui.ui_004')}" class="w-full border-b border-outline-variant/30 py-3 pl-8 pr-4 text-sm bg-transparent focus:border-primary transition-colors outline-none">
@@ -1337,19 +1337,19 @@ function renderStory(){
   const s = t('story');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 max-w-4xl mx-auto space-y-16">
-    <div class="text-center reveal">
-      <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block">${s.subtitle}</span>
-      <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
+    <div class="text-center">
+      <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
+      <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
     </div>
-    <div class="aspect-[21/9] overflow-hidden rounded-2xl reveal">
-      <img loading="lazy" src="images/CEO.webp" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Hamin Banga, fondateur de Malkia B Cosmetics">
+    <div class="aspect-[21/9] overflow-hidden rounded-2xl reveal-scale image-zoom">
+      <img loading="lazy" src="images/CEO.webp" class="w-full h-full object-cover" alt="Hamin Banga, fondateur de Malkia B Cosmetics">
     </div>
     <div class="space-y-6 text-on-surface-variant leading-relaxed reveal">
       <p class="text-base md:text-lg">${s.p1}</p>
-      <p class="text-base md:text-lg">${s.p2}</p>
-      <p class="text-base md:text-lg">${s.p3}</p>
+      <p class="text-base md:text-lg reveal reveal-d2">${s.p2}</p>
+      <p class="text-base md:text-lg reveal reveal-d3">${s.p3}</p>
     </div>
-    <div class="text-center reveal">
+    <div class="text-center reveal reveal-d2">
       <p class="font-display text-xl text-primary">${s.sig}</p>
     </div>
   </div>`;
@@ -1396,12 +1396,12 @@ function renderShops(){
   const s = t('shops'), tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-16">
-    <div class="text-center reveal">
-      <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block">${s.subtitle}</span>
-      <h1 class="font-display text-3xl md:text-5xl leading-tight">${s.title}</h1>
+    <div class="text-center">
+      <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
+      <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
     </div>
-    ${shopCard('bukavu')}
-    ${shopCard('kigali')}
+    <div class="reveal">${shopCard('bukavu')}</div>
+    <div class="reveal reveal-d2">${shopCard('kigali')}</div>
     <section class="pt-8">
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
@@ -1440,14 +1440,14 @@ function renderContact(){
   const c = t('contact'), f = c.form;
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-20">
-    <div class="max-w-2xl mx-auto text-center reveal">
-      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${c.title}</span>
-      <h1 class="font-display text-3xl md:text-5xl mb-6 leading-tight">${c.heading}</h1>
-      <p class="text-on-surface-variant">${c.desc}</p>
+    <div class="max-w-2xl mx-auto text-center">
+      <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${c.title}</span>
+      <h1 class="font-display text-3xl md:text-5xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${c.heading}</h1>
+      <p class="text-on-surface-variant animate-fade-in-up" style="animation-delay:0.3s">${c.desc}</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16">
-      <div class="lg:col-span-7 bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/10 reveal reveal-left">
+      <div class="lg:col-span-7 bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/10 reveal-left">
         <form onsubmit="event.preventDefault(); contactWhatsApp(this)" class="space-y-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div><label class="text-[11px] uppercase tracking-widest text-on-surface-variant block mb-2">${f.name}</label><input name="name" class="underline-input w-full py-2 text-sm" placeholder="${f.name}" required></div>
