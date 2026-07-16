@@ -68,7 +68,11 @@ const TR = {
     team: { title:"Notre Équipe", subtitle:"Des passionnés à votre service", boss:"Fondatrice & Directrice Artistique",
       ceo:"CEO & Fondateur", emp:"Spécialiste Beauté",
       desc:"Derrière chaque soin se cache une équipe passionnée, unie par la même vision : révéler la souveraine en chaque femme." },
-    cat: { all:"Tous", body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Bien-être" },
+    cat: { all:"Tous", body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Bien-être",
+      body_title:"Soins Corps", body_sub:"Hydratation, éclat et nutrition pour votre corps",
+      face_title:"Soins Visage", face_sub:"Routine complète pour un teint lumineux",
+      fragrance_title:"Nos Parfums", fragrance_sub:"Des signatures olfactives pour chaque personnalité",
+      wellness_title:"Bien-être Essentiel", wellness_sub:"Compléments et soins pour votre équilibre" },
     product: { add:"Ajouter au panier", added:"Ajouté au panier !", desc:"Description", ing:"Ingrédients", use:"Comment utiliser",
       all_products:"Tous nos produits", subtitle:"Découvrez notre sélection complète de soins",
       shop:"Boutique", reviews:"Avis", rating:"Note" },
@@ -165,7 +169,11 @@ const TR = {
     team: { title:"Our Team", subtitle:"Passionate people at your service", boss:"Founder & Art Director",
       ceo:"CEO & Founder", emp:"Beauty Specialist",
       desc:"Behind every product is a passionate team, united by the same vision: revealing the sovereign in every woman." },
-    cat: { all:"All", body:'Body', face:'Face', fragrance:'Fragrances', wellness:'Wellness' },
+    cat: { all:"All", body:'Body', face:'Face', fragrance:'Fragrances', wellness:'Wellness',
+      body_title:"Body Care", body_sub:"Hydration, glow and nutrition for your body",
+      face_title:"Face Care", face_sub:"Complete routine for a radiant complexion",
+      fragrance_title:"Our Fragrances", fragrance_sub:"Olfactive signatures for every personality",
+      wellness_title:"Essential Wellness", wellness_sub:"Supplements and care for your inner balance" },
     product: { add:"Add to Cart", added:"Added to cart!", desc:"Description", ing:"Ingredients", use:"How to Use",
       all_products:"All Products", subtitle:"Discover our complete selection of beauty care",
       shop:"Shop", reviews:"Reviews", rating:"Rating" },
@@ -1325,8 +1333,8 @@ function renderProducts(cat){
   <div class="px-5 md:px-margin-desktop pb-24">
     <div class="max-w-2xl mb-10 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
-      <h1 class="font-display text-3xl md:text-5xl leading-tight">${p.all_products}</h1>
-      <p class="text-on-surface-variant mt-4">${p.subtitle}</p>
+      <h1 class="font-display text-3xl md:text-5xl leading-tight">${cat ? t('cat.'+cat+'_title') : p.all_products}</h1>
+      <p class="text-on-surface-variant mt-4">${cat ? t('cat.'+cat+'_sub') : p.subtitle}</p>
     </div>
     <nav class="flex flex-wrap gap-2 md:gap-4 mb-6 border-b border-outline-variant/20 pb-4 reveal" id="productFilterNav">
       ${Object.entries({all: cats.all, ...Object.fromEntries(Object.entries(CATS).map(([k,v])=>[k, t('cat.'+k)||v]))}).map(([k,v])=>`
