@@ -525,11 +525,11 @@ function renderTeamMember(id){
         <span class="text-[11px] text-primary uppercase tracking-widest mb-2 block">${t('account.also')}</span>
         <h2 class="font-display text-2xl md:text-3xl">${t('account.members')}</h2>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div class="grid grid-cols-5 gap-3 md:gap-6">
         ${rot.map(m=>`
         <a href="#/team/${m.id}" class="group text-center">
-          <div class="aspect-square overflow-hidden mb-3 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
-            <img loading="lazy" src="${ti(m,400,400)}" class="w-full h-full object-cover" alt="${m.name}">
+          <div class="aspect-square overflow-hidden mb-2 border border-outline-variant/10 transition-transform duration-500 group-hover:scale-105">
+            <img loading="lazy" src="${ti(m,300,300)}" class="w-full h-full object-cover" alt="${m.name}">
           </div>
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
           <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
