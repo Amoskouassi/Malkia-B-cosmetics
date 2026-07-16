@@ -441,12 +441,16 @@ function updateCartCount(){
   cartCount.textContent = count;
   if(count > 0){ cartCount.classList.add('bump'); setTimeout(()=>cartCount.classList.remove('bump'), 200); }
 }
-function showToast(msg){
-  const t = document.getElementById('toast');
-  if (!t) return;
-  t.textContent = msg;
-  t.classList.remove('translate-y-24');
-  setTimeout(()=>t.classList.add('translate-y-24'), 2200);
+function showToast(msg, icon='check_circle'){
+  const el = document.getElementById('toast');
+  const msgEl = document.getElementById('toastMsg');
+  const iconEl = document.getElementById('toastIcon');
+  if (!el || !msgEl) return;
+  msgEl.textContent = msg;
+  if(iconEl) iconEl.textContent = icon;
+  clearTimeout(el._hide);
+  el.classList.remove('translate-y-full');
+  el._hide = setTimeout(() => el.classList.add('translate-y-full'), 2800);
 }
   function toggleMobileMenu(){
     const m = document.getElementById('mobileMenu');
