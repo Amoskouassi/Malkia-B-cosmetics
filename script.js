@@ -506,6 +506,15 @@ function renderTeam(){
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
       </a>`).join('')}
     </div>
+    <div class="mt-16 text-center border-t border-outline-variant/20 pt-10">
+      <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">${t('home.see_all')}</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="#/products" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.products')}</a>
+        <a href="#/story" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.story')}</a>
+        <a href="#/shops" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.shops')}</a>
+        <a href="#/contact" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.contact')}</a>
+      </div>
+    </div>
   </div>`;
 }
 
@@ -550,6 +559,16 @@ function renderTeamMember(id){
           <h4 class="font-display text-sm md:text-base font-medium">${m.name}</h4>
           <p class="text-[10px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
         </a>`).join('')}
+      </div>
+    </div>
+    <div class="mt-16 text-center border-t border-outline-variant/20 pt-10">
+      <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">${t('home.see_all')}</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="#/products" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.products')}</a>
+        <a href="#/story" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.story')}</a>
+        <a href="#/shops" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.shops')}</a>
+        <a href="#/contact" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.contact')}</a>
+        <a href="#/home" class="text-on-surface-variant hover:text-primary luxury-underline">${t('nav.home')}</a>
       </div>
     </div>
   </div>`;
