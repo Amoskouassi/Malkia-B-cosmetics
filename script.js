@@ -46,7 +46,7 @@ const TR = {
       cta:"Découvrir la collection", s1:"Soin Corps", s2:"Soin Visage", s3:"Parfums Signature", s4:"Bien-être Essentiel",
       cta1:"Découvrir", cta2:"En savoir plus",
       slide0_tag:"Since 2015 · Livraison mondiale", slide0_title:"L'Art de la Beauté Africaine",
-      slide0_text:"Des soins premium inspirés des traditions ancestrales.",
+      slide0_text:"La vraie beauté vient de l'intérieur.",
       slide1_tag:"Nouvelle Collection", slide1_title:"Soin Visage & Corps",
       slide1_text:"Une gamme complète pour révéler votre éclat naturel.",
       slide2_tag:"Parfums Signature", slide2_title:"L'Élégance en Flacon",
@@ -86,7 +86,7 @@ const TR = {
       direct:"Contact direct", offices:"Nos Représentations",
       hours:"Lun – Sam : 9h00 – 18h00<br>Dim : Sur rendez-vous", map:"Voir sur Google Maps",
       wa:"Contactez-nous via WhatsApp", wa_sub:"Réponse sous 24h" },
-    footer: { tagline:"La vraie beauté vient de l'intérieur. — Hamin Banga",
+    footer: { tagline:"La vraie beauté vient de l'intérieur.",
       shop:"Boutique", support:"Assistance", follow:"Suivez-nous", delivery:"Livraison & retours",
       copyright:"© 2026 Malkia B Cosmetics. Fabrication artisanale." },
     team: { title:"Notre Équipe", subtitle:"Des passionnés à votre service", boss:"Fondatrice & Directrice Artistique",
@@ -149,7 +149,7 @@ const TR = {
       cta:"Discover the Collection", s1:"Body Care", s2:"Face Care", s3:"Signature Fragrances", s4:"Essential Wellness",
       cta1:"Discover", cta2:"Learn More",
       slide0_tag:"Since 2015 · Worldwide Delivery", slide0_title:"The Art of African Beauty",
-      slide0_text:"Premium care inspired by ancestral traditions.",
+      slide0_text:"True beauty comes from within.",
       slide1_tag:"New Collection", slide1_title:"Face & Body Care",
       slide1_text:"A complete range to reveal your natural glow.",
       slide2_tag:"Signature Fragrances", slide2_title:"Elegance in a Bottle",
@@ -188,7 +188,7 @@ const TR = {
       direct:"Direct Contact", offices:"Our Locations",
       hours:"Mon – Sat: 9:00 AM – 6:00 PM<br>Sun: By appointment", map:"View on Google Maps",
       wa:"Contact us via WhatsApp", wa_sub:"Reply within 24h" },
-    footer: { tagline:"True beauty comes from within. — Hamin Banga",
+    footer: { tagline:"True beauty comes from within.",
       shop:"Shop", support:"Support", follow:"Follow Us", delivery:"Shipping & Returns",
       copyright:"© 2026 Malkia B Cosmetics. Handmade with care." },
     team: { title:"Our Team", subtitle:"Passionate people at your service", boss:"Founder & Art Director",
@@ -370,7 +370,7 @@ const HERO_SLIDES = [
     img: 'images/pexels-jayrinho-16559618.webp',
     tag: 'Since 2015 · Livraison mondiale',
     title: 'Votre Beauté, Notre Priorité',
-    text: 'True Beauty Comes From Within — Des soins de beauté premium conçus pour révéler votre éclat avec élégance, douceur et efficacité.',
+    text: "La vraie beauté vient de l'intérieur.",
     cta1: { text: 'Découvrir nos produits', link: '#/category/fragrance' },
     cta2: { text: 'Commander via WhatsApp', link: '#/contact' }
   },
@@ -796,7 +796,7 @@ function renderHome(){
   </section>
 
   <div class="text-center py-5 md:py-7 bg-primary/5 border-y border-primary/10 mb-16 md:mb-24 reveal">
-    <p class="font-display text-base md:text-xl text-primary italic tracking-wide">${t('story.credo')} — Hamin Banga</p>
+    <p class="font-display text-base md:text-xl text-primary italic tracking-wide">${t('story.credo')}</p>
   </div>
 
   <section class="px-5 md:px-margin-desktop mb-16 md:mb-24 reveal">
