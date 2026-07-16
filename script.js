@@ -506,7 +506,10 @@ function renderTeam(){
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
       </a>`).join('')}
     </div>
-    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mx-auto mt-16"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </div>`;
 }
 
@@ -839,7 +842,6 @@ function renderCategory(catKey){
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
-    <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-6"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('product.all_products')}</a>
     <div class="text-center mb-10">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${t('categories')}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${label}</h1>
@@ -858,6 +860,10 @@ function renderCategory(catKey){
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_005')}</p>
     </div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </div>
   `;
 }
@@ -872,7 +878,6 @@ function renderProduct(id){
   return `
   <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
-      <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-6"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('product.all_products')}</a>
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
         <img id="mainImg" src="${mainImg}" class="w-full h-full object-cover" alt="${p.name}">
       </div>
@@ -921,6 +926,10 @@ function renderProduct(id){
       <h2 class="font-display text-2xl md:text-3xl">${t('ui.ui_008')}</h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">${related.map(p=>productCard(p)).join('')}</div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </section>
   `;
 }
@@ -964,7 +973,6 @@ function renderCart(){
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
     <p class="text-sm text-on-surface-variant italic mb-12">${t('ui.ui_002')}</p>
-    <a href="#/products" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('cart.cta')}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-8">
         ${lines.map(l=>`
@@ -995,7 +1003,6 @@ function renderCart(){
             </div>
           </div>
         </div>`).join('')}
-        <a href="#/products" class="flex items-center gap-2 mt-8 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${ca.cta}</a>
       </div>
       <div class="lg:col-span-4">
         <div class="bg-surface-container-low p-8 sticky top-28 border border-outline-variant/10">
@@ -1014,6 +1021,10 @@ function renderCart(){
           <a href="#/checkout" class="block text-center w-full bg-primary text-on-primary py-4 text-[12px] uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${ca.checkout}</a>
         </div>
       </div>
+    </div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>
   `;
@@ -1056,7 +1067,6 @@ function renderCheckout(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-12">${co.title}</h1>
-    <a href="#/cart" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${ca.title}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-7 space-y-16">
         <section>
@@ -1168,6 +1178,10 @@ function renderCheckout(){
         </div>
       </div>
     </div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </div>
   `;
 }
@@ -1233,7 +1247,6 @@ function renderAccount(){
   <div class="px-5 md:px-margin-desktop pb-24">
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
     <p class="text-sm text-on-surface-variant mb-12">${t('ui.ui_028')}${name}</p>
-    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm -mt-8 mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <aside class="lg:col-span-3 space-y-2">
         <button onclick="switchAccount('orders')" id="tab-orders" class="w-full flex items-center gap-4 py-3 px-4 bg-secondary-container text-on-secondary-container">
@@ -1253,6 +1266,10 @@ function renderAccount(){
       <div id="accountContent" class="lg:col-span-9 space-y-8">
         ${renderAccountSection('orders', orders, profile)}
       </div>
+    </div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>
   `;
@@ -1358,6 +1375,10 @@ function renderProducts(cat){
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_042')}</p>
     </div>
+    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </div>`;
 }
 
@@ -1366,7 +1387,6 @@ function renderStory(){
   const s = t('story');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 max-w-4xl mx-auto space-y-16">
-    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
@@ -1381,6 +1401,10 @@ function renderStory(){
     </div>
     <div class="text-center reveal reveal-d2">
       <p class="font-display text-xl text-primary">${s.sig}</p>
+    </div>
+    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>`;
 }
@@ -1426,7 +1450,6 @@ function renderShops(){
   const s = t('shops'), tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-16">
-    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="text-center reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
@@ -1450,6 +1473,10 @@ function renderShops(){
         </a>`).join('')}
       </div>
     </section>
+    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    </div>
   </div>`;
 }
 
@@ -1471,7 +1498,6 @@ function renderContact(){
   const c = t('contact'), f = c.form;
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-20">
-    <a href="#/home" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
     <div class="max-w-2xl mx-auto text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${c.title}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${c.heading}</h1>
@@ -1518,6 +1544,10 @@ function renderContact(){
           </a>
         </div>
       </div>
+    </div>
+    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
+      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
+      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>`;
 }
