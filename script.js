@@ -74,7 +74,7 @@ const TR = {
       fragrance_title:"Nos Parfums", fragrance_sub:"Des signatures olfactives pour chaque personnalité",
       wellness_title:"Bien-être Essentiel", wellness_sub:"Compléments et soins pour votre équilibre" },
     product: { add:"Ajouter au panier", added:"Ajouté au panier !", desc:"Description", ing:"Ingrédients", use:"Comment utiliser",
-      all_products:"Tous nos produits", subtitle:"Découvrez notre sélection complète de soins",
+      all_products:"Consulter nos articles", subtitle:"Découvrez notre sélection complète de soins",
       shop:"Boutique", reviews:"Avis", rating:"Note" },
     cart: { title:"Votre Panier", empty:"Votre panier est vide", cta:"Découvrir nos produits", total:"Total",
       checkout:"Commander", remove:"Retirer", qty:"Qté", sub:"Sous-total", delivery:"Livraison",
@@ -93,7 +93,7 @@ const TR = {
     new_arrivals:"Nouveautés", view_all:"Voir tout", categories:"Nos Catégories",
     ui:{
       ui_001:"À venir", ui_002:"Page non trouvée. La page que vous recherchez n'existe pas ou a été déplacée.",
-      ui_003:"Retour à l'accueil", ui_004:"Rechercher un produit...",
+      ui_003:"Retour", ui_050:"Tous nos produits", ui_004:"Rechercher un produit...",
       ui_005:"Aucun produit ne correspond à votre recherche.", ui_006:"Produit introuvable",
       ui_007:"Acheter Maintenant", ui_008:"Complétez Votre Routine",
       ui_009:"À partir de 10 $", ui_010:"Prénom", ui_011:"Prénom",
@@ -175,7 +175,7 @@ const TR = {
       fragrance_title:"Our Fragrances", fragrance_sub:"Olfactive signatures for every personality",
       wellness_title:"Essential Wellness", wellness_sub:"Supplements and care for your inner balance" },
     product: { add:"Add to Cart", added:"Added to cart!", desc:"Description", ing:"Ingredients", use:"How to Use",
-      all_products:"All Products", subtitle:"Discover our complete selection of beauty care",
+      all_products:"Browse our products", subtitle:"Discover our complete selection of beauty care",
       shop:"Shop", reviews:"Reviews", rating:"Rating" },
     cart: { title:"Your Cart", empty:"Your cart is empty", cta:"Discover our products", total:"Total",
       checkout:"Checkout", remove:"Remove", qty:"Qty", sub:"Subtotal", delivery:"Shipping",
@@ -194,7 +194,7 @@ const TR = {
     new_arrivals:"New Arrivals", view_all:"View All", categories:"Our Categories",
     ui:{
       ui_001:"Coming soon", ui_002:"Page not found. The page you are looking for does not exist or has been moved.",
-      ui_003:"Back to home", ui_004:"Search a product...",
+      ui_003:"Back", ui_050:"All Products", ui_004:"Search a product...",
       ui_005:"No product matches your search.", ui_006:"Product not found",
       ui_007:"Buy Now", ui_008:"Complete Your Routine",
       ui_009:"From 10 $", ui_010:"First Name", ui_011:"First Name",
@@ -491,6 +491,7 @@ function renderTeam(){
   const tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/shops" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.shops')}</a>
     <div class="text-center mb-16 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${tm.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${tm.title}</h1>
@@ -506,20 +507,19 @@ function renderTeam(){
         <p class="text-[11px] text-primary uppercase tracking-widest mt-1">${m.roleKey ? t('team.'+m.roleKey) : (LANG.current==='en' && m.roleEn ? m.roleEn : m.role)}</p>
       </a>`).join('')}
     </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    <div class="text-center mt-16 pt-10 border-t border-outline-variant/20 reveal">
+      <a href="#/products" class="inline-flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>`;
 }
 
 function renderTeamMember(id){
   const tm = t('team'), m = TEAM.find(t=>t.id===id);
-  if(!m) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('account.not_found')}</h1><a href="#/team" class="inline-block mt-6 text-primary border-b border-primary/30">${t('account.back')}</a></div>`;
+  if(!m) return `<div class="px-5 text-center py-20"><h1 class="font-display text-2xl">${t('account.not_found')}</h1><a href="#/shops" class="inline-block mt-6 text-primary border-b border-primary/30">${t('nav.shops')}</a></div>`;
   const others = TEAM.filter(t=>t.id!==id); const startIdx = TEAM.findIndex(t=>t.id===id) % others.length; const rot = [...others.slice(startIdx), ...others.slice(0, startIdx)].slice(0, 5);
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
-    <a href="#/team" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('account.all_team')}</a>
+    <a href="#/shops" onclick="sessionStorage.setItem('scrollTeam','1')" class="flex items-center gap-2 text-primary luxury-underline w-fit text-sm mb-10"><span class="material-symbols-outlined text-base">arrow_back</span> ${LANG.current==='en' ? 'See all members' : 'Voir tous les membres'}</a>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
       <div class="md:col-span-5 reveal-left">
         <div class="aspect-square overflow-hidden border border-outline-variant/10 shadow-lg image-zoom">
@@ -685,7 +685,7 @@ function navigate(){
   else if(page==='team' && param){ app.innerHTML = renderTeamMember(param); setTimeout(initScrollReveal, 50); }
   else if(page==='team'){ app.innerHTML = renderTeam(); setTimeout(initScrollReveal, 50); }
   else if(page==='story'){ app.innerHTML = renderStory(); setTimeout(initScrollReveal, 50); }
-  else if(page==='shops'){ app.innerHTML = renderShops(); setTimeout(initScrollReveal, 50); }
+  else if(page==='shops'){ app.innerHTML = renderShops(); setTimeout(()=>{ initScrollReveal(); const st=sessionStorage.getItem('scrollTeam'); if(st){ sessionStorage.removeItem('scrollTeam'); const el=document.getElementById('teamSection'); if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),100); } }, 50); }
   else if(page==='products'){ app.innerHTML = renderProducts(param); setTimeout(()=>{ initScrollReveal(); initProductSearch(); }, 50); }
   else{ app.innerHTML = renderNotFound(); }
   updateCartCount();
@@ -842,6 +842,7 @@ function renderCategory(catKey){
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
   </div>` : ''}
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/products" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.products')}</a>
     <div class="text-center mb-10">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${t('categories')}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-4 animate-zoom-in" style="animation-delay:0.15s">${label}</h1>
@@ -860,10 +861,6 @@ function renderCategory(catKey){
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_005')}</p>
     </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-    </div>
   </div>
   `;
 }
@@ -876,6 +873,7 @@ function renderProduct(id){
   const mainImg = (p.gallery && p.gallery[0]) || p.img || img(p.seed, 700, 875);
   const thumbs = p.gallery || (p.img ? [p.img] : [img(p.seed, 140, 175), img(p.seed+'-b', 140, 175), img(p.seed+'-c', 140, 175)]);
   return `
+  <a href="#/products" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors px-5 md:px-margin-desktop mb-6 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.products')}</a>
   <div id="productView" data-pid="${p.id}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 px-5 md:px-margin-desktop pb-16">
     <div>
       <div class="aspect-[4/5] overflow-hidden mb-4 border border-outline-variant/10">
@@ -926,10 +924,6 @@ function renderProduct(id){
       <h2 class="font-display text-2xl md:text-3xl">${t('ui.ui_008')}</h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">${related.map(p=>productCard(p)).join('')}</div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-    </div>
   </section>
   `;
 }
@@ -971,6 +965,7 @@ function renderCart(){
   const subtotal = lines.reduce((s,l)=>s+l.lineTotal,0);
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/products" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.products')}</a>
     <h1 class="font-display text-2xl md:text-3xl text-primary mb-2">${ca.title}</h1>
     <p class="text-sm text-on-surface-variant italic mb-12">${t('ui.ui_002')}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -1022,10 +1017,6 @@ function renderCart(){
         </div>
       </div>
     </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-    </div>
   </div>
   `;
 }
@@ -1066,6 +1057,7 @@ function renderCheckout(){
   const total = subtotal + shipping;
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/cart" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.cart')}</a>
     <h1 class="font-display text-2xl md:text-3xl mb-12">${co.title}</h1>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       <div class="lg:col-span-7 space-y-16">
@@ -1178,10 +1170,6 @@ function renderCheckout(){
         </div>
       </div>
     </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-    </div>
   </div>
   `;
 }
@@ -1245,6 +1233,7 @@ function renderAccount(){
   const name = (profile.firstName || '[Prénom]') + ' ' + (profile.lastName || '[Nom]');
   return `
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.home')}</a>
     <h1 class="font-display text-2xl md:text-3xl mb-2">${ac.title}</h1>
     <p class="text-sm text-on-surface-variant mb-12">${t('ui.ui_028')}${name}</p>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -1266,10 +1255,6 @@ function renderAccount(){
       <div id="accountContent" class="lg:col-span-9 space-y-8">
         ${renderAccountSection('orders', orders, profile)}
       </div>
-    </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>
   `;
@@ -1344,17 +1329,17 @@ function renderProducts(cat){
   const p = t('product'), cats = t('cat'), n = t('nav');
   const active = cat || 'all';
   const filtered = cat ? PRODUCTS.filter(x=>x.cat===cat) : PRODUCTS;
-  const catHero = cat ? { body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }[cat] : null;
+  const heroImgs = { all:'images/gamme de produit new.jpg', body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }; const catHero = heroImgs[cat||'all'];
   return `
-  ${catHero ? `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative">
-    <img src="${catHero}" class="w-full h-full object-cover" alt="${t('cat.'+cat)}">
+    <img src="${catHero}" class="w-full h-full object-cover" alt="${cat ? t('cat.'+cat) : t('product.all_products')}">
     <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent"></div>
-  </div>` : ''}
+  </div>
   <div class="px-5 md:px-margin-desktop pb-24">
+    <a href="#/${cat ? 'products' : 'home'}" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${cat ? t('nav.products') : t('nav.home')}</a>
     <div class="max-w-2xl mb-10 reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${t('categories')}</span>
-      <h1 class="font-display text-3xl md:text-5xl leading-tight">${cat ? t('cat.'+cat+'_title') : p.all_products}</h1>
+      <h1 class="font-display text-3xl md:text-5xl leading-tight">${cat ? t('cat.'+cat+'_title') : `${t('ui.ui_050')}`}</h1>
       <p class="text-on-surface-variant mt-4">${cat ? t('cat.'+cat+'_sub') : p.subtitle}</p>
     </div>
     <nav class="flex flex-wrap gap-2 md:gap-4 mb-6 border-b border-outline-variant/20 pb-4 reveal" id="productFilterNav">
@@ -1375,10 +1360,6 @@ function renderProducts(cat){
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_042')}</p>
     </div>
-    <div class="border-t border-outline-variant/20 mt-16 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-    </div>
   </div>`;
 }
 
@@ -1387,6 +1368,7 @@ function renderStory(){
   const s = t('story');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 max-w-4xl mx-auto space-y-16">
+    <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.home')}</a>
     <div class="text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
@@ -1402,9 +1384,8 @@ function renderStory(){
     <div class="text-center reveal reveal-d2">
       <p class="font-display text-xl text-primary">${s.sig}</p>
     </div>
-    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    <div class="text-center">
+      <a href="#/products" class="inline-flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>`;
 }
@@ -1450,13 +1431,14 @@ function renderShops(){
   const s = t('shops'), tm = t('team');
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-16">
+    <a href="#/products" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.products')}</a>
     <div class="text-center reveal">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-4 block animate-fade-in-down">${s.subtitle}</span>
       <h1 class="font-display text-3xl md:text-5xl leading-tight animate-zoom-in" style="animation-delay:0.15s">${s.title}</h1>
     </div>
     <div class="reveal">${shopCard('bukavu')}</div>
     <div class="reveal reveal-d2">${shopCard('kigali')}</div>
-    <section class="pt-8">
+    <section id="teamSection" class="pt-8">
       <div class="text-center mb-12 reveal">
         <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block">${tm.subtitle}</span>
         <h2 class="font-display text-2xl md:text-4xl">${tm.title}</h2>
@@ -1473,9 +1455,8 @@ function renderShops(){
         </a>`).join('')}
       </div>
     </section>
-    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    <div class="text-center">
+      <a href="#/products" class="inline-flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
     </div>
   </div>`;
 }
@@ -1498,6 +1479,7 @@ function renderContact(){
   const c = t('contact'), f = c.form;
   return `
   <div class="px-5 md:px-margin-desktop pb-24 space-y-20">
+    <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors mb-10 w-fit"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.home')}</a>
     <div class="max-w-2xl mx-auto text-center">
       <span class="text-[11px] text-primary uppercase tracking-widest mb-3 block animate-fade-in-down">${c.title}</span>
       <h1 class="font-display text-3xl md:text-5xl mb-6 leading-tight animate-zoom-in" style="animation-delay:0.15s">${c.heading}</h1>
@@ -1545,9 +1527,8 @@ function renderContact(){
         </div>
       </div>
     </div>
-    <div class="border-t border-outline-variant/20 pt-10 text-center flex flex-wrap justify-center gap-8">
-      <a href="#/home" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('ui.ui_003')}</a>
-      <a href="#/products" class="flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine">${t('product.all_products')} <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+    <div class="text-center">
+      <a href="#/home" class="inline-flex items-center gap-2 text-sm bg-primary text-on-primary px-8 py-3 uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all btn-shine"><span class="material-symbols-outlined text-base">arrow_back</span> ${t('nav.home')}</a>
     </div>
   </div>`;
 }
