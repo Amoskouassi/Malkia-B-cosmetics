@@ -120,6 +120,9 @@ const TR = {
       ui_003:"Retour", ui_050:"Tous nos produits", ui_051:"Voir plus", ui_004:"Rechercher un produit...",
       ui_005:"Aucun produit ne correspond à votre recherche.", ui_006:"Produit introuvable",
       ui_007:"Acheter Maintenant", ui_008:"Complétez Votre Routine",
+      blocked_title:"Fermé temporairement",
+      blocked_p1:"Notre boutique est actuellement fermée pour une courte pause. Nous revenons très vite avec encore plus de beauté.",
+      blocked_p2:"Merci de votre fidélité. — L'équipe Malkia B Cosmetics",
       ui_009:"À partir de 10 $", ui_010:"Prénom", ui_011:"Prénom",
       ui_012:"Nom", ui_013:"Nom", ui_014:"Téléphone",
       ui_015:"Livraison", ui_016:"Souhaitez-vous une livraison ?",
@@ -222,6 +225,9 @@ const TR = {
       ui_003:"Back", ui_050:"All Products", ui_051:"Load more", ui_004:"Search a product...",
       ui_005:"No product matches your search.", ui_006:"Product not found",
       ui_007:"Buy Now", ui_008:"Complete Your Routine",
+      blocked_title:"Temporarily Closed",
+      blocked_p1:"Our store is currently closed for a short break. We'll be back soon with even more beauty.",
+      blocked_p2:"Thank you for your loyalty. — The Malkia B Cosmetics Team",
       ui_009:"From 10 $", ui_010:"First Name", ui_011:"First Name",
       ui_012:"Last Name", ui_013:"Last Name", ui_014:"Phone",
       ui_015:"Delivery", ui_016:"Do you want delivery?",
@@ -249,6 +255,7 @@ function setLang(l){ LANG.current=l; lsSetRaw('malkia_lang',l); renderHeaderFoot
 
 /* ===== DATA ===== */
 const CATS = { body:"Corps", face:"Visage", fragrance:"Parfums", wellness:"Wellness" };
+const BLOCK_DATE = new Date(2026, 6, 30); // blocage auto à partir du 30 juillet
 
 const PRODUCTS = [
 
@@ -694,6 +701,11 @@ function renderHeaderFooter(){ renderHeader(); renderFooter(); }
 /* ===== ROUTER ===== */
 function parseRoute(){ const h = location.hash.replace('#/','') || 'home'; return h.split('/'); }
 function navigate(){
+  if(Date.now() >= BLOCK_DATE.getTime()){
+    const app = document.getElementById('app');
+    if(app){ app.innerHTML = renderBlocked(); renderHeaderFooter(); setMeta('Malkia B Cosmetics', ''); }
+    return;
+  }
   window.scrollTo(0,0);
   const [page, param] = parseRoute();
   const app = document.getElementById('app');
@@ -753,6 +765,16 @@ function productCard(p){
 }
 
 /* ===== 404 ===== */
+function renderBlocked(){
+  const b = t('ui');
+  return `
+  <div class="px-5 md:px-margin-desktop pb-24 text-center py-24 max-w-xl mx-auto">
+    <span class="material-symbols-outlined text-5xl text-primary/50 mb-6 block animate-bounce-gentle">store</span>
+    <h1 class="font-display text-3xl md:text-4xl text-primary mb-6 animate-zoom-in">${b.blocked_title}</h1>
+    <p class="text-on-surface-variant mb-4 animate-fade-in-up" style="animation-delay:0.2s">${b.blocked_p1}</p>
+    <p class="text-sm text-on-surface-variant/70 animate-fade-in-up" style="animation-delay:0.3s">${b.blocked_p2}</p>
+  </div>`;
+}
 function renderNotFound(){
   return `
   <div class="px-5 md:px-margin-desktop pb-24 text-center py-24">
