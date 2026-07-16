@@ -13,13 +13,27 @@ function lsSetRaw(k, v){
 }
 
 let productLimit = 8;
+let filteredProducts = [];
 function loadMoreProducts(){
   productLimit += 8;
-  const [page, param] = parseRoute();
-  const app = document.getElementById('app');
-  if(app) app.innerHTML = renderProducts(param||undefined);
-  setTimeout(initScrollReveal, 50);
-  initProductSearch();
+  const grid = document.getElementById('productGrid');
+  const wrap = document.getElementById('loadMoreWrap');
+  if(!grid || !filteredProducts.length) return;
+  const start = grid.children.length;
+  const frag = document.createDocumentFragment();
+  filteredProducts.slice(start, productLimit).forEach((p,i)=>{
+    const idx = start + i;
+    const d = document.createElement('div');
+    d.dataset.name = p.name.toLowerCase();
+    d.className = `reveal reveal-d${(idx%4)+1}`;
+    d.innerHTML = productCard(p);
+    frag.appendChild(d);
+  });
+  grid.appendChild(frag);
+  if(productLimit >= filteredProducts.length && wrap) wrap.remove();
+  initScrollReveal();
+  const input = document.getElementById('productSearch');
+  if(input && input.value.trim()) input.dispatchEvent(new Event('input'));
 }
 /* ===== I18N ===== */
 const LANG = { current: lsGetRaw('malkia_lang', 'fr') };
@@ -1353,7 +1367,7 @@ function renderProducts(cat){
   if(cat!==lastCat){ productLimit = 8; lastCat = cat; }
   const p = t('product'), cats = t('cat'), n = t('nav');
   const active = cat || 'all';
-  const filtered = cat ? PRODUCTS.filter(x=>x.cat===cat) : PRODUCTS;
+  filteredProducts = cat ? PRODUCTS.filter(x=>x.cat===cat) : PRODUCTS;
   const heroImgs = { all:'images/gamme de produit new.jpg', body:'images/corps accueil.webp', face:'images/visage accueil.webp', fragrance:'images/cat-fragrance.webp', wellness:'images/bien etre accueil (2).webp' }; const catHero = heroImgs[cat||'all'];
   return `
   <div class="w-full h-[30vh] md:h-[45vh] overflow-hidden relative">
@@ -1379,13 +1393,13 @@ function renderProducts(cat){
       </div>
     </div>
     <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
-      ${filtered.slice(0, productLimit).map((p,i)=>`<div data-name="${p.name.toLowerCase()}" class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
+      ${filteredProducts.slice(0, productLimit).map((p,i)=>`<div data-name="${p.name.toLowerCase()}" class="reveal reveal-d${(i%4)+1}">${productCard(p)}</div>`).join('')}
     </div>
     <div id="noResults" class="text-center py-16 hidden">
       <span class="material-symbols-outlined text-4xl text-outline mb-4 block">search_off</span>
       <p class="text-on-surface-variant">${t('ui.ui_042')}</p>
     </div>
-    ${filtered.length > productLimit ? `
+    ${filteredProducts.length > productLimit ? `
     <div id="loadMoreWrap" class="text-center mt-12">
       <button onclick="loadMoreProducts()" class="inline-flex items-center gap-2 text-sm border border-primary text-primary px-8 py-3 uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-shine">${t('ui.ui_051')}</button>
     </div>` : ''}
